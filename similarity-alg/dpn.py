@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def dpn(spectra_1, spectra_2):
     min_length = min(len(spectra_1), len(spectra_2)) - 1
     spectra_1_mag = np.linalg.norm(spectra_1['Absorbance'])

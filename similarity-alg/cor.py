@@ -1,22 +1,16 @@
-import pandas as pd
 import numpy as np
 
-def cor(spectra):
-    mean_x = np.mean(spectra['Wavenumber'])
-    mean_y = np.mean(spectra['Absorbance'])
-    nominator = 0
-    wave_squared_sum = 0
-    absorb_squared_sum = 0
+def cor(spectra_1, spectra_2):
+    avg1 = np.mean(spectra_1['Absorbance'])
+    avg2 = np.mean(spectra_2['Absorbance'])
+    nominator = norm_spectra_1 = norm_spectra_2 = 0
 
-    for index, entry in spectra.iterrows():
-        nominator += entry['Wavenumber'] * entry['Absorbance']
-        wave_squared_sum += entry['Wavenumber'] ** 2
-        absorb_squared_sum += entry['Absorbance'] ** 2
+    for i in range(min(len(spectra_1), len(spectra_2))):
+        nominator += (spectra_1['Absorbance'][i] - avg1) * (spectra_2['Absorbance'][i] - avg2)
+        norm_spectra_1 += (spectra_1['Absorbance'][i] - avg1) ** 2
+        norm_spectra_2 += (spectra_2['Absorbance'][i] - avg2) ** 2
 
-    nominator -= len(spectra) * mean_x * mean_y
-    wave_squared_sum -= len(spectra) * (mean_x ** 2)
-    absorb_squared_sum -= len(spectra) * (mean_y ** 2)
+    norm_spectra_1 **= 0.5
+    norm_spectra_2 **= 0.5
 
-    denominator = (wave_squared_sum ** 0.5) * (absorb_squared_sum ** 0.5)
-
-    return nominator / denominator
+    return nominator / (norm_spectra_1 * norm_spectra_2)
