@@ -1,9 +1,12 @@
 import pandas as pd
-from mad import mad
-from msd import msd
-from cor import cor
-from dpn import dpn
+from algorithms.mad import mad
+from algorithms.msd import msd
+from algorithms.cor import cor
+from algorithms.dpn import dpn
 
+"""
+    Used for the difference based algorithms like MAD and MSD
+"""
 def difference_results(spectra1_score, spectra2_score, alg_name):
     print(alg_name)
     print('Spectra 1 score: {0}'.format(spectra1_score))
@@ -11,6 +14,9 @@ def difference_results(spectra1_score, spectra2_score, alg_name):
     print('Difference between two spectra: {0}'.format(abs(spectra1_score - spectra2_score)))
     print()
 
+"""
+    Used for similarity based algorithms like COR and DPN
+"""
 def similarity_results(spectra_score, alg_name):
     print(alg_name)
     print('Spectra score: {0}'.format(spectra_score))
