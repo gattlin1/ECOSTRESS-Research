@@ -1,7 +1,14 @@
 import numpy as np
 import pandas as pd
 import os
+
+def floor(spectra, multiplier):
+    mean = np.mean(spectra['Absorbance']) * multiplier
+    spectra['Absorbance'] = np.where(spectra['Absorbance'] < mean, mean, spectra['Absorbance'])
+    return spectra
+
 def nlc(spectra, width):
+    floor(spectra, 0.75)
     results = pd.DataFrame(columns=['Wavenumber', 'Absorbance'])
     spectra_length = spectra.shape[0]
 
