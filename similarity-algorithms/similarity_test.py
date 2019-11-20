@@ -3,6 +3,7 @@ from algorithms.mad import mad
 from algorithms.msd import msd
 from algorithms.cor import cor
 from algorithms.dpn import dpn
+from algorithms.nlc import nlc
 
 """
     Used for the difference based algorithms like MAD and MSD
@@ -24,8 +25,8 @@ def similarity_results(spectra_score, alg_name):
 
 
 if __name__=='__main__':
-    spectra1_path = '../spectra/109-97-7_a.csv'
-    spectra2_path = '../spectra/109-97-7_b.csv'
+    spectra1_path = '../spectra/79-09-4_a.csv'
+    spectra2_path = '../spectra/79-09-4_b.csv'
 
     spectra_1 = pd.read_csv(spectra1_path, names=['Wavenumber', 'Absorbance'], header=None)
     spectra_2 = pd.read_csv(spectra2_path, names=['Wavenumber', 'Absorbance'], header=None)
@@ -35,4 +36,9 @@ if __name__=='__main__':
 
     similarity_results(dpn(spectra_1, spectra_2), 'DPN')
     similarity_results(cor(spectra_1, spectra_2), 'COR')
+
+    nlc_1 = nlc(spectra_1, 10)
+    nlc_2 = nlc(spectra_2, 10)
+    similarity_results(dpn(nlc_1, nlc_2), 'NLC -> DPN')
+    similarity_results(cor(nlc_1, nlc_2), 'NLC -> COR')
 
