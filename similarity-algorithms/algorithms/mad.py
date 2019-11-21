@@ -1,10 +1,9 @@
 import numpy as np
 
-def mad(spectra):
+def mad(spectra_1, spectra_2):
     distance = 0
-    mean = np.mean(spectra['Absorbance'])
 
-    for value in spectra['Absorbance']:
-        distance += abs(value - mean)
+    for i in range(min(len(spectra_1), len(spectra_2))):
+        distance += abs(spectra_1['Absorbance'][i] - spectra_2['Absorbance'][i])
 
-    return distance / len(spectra)
+    return 1 / distance

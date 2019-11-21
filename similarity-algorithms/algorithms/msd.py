@@ -1,12 +1,9 @@
 import numpy as np
 
-def msd(spectra):
+def msd(spectra_1, spectra_2):
     distance = 0
-    mean = np.mean(spectra['Absorbance'])
 
-    for value in spectra['Absorbance']:
-        distance += (value - mean) ** 2
+    for i in range(min(len(spectra_1), len(spectra_2))):
+        distance += (spectra_1['Absorbance'][i] - spectra_2['Absorbance'][i]) ** 2
 
-    distance /= len(spectra) - 1
-
-    return distance ** 0.5
+    return 1 / (distance ** 0.5)
