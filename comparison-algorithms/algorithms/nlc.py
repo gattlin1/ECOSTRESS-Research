@@ -2,33 +2,32 @@ import numpy as np
 import pandas as pd
 import os
 
+def get_mean(spectra):
+    mean = 0
+    for entry in spectra:
+        mean += entry[1]
+
+    return mean / len(spectra)
+
 def floor(spectra, multiplier):
-    mean = np.mean(spectra['Absorbance']) * multiplier
-    spectra['Absorbance'] = np.where(spectra['Absorbance'] < mean, mean, spectra['Absorbance'])
+    mean = get_mean(spectra) * multiplier
+    for entry in spectra:
+        if entry[1] < mean:
+            entry[1] = mean
     return spectra
 
 def nlc(spectra, width):
-    floor(spectra, 0.75)
-    results = pd.DataFrame(columns=['Wavenumber', 'Absorbance'])
-    spectra_length = spectra.shape[0]
+    floor(spectra, 0.3)
+    results = []
 
-    for i in range(spectra_length):
+    for i in range(len(spectra)):
         left_section = right_section = 0
-        for j in range(1, width):
+        for j in range(1, width + 1):
             if i - j > 0:
-                left_section += spectra['Absorbance'][i - j]
-            if i + j < spectra_length:
-                right_section += spectra['Absorbance'][i + j]
+                left_section += spectra[i - j][1]
+            if i + j < len(spectra):
+                right_section += spectra[i + j][1]
         new_absorb = right_section / (left_section + right_section)
-        results = results.append({'Wavenumber' : spectra['Wavenumber'][i] , 'Absorbance' : new_absorb}, ignore_index=True)
+        results.append([spectra[i][1] , new_absorb])
 
     return results
-
-if __name__=='__main__':
-    path = '../../spectra/'
-    for file in os.listdir(path):
-        if file.endswith('.csv'):
-            spectra = pd.read_csv(path + file, names=['Wavenumber', 'Absorbance'], header=None)
-
-            nlc_spectra = nlc(spectra, 10)
-            nlc_spectra.to_csv('../../spectra/nlc_spectra/nlc_' + file, header=False, index=None)
