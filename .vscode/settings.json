@@ -1,4 +1,5 @@
 {
     "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "python.pythonPath": "/Users/gattlinwalker/Documents/school_work/MSU/csc/csc596/.venv/bin/python3"
 }
