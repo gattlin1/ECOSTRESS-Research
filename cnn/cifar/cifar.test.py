@@ -2,6 +2,7 @@ from __future__ import print_function
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential, load_model
+from keras.utils import plot_model
 import os
 
 if __name__=='__main__':

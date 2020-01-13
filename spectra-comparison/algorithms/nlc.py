@@ -1,21 +1,3 @@
-import numpy as np
-import pandas as pd
-import os
-
-def get_mean(spectra):
-    mean = 0
-    for entry in spectra:
-        mean += entry[1]
-
-    return mean / len(spectra)
-
-def floor(spectra, multiplier):
-    mean = get_mean(spectra) * multiplier
-    for entry in spectra:
-        if entry[1] < mean:
-            entry[1] = mean
-    return spectra
-
 def nlc(spectra, width):
     floor(spectra, 0.3)
     results = []
@@ -31,3 +13,18 @@ def nlc(spectra, width):
         results.append([spectra[i][1] , new_absorb])
 
     return results
+
+def floor(spectra, multiplier):
+    mean = get_mean(spectra) * multiplier
+    for entry in spectra:
+        if entry[1] < mean:
+            entry[1] = mean
+
+def get_mean(spectra):
+    mean = 0
+    for entry in spectra:
+        mean += entry[1]
+
+    return mean / len(spectra)
+
+
