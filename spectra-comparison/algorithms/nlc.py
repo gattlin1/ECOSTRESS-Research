@@ -10,7 +10,7 @@ def nlc(spectra, width):
             if i + j < len(spectra):
                 right_section += spectra[i + j][1]
         new_absorb = right_section / (left_section + right_section)
-        results.append([spectra[i][1] , new_absorb])
+        results.append([spectra[i][0] , new_absorb])
 
     return results
 

@@ -33,5 +33,4 @@ def match_points(spectra1, spectra2):
         closest_index = get_closest_value_index(spectra2, wavenumber)
         matched_spectra.append(spectra2[closest_index])
 
-
     return matched_spectra
