@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../../')
 import colorama
 import os
 from colorama import Fore, Back, Style

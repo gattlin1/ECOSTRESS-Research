@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../../')
+
 import colorama
 from colorama import Fore, Back, Style
 import pandas as pd
@@ -16,28 +19,6 @@ def similarity_results(spectra_score, alg_name):
 
 if __name__=='__main__':
     colorama.init()
-
-    # Smaller Dataset Comparison
-    print(Fore.YELLOW + 'Other DATASET' + Style.RESET_ALL)
-    spectra1_path = '../spectra/79-09-4_a.csv'
-    spectra2_path = '../spectra/79-09-4_b.csv'
-
-    spectra_1 = make_dataset(spectra1_path)
-    spectra_2 = make_dataset(spectra2_path)
-    spectra_2 = match_points(spectra_1, spectra_2)
-
-    similarity_results(mad(spectra_1, spectra_2), 'MAD')
-    similarity_results(msd(spectra_1, spectra_2), 'MSD')
-    similarity_results(dpn(spectra_1, spectra_2), 'DPN')
-    similarity_results(cor(spectra_1, spectra_2), 'COR')
-
-    nlc_1 = nlc(spectra_1, 10)
-    nlc_2 = nlc(spectra_2, 10)
-    similarity_results(mad(nlc_1, nlc_2), 'NLC -> MAD')
-    similarity_results(msd(nlc_1, nlc_2), 'NLC -> MSD')
-    similarity_results(dpn(nlc_1, nlc_2), 'NLC -> DPN')
-    similarity_results(cor(nlc_1, nlc_2), 'NLC -> COR')
-
 
     # Nasa Dataset
     print(Fore.BLUE + '\nNASA DATASET' + Style.RESET_ALL)
