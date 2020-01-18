@@ -11,9 +11,9 @@ def main():
     nlc_hitlist = Hitlist('nlc -> cor')
 
     # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../spectra/'
+    directory_path = '../ecospeclib-all/'
     for file in os.listdir(directory_path):
-        if (file.endswith('.csv')):
+        if (file.endswith('.txt')):
             file_path = directory_path + file
             normal_hitlist.find_match(file_path, directory_path)
             nlc_hitlist.find_match(file_path, directory_path)

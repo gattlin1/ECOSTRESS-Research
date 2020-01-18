@@ -9,7 +9,7 @@ from algorithms.msd import msd
 from algorithms.cor import cor
 from algorithms.dpn import dpn
 from algorithms.nlc import nlc
-from pre_process.make_dataset import make_dataset
+from pre_process.make_nasa_dataset import make_nasa_dataset
 from pre_process.spectra_point_matcher import match_points
 
 class Hitlist:
@@ -18,7 +18,7 @@ class Hitlist:
         self.missed_spectrum = []
 
     def find_match(self, file_path, dir_path):
-        unknown_spectrum = make_dataset(file_path)
+        unknown_spectrum = make_nasa_dataset(file_path)
         unknown_spectrum_name = file_path.split('/')
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
         spectra_hitlist = []
@@ -27,9 +27,9 @@ class Hitlist:
             unknown_spectrum = nlc(unknown_spectrum, 9)
 
         for file in os.listdir(dir_path):
-            if (file.endswith('.csv') and file != unknown_spectrum_name):
+            if (file.endswith('.txt') and file != unknown_spectrum_name):
                 spectrum_name = file.split('.')[0]
-                known_spectrum = make_dataset(dir_path + file)
+                known_spectrum = make_nasa_dataset(dir_path + file)
 
                 # calculating similarity score and then adding it to hitlist
                 known_spectrum = match_points(unknown_spectrum, known_spectrum)
