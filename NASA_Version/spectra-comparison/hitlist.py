@@ -1,6 +1,5 @@
-import os
-import time
 import colorama
+import os
 from colorama import Fore, Back, Style
 from algorithms.mad import mad
 from algorithms.msd import msd
@@ -8,24 +7,19 @@ from algorithms.cor import cor
 from algorithms.dpn import dpn
 from algorithms.nlc import nlc
 from pre_process.make_dataset import make_dataset
-from pre_process.make_nasa_dataset import make_nasa_dataset
 from pre_process.spectra_point_matcher import match_points
 
 class Hitlist:
-    missed_spectrum = []
-    comparison_type = ''
-
     def __init__(self, algorithm):
         self.comparison_type = algorithm
         self.missed_spectrum = []
-
 
     def find_match(self, file_path, dir_path):
         unknown_spectrum = make_dataset(file_path)
         unknown_spectrum_name = file_path.split('/')
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
         spectra_hitlist = []
-        
+
         if 'nlc' in self.comparison_type:
             unknown_spectrum = nlc(unknown_spectrum, 9)
 
@@ -49,7 +43,7 @@ class Hitlist:
                     score = mad(unknown_spectrum, known_spectrum)
                 elif 'msd' in self.comparison_type:
                     score = msd(unknown_spectrum, known_spectrum)
-                        
+
                 spectra_hitlist.append({'name': spectrum_name, 'score': score})
 
         spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['score'], reverse=True)
@@ -71,28 +65,9 @@ class Hitlist:
                     print(Fore.RED + 'Actual closest compound was {0} spectrum from closest'.format(i) + Style.RESET_ALL)
                 else:
                     print(Fore.GREEN + 'Found an exact match' + Style.RESET_ALL)
-                break
 
-def main():
-    colorama.init()
-    normal_hitlist = Hitlist('cor')
-    nlc_hitlist = Hitlist('nlc -> cor')
-
-    directory_path = '../spectra/'
-
-    for file in os.listdir(directory_path):
-        if (file.endswith('.csv')):
-            file_path = directory_path + file
-            normal_hitlist.find_match(file_path, directory_path)
-            nlc_hitlist.find_match(file_path, directory_path)
-    
-    accuracy(normal_hitlist)
-    accuracy(nlc_hitlist)
-
-def accuracy(hitlist):
-    color = Fore.GREEN
-    if len(hitlist.missed_spectrum) > 0:
-        color = Fore.RED
-    print(color + '\n{0} Spectrum Misclassified {1}'.format(hitlist.comparison_type, len(hitlist.missed_spectrum)) + Style.RESET_ALL)
-
-main()
+    def accuracy(self):
+        color = Fore.GREEN
+        if len(self.missed_spectrum) > 0:
+            color = Fore.RED
+        print(color + '\n{0} Spectrum Misclassified {1}'.format(self.comparison_type, len(self.missed_spectrum)) + Style.RESET_ALL)
