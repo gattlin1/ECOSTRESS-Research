@@ -27,7 +27,7 @@ class Hitlist:
             unknown_spectrum = nlc(unknown_spectrum, 9)
 
         for file in os.listdir(dir_path):
-            if (file.endswith('.txt') and file != unknown_spectrum_name):
+            if (file.endswith('.txt') and file != unknown_spectrum_name and 'ancillary' not in file):
                 spectrum_name = file.split('.')[0]
                 known_spectrum = make_nasa_dataset(dir_path + file)
 
