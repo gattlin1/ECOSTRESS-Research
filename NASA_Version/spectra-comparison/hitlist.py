@@ -24,9 +24,6 @@ class Hitlist:
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
         spectra_hitlist = []
 
-        if 'nlc' in self.comparison_type:
-            unknown_spectrum = nlc(unknown_spectrum, 9)
-
         for file in os.listdir(dir_path):
             if file.endswith('.txt') and file != unknown_spectrum_name and 'spectrum' in file:
                 unknown_spectrum_copy = deepcopy(unknown_spectrum)
@@ -37,11 +34,7 @@ class Hitlist:
                 # calculating similarity score and then adding it to hitlist
                 unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum, known_spectrum, 5.0)
 
-                if 'nlc' in self.comparison_type and len(known_spectrum) > 0:
-                    known_spectrum = nlc(known_spectrum, 9)
-
                 score = 0
-
                 if len(unknown_spectrum_copy) > 0: # check to make sure the spectrums somewhat match
                     if 'cor' in self.comparison_type:
                         score = cor(unknown_spectrum_copy, known_spectrum)

@@ -120,6 +120,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# NLC Version of Dataset
+ecospeclib-all-nlc/
+ecospeclib-organized/
+ecospeclib-final/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/tasks.json
