@@ -1,3 +1,10 @@
+def mean(spectrum):
+    sum = 0
+    for wavelength, absorbance in spectrum:
+        sum += wavelength
+
+    return sum / len(spectrum)
+
 def get_closest_value_index(arr, target):
     n = len(arr)
     left = 0
@@ -26,11 +33,21 @@ def get_closest_value_index(arr, target):
 def find_closest(arr, left, right, target):
     return right if target - arr[left][0] >= arr[right][0] - target else left
 
-def match_points(spectra1, spectra2):
-    matched_spectra = []
-    spectra2.sort(key = lambda x: x[0])
-    for wavenumber, absorbance in spectra1:
-        closest_index = get_closest_value_index(spectra2, wavenumber)
-        matched_spectra.append(spectra2[closest_index])
+def match_points(spectra1, spectra2, threshold_difference):
+    matched_spectra1 = []
+    matched_spectra2 = []
 
-    return matched_spectra
+    mean_1 = mean(spectra1)
+    mean_2 = mean(spectra2)
+
+    if abs(mean_1 - mean_2) < 4:
+        spectra1.sort(key = lambda x: x[0])
+        spectra2.sort(key = lambda x: x[0])
+
+        for wavenumber, absorbance in spectra1:
+            closest_index = get_closest_value_index(spectra2, wavenumber)
+            if abs(wavenumber - spectra2[closest_index][0]) < threshold_difference:
+                matched_spectra1.append([wavenumber, absorbance])
+                matched_spectra2.append(spectra2[closest_index])
+
+    return matched_spectra1, matched_spectra2

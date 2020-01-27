@@ -8,7 +8,7 @@ Owner: JHU
 Wavelength Range: All
 Origin: Kenai-Cook Inlet Division, Ak.
 Collection Date: N/A
-Description: Parent material: volcanic ash from acidic-ash material over glacial till from mixed-igneous and metamorphic matter.  Physiography: hillside with 18¡ east-facing slope.  Dark reddish brown, organic-rich, silty loam (A0 horizon); (medial over loamy, mixed typic). Original ASTER Spectral Library name was jhu.becknic.soil.spodosol.cryohumod.coarse.87P4264.spectrum.txt
+Description: Parent material: volcanic ash from acidic-ash material over glacial till from mixed-igneous and metamorphic matter.  Physiography: hillside with 18 (degree) east-facing slope.  Dark reddish brown, organic-rich, silty loam (A0 horizon); (medial over loamy, mixed typic). Original ASTER Spectral Library name was jhu.becknic.soil.spodosol.cryohumod.coarse.87P4264.spectrum.txt
 Measurement: Directional (10 degree) hemispherical reflectance
 First Column: X
 Second Column: Y
