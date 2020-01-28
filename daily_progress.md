@@ -17,3 +17,8 @@
     - The current pearson implementation must make two passes. First to get the average and the second to calculate the formula. The implementation now will do this in one pass and save on computations
 2. Starting to have the actual hitlist give back results for the NASA dataset. Only have tested it on a few random spectrum so far.
 3. Fixed the Results Generator for the NASA dataset.
+
+## January 26, 2020
+
+1. Graphed all NASA spectrum.
+2. Started organizing the dataset to ab pairs.

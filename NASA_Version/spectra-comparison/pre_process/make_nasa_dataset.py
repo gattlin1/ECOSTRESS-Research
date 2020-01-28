@@ -19,8 +19,8 @@ def make_nasa_dataset(file_path):
     return dataset
 
 if __name__=='__main__':
-    vis_dir = '../../visualization/'
-    directory_path = '../../ecospeclib-all/'
+    vis_dir = '../../visualization-final/'
+    directory_path = '../../ecospeclib-final/'
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
