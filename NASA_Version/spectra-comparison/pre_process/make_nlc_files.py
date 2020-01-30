@@ -10,13 +10,13 @@ from make_nasa_dataset import make_nasa_dataset
 
 
 def main():
-    path = '../../ecospeclib-all-nlc'
+    path = '../../ecospeclib-all-nlc-v2'
 
     if not os.path.exists(path):
         os.mkdir(path)
 
     # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../../ecospeclib-final/'
+    directory_path = '../../ecospeclib-final-v2/'
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file

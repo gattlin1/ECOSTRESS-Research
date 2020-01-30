@@ -3,9 +3,9 @@ def nlc(spectra, width):
     results = []
 
     for i in range(len(spectra)):
-        left_section = right_section = 0
+        left_section, right_section = 0, 0
         for j in range(1, width + 1):
-            if i - j > 0:
+            if i - j >= 0:
                 left_section += spectra[i - j][1]
             if i + j < len(spectra):
                 right_section += spectra[i + j][1]

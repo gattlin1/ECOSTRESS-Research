@@ -1,9 +1,11 @@
 import colorama
 import os
 from hitlist import Hitlist
-import time
+import datetime
+import random
 
 def main():
+    start = datetime.datetime.now()
     # initialize console color.
     colorama.init()
 
@@ -14,7 +16,9 @@ def main():
     msd_hitlist = Hitlist('msd')
 
     # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../ecospeclib-final/'
+    directory_path = '../ecospeclib-final-v2/'
+    a = os.listdir(directory_path)
+    random.shuffle(a)
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
@@ -36,7 +40,7 @@ def main():
     nlc_msd_hitlist = Hitlist('nlc - msd')
 
     # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../ecospeclib-all-nlc/'
+    directory_path = '../ecospeclib-all-nlc-v2/'
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
@@ -49,5 +53,6 @@ def main():
     nlc_dpn_hitlist.accuracy()
     nlc_mad_hitlist.accuracy()
     nlc_msd_hitlist.accuracy()
+    print('Total Runtime: {0}'.format(datetime.datetime.now() - start))
 
 main()

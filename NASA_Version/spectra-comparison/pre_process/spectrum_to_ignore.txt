@@ -1,0 +1,15 @@
+manmade.roofingmaterial.roofingpaper
+mineral.arsenate.none.coarse.tir
+mineral.arsenate.none.fine.tir
+mineral.arsenate.none.medium.tir
+mineral.chloride.none.coarse.all
+mineral.element.none.coarse.tir
+mineral.element.none.fine.tir
+mineral.element.none.medium.tir
+rock.igneous.basic.solid.vswir
+rock.metamorphic.gneis.solid.vswir
+rock.metamorphic.slate.solid.vswir
+rock.sedimentary.chemicalprecipitate.solid.all
+rock.sedimentary.chemicalprecipitate.solid.vswir
+rock.sedimentary.siliceou.solid.all
+rock.sedimentary.siltstone.coarse.all
