@@ -17,8 +17,6 @@ def main():
 
     # loop through spectrum files in a directory and find matches in the hitlist
     directory_path = '../ecospeclib-final-v2/'
-    a = os.listdir(directory_path)
-    random.shuffle(a)
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
