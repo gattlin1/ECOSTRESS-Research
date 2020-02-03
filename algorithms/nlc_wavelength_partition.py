@@ -1,6 +1,4 @@
-from make_nasa_dataset import make_nasa_dataset
 import matplotlib.pyplot as plt
-from nlc import nlc
 import pandas as pd
 
 def nlc_wavelength_range(spectra, width):
@@ -14,7 +12,7 @@ def nlc_wavelength_range(spectra, width):
         j = 1
         in_bounds = True
         while i - j >= 0 and in_bounds:
-            if abs(spectra[i][0] - spectra[i - j][0] <= width):
+            if abs(spectra[i][0] - spectra[i - j][0]) <= width:
                 left_section['sum'] += spectra[i - j][1]
                 left_section['count'] += 1
             else:
@@ -24,7 +22,7 @@ def nlc_wavelength_range(spectra, width):
         j = 1        
         in_bounds = True
         while i + j < len(spectra) and in_bounds:
-            if abs(spectra[i][0] - spectra[i + j][0] <= width):
+            if abs(spectra[i][0] - spectra[i + j][0]) <= width:
                 right_section['sum'] += spectra[i + j][1]
                 right_section['count'] += 1
             else:
@@ -40,7 +38,10 @@ def nlc_wavelength_range(spectra, width):
         else:
             left_section['average'] = left_section['sum'] / left_section['count']
 
-        new_absorb = right_section['average'] / (left_section['average'] + right_section['average'])
+        new_absorb = 0
+        if right_section['average'] != 0 or left_section['average'] != 0:
+            new_absorb = right_section['average'] / (left_section['average'] + right_section['average']) 
+
         results.append([spectra[i][0] , new_absorb])
 
     return results
