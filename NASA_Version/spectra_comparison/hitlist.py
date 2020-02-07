@@ -27,6 +27,12 @@ class Hitlist:
 
         self.file = open(results_path, 'a', errors='ignore')
 
+        heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
+        if not os.path.exists(heatmap_path):
+            open(heatmap_path, 'x', errors='ignore')
+
+        self.heatmap = open(heatmap_path, 'a', errors='ignore')
+
     def create_difference_matrix(self):
         difference_matrix = {}
         for file in os.listdir(self.dataset_path):
@@ -42,7 +48,7 @@ class Hitlist:
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path)[300:330]:
+        for file in os.listdir(self.dataset_path)[329:330]:
             if file.endswith('.txt') and 'spectrum' in file:
                 file_path = self.dataset_path + file
                 self.find_matches(file_path, self.dataset_path)
@@ -183,6 +189,9 @@ class Hitlist:
 
         self.log_info('Total Spectrum Misclassified {0}'.format(len(self.missed_spectrum)), color)
         self.log_info('Average Miss: {0:.2f}\n'.format(average_miss), color)
+
+        accuracy = len(self.missed_spectrum) / len(self.difference_matrix)
+        self.heatmap.write('({0}, {1})\n'.format(accuracy, average_miss))
 
         for category in missed_categories.keys():
             self.log_info('{0} Spectrum Misclassified {1}'.format(category, missed_categories[category][0]), color)

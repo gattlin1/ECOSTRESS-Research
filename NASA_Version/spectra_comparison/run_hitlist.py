@@ -4,6 +4,9 @@ from hitlist import Hitlist
 from algorithms.nlc import nlc
 from pre_process.make_nlc_files import make_nlc_files
 import multiprocessing
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 
 # Creates a hitlist for the specified algorithm and gives it the path to
 # the spectrum directory
@@ -20,7 +23,7 @@ if __name__=='__main__':
     nlc_dataset_path = '../ecospeclib-final-nlc/'
 
     # Create NLC Versions of Dataset
-    make_nlc_files(dataset_path, nlc_dataset_path)
+    #make_nlc_files(dataset_path, nlc_dataset_path)
 
     processes = []
     hitlist_types = ['cor', 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']

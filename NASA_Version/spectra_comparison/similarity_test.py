@@ -21,9 +21,8 @@ if __name__=='__main__':
 
     # Nasa Dataset
     print(Fore.BLUE + 'NASA DATASET' + Style.RESET_ALL)
-    spectra1_path = '../ecospeclib-all/manmade.concrete.pavingconcrete.solid.all.0425uuuasp.jhu.becknic.spectrum.txt'
-    spectra2_path = '../ecospeclib-all/manmade.concrete.pavingconcrete.solid.all.0425uuuasp.jhu.becknic.spectrum.txt'
-    spectra3_path = '../ecospeclib-all/manmade.concrete.pavingconcrete.solid.all.0397uuucnc.jhu.becknic.spectrum.txt'
+    spectra1_path = '../ecospeclib-all/manmade.concrete.constructionconcrete.solid.all.0598uuucnc.jhu.becknic.spectrum.txt'
+    spectra2_path = '../ecospeclib-all/manmade.roofingmaterial.tile.solid.all.0484uuupot.jhu.becknic.spectrum.txt'
 
     spectra_1 = make_nasa_dataset(spectra1_path)
     spectra_2 = make_nasa_dataset(spectra2_path)

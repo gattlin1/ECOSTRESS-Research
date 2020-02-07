@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-def nlc_wavelength_range(spectra, width):
-    floor(spectra, 0.3)
+def nlc_wavelength_range(spectra, floor_value=0.3, width=1.5):
+    floor(spectra, floor_value)
     results = []
 
     for i in range(len(spectra)):

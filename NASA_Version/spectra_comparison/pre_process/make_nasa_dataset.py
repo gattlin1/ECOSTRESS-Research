@@ -20,7 +20,7 @@ def make_nasa_dataset(file_path):
 
 if __name__=='__main__':
     vis_dir = '../../visualization-final-v2/'
-    directory_path = '../../ecospeclib-final-v2/'
+    directory_path = '../../ecospeclib-final-nlc/'
 
     if not os.path.exists(vis_dir):
         os.mkdir(vis_dir)
@@ -43,5 +43,5 @@ if __name__=='__main__':
             plt.ylabel('Reflectance')
             plt.xlabel('Wavelength')
 
-            plt.savefig(vis_dir + file + '.png')
+            plt.savefig(vis_dir + '/'.join(split_file) + '/' + file + '.png')
             plt.close('all')

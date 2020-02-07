@@ -2,11 +2,11 @@
 
 ## NLC WORK
 
-#### January 19, 2020
+### January 19, 2020
 
 1. Rewrote Hitlist implementation with classes. This way it'll be easier to have multiple different versions for spectral similarity algorithms.
 
-#### January 21, 2020
+### January 21, 2020
 
 1. Worked on the spectrum matcher only matching values if their wavelengths are withing a certain threshold of each other.
     - Hopefully this will fix the issues where two spectrum with different wavelength ranges end up making the similarity algorithms fail

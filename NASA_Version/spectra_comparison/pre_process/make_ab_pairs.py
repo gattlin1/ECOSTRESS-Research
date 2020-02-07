@@ -24,10 +24,10 @@ def generate_file_list(file_path):
     files = []
     with open(file_path, 'r') as file:
         files = [line.strip('\n').strip(' ') for line in file.readlines()]
-        
+
     return files
-        
-        
+
+
 def find_best_match(files, algorithm='cor'):
     ab_pairs = []
     for file in files:
@@ -39,7 +39,7 @@ def find_best_match(files, algorithm='cor'):
             other_file = other_file.replace('\\', '/')
             if file != other_file:
                 other_dataset = make_nasa_dataset(other_file)
-                
+
                 score = 0
                 if algorithm == 'cor':
                     score = cor(dataset, other_dataset)
@@ -68,9 +68,6 @@ if __name__=='__main__':
 
     spectrum_to_ignore = generate_file_list('./spectrum_to_ignore.txt')
     msd_spectrum = generate_file_list('./special_cases.txt')
-
-    print('Spectrum to ignore\n', spectrum_to_ignore)
-    print('MSD Spectrum\n', msd_spectrum)
 
     if not os.path.exists(dest_path):
         os.mkdir(dest_path)
@@ -101,6 +98,4 @@ if __name__=='__main__':
                     algorithm = 'mad'
             if valid_directory:
                 if(algorithm == 'mad'):
-                    print(algorithm)
-                    print(files[0])
                 find_best_match(files, algorithm=algorithm)
