@@ -34,20 +34,20 @@ def find_closest(arr, left, right, target):
     return right if target - arr[left][0] >= arr[right][0] - target else left
 
 def match_points(spectra1, spectra2, threshold_difference):
-    matched_spectra1 = []
-    matched_spectra2 = []
+    spectra1.sort(key = lambda x: x[0])
+    spectra2.sort(key = lambda x: x[0])
 
-    mean_1 = mean(spectra1)
-    mean_2 = mean(spectra2)
+    if spectra1[0][0] > spectra2[0][0]:
+        return create_matched_spectra(spectra1, spectra2, threshold_difference)
+    else:
+        return create_matched_spectra(spectra2, spectra1, threshold_difference)
 
-    if abs(mean_1 - mean_2) < 4:
-        spectra1.sort(key = lambda x: x[0])
-        spectra2.sort(key = lambda x: x[0])
-
-        for wavenumber, absorbance in spectra1:
-            closest_index = get_closest_value_index(spectra2, wavenumber)
-            if abs(wavenumber - spectra2[closest_index][0]) < threshold_difference:
-                matched_spectra1.append([wavenumber, absorbance])
-                matched_spectra2.append(spectra2[closest_index])
+def create_matched_spectra(spectra1, spectra2, threshold_difference):
+    matched_spectra1, matched_spectra2 = [], []
+    for wavenumber, absorbance in spectra1:
+        closest_index = get_closest_value_index(spectra2, wavenumber)
+        if abs(wavenumber - spectra2[closest_index][0]) < threshold_difference:
+            matched_spectra1.append([wavenumber, absorbance])
+            matched_spectra2.append(spectra2[closest_index])
 
     return matched_spectra1, matched_spectra2

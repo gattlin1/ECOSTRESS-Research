@@ -124,7 +124,7 @@ dmypy.json
 ecospeclib-final-v2
 ecospeclib-organized
 visualization-final-v2
-ecospeclib-all-nlc-v2
+ecospeclib-all-nlc/
 
 ### VisualStudioCode ###
 .vscode/*

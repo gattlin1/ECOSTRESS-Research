@@ -1,30 +1,22 @@
-import colorama
 import os
-import sys
-sys.path.append('../../../')
 from algorithms.nlc import nlc
 from os import listdir
 from os.path import isfile, join
-import shutil
-from make_nasa_dataset import make_nasa_dataset
+from pre_process.make_nasa_dataset import make_nasa_dataset
 
 
-def main():
-    path = '../../ecospeclib-all-nlc-v2'
+def make_nlc_files(dataset_path, destination):
 
-    if not os.path.exists(path):
-        os.mkdir(path)
+    # creates destination if it does not already exist
+    if not os.path.exists(destination):
+        os.mkdir(destination)
 
     # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../../ecospeclib-final-v2/'
-    for file in os.listdir(directory_path):
+    for file in os.listdir(dataset_path):
         if file.endswith('.txt') and 'spectrum' in file:
-            file_path = directory_path + file
-            spectrum = make_nasa_dataset(file_path)
+            spectrum = make_nasa_dataset(dataset_path + file)
             spectrum = nlc(spectrum, 9)
 
-            with open(path + '/{0}'.format(file) , mode='wt', encoding='utf-8') as myfile:
+            with open(destination + '/{0}'.format(file) , mode='wt', encoding='utf-8') as myfile:
                 for wavelength, reflectance in spectrum:
                     myfile.write('{0}\t {1}\n'.format(wavelength, reflectance))
-
-main()

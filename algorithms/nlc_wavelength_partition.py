@@ -8,7 +8,7 @@ def nlc_wavelength_range(spectra, width):
     for i in range(len(spectra)):
         left_section = {'sum': 0, 'count': 0}
         right_section = {'sum': 0, 'count': 0}
-        
+
         j = 1
         in_bounds = True
         while i - j >= 0 and in_bounds:
@@ -19,7 +19,7 @@ def nlc_wavelength_range(spectra, width):
                 in_bounds = False
             j += 1
 
-        j = 1        
+        j = 1
         in_bounds = True
         while i + j < len(spectra) and in_bounds:
             if abs(spectra[i][0] - spectra[i + j][0]) <= width:
@@ -40,7 +40,7 @@ def nlc_wavelength_range(spectra, width):
 
         new_absorb = 0
         if right_section['average'] != 0 or left_section['average'] != 0:
-            new_absorb = right_section['average'] / (left_section['average'] + right_section['average']) 
+            new_absorb = right_section['average'] / (left_section['average'] + right_section['average'])
 
         results.append([spectra[i][0] , new_absorb])
 
@@ -59,27 +59,27 @@ def get_mean(spectra):
 
     return mean / len(spectra)
 
-if __name__=='__main__':
-    path = '../../ecospeclib-all/manmade.concrete.constructionconcrete.solid.all.0598uuucnc.jhu.becknic.spectrum.txt'
-    spectrum = make_nasa_dataset(path)
-    nlc_wave = nlc_wavelength_range(spectrum, 1.5)
-    nlc_index = nlc(spectrum, 9)
+# if __name__=='__main__':
+#     path = '../../ecospeclib-all/manmade.concrete.constructionconcrete.solid.all.0598uuucnc.jhu.becknic.spectrum.txt'
+#     spectrum = make_nasa_dataset(path)
+#     nlc_wave = nlc_wavelength_range(spectrum, 1.5)
+#     nlc_index = nlc(spectrum, 9)
 
 
-    dataset = pd.DataFrame(nlc_wave, columns = ['Wavelength', 'Reflectance'])
+#     dataset = pd.DataFrame(nlc_wave, columns = ['Wavelength', 'Reflectance'])
 
-    plt.figure(figsize=(12, 6))
-    plt.plot(dataset['Wavelength'], dataset['Reflectance'])
-    plt.title('file')
-    plt.ylabel('Reflectance')
-    plt.xlabel('Wavelength')
-    plt.savefig( './wave.png')
+#     plt.figure(figsize=(12, 6))
+#     plt.plot(dataset['Wavelength'], dataset['Reflectance'])
+#     plt.title('file')
+#     plt.ylabel('Reflectance')
+#     plt.xlabel('Wavelength')
+#     plt.savefig( './wave.png')
 
-    dataset = pd.DataFrame(nlc_index, columns = ['Wavelength', 'Reflectance'])
+#     dataset = pd.DataFrame(nlc_index, columns = ['Wavelength', 'Reflectance'])
 
-    plt.figure(figsize=(12, 6))
-    plt.plot(dataset['Wavelength'], dataset['Reflectance'])
-    plt.title('file')
-    plt.ylabel('Reflectance')
-    plt.xlabel('Wavelength')
-    plt.savefig( './index.png')
+#     plt.figure(figsize=(12, 6))
+#     plt.plot(dataset['Wavelength'], dataset['Reflectance'])
+#     plt.title('file')
+#     plt.ylabel('Reflectance')
+#     plt.xlabel('Wavelength')
+#     plt.savefig( './index.png')

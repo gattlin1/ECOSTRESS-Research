@@ -1,56 +1,38 @@
-import colorama
 import os
-from hitlist import Hitlist
 import datetime
-import random
+from hitlist import Hitlist
+from algorithms.nlc import nlc
+from pre_process.make_nlc_files import make_nlc_files
+import multiprocessing
 
-def main():
+# Creates a hitlist for the specified algorithm and gives it the path to
+# the spectrum directory
+def run_hitlist(algorithm, path):
+    created_hitlist = Hitlist(algorithm, path)
+    created_hitlist.run_spectra()
+    created_hitlist.accuracy()
+
+if __name__=='__main__':
     start = datetime.datetime.now()
-    # initialize console color.
-    colorama.init()
 
-    # initialize hitlists for normal spectra comparison
-    cor_hitlist = Hitlist('cor')
-    dpn_hitlist = Hitlist('dpn')
-    mad_hitlist = Hitlist('mad')
-    msd_hitlist = Hitlist('msd')
+    # paths to spectrum directories
+    dataset_path = '../ecospeclib-final/'
+    nlc_dataset_path = '../ecospeclib-final-nlc/'
 
-    # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../ecospeclib-final-v2/'
-    for file in os.listdir(directory_path):
-        if file.endswith('.txt') and 'spectrum' in file:
-            file_path = directory_path + file
-            cor_hitlist.find_match(file_path, directory_path)
-            dpn_hitlist.find_match(file_path, directory_path)
-            mad_hitlist.find_match(file_path, directory_path)
-            msd_hitlist.find_match(file_path, directory_path)
+    # Create NLC Versions of Dataset
+    make_nlc_files(dataset_path, nlc_dataset_path)
 
-    cor_hitlist.accuracy()
-    dpn_hitlist.accuracy()
-    mad_hitlist.accuracy()
-    msd_hitlist.accuracy()
+    processes = []
+    hitlist_types = ['cor', 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
+    for alg in hitlist_types:
+        if 'nlc' in alg:
+            p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path))
+        else:
+            p = multiprocessing.Process(target=run_hitlist, args=(alg, dataset_path))
+        processes.append(p)
+        p.start()
 
+    for process in processes:
+        process.join()
 
-        # initialize hitlists for normal spectra comparison and nlc.
-    nlc_cor_hitlist = Hitlist('nlc - cor')
-    nlc_dpn_hitlist = Hitlist('nlc - dpn')
-    nlc_mad_hitlist = Hitlist('nlc - mad')
-    nlc_msd_hitlist = Hitlist('nlc - msd')
-
-    # loop through spectrum files in a directory and find matches in the hitlist
-    directory_path = '../ecospeclib-all-nlc-v2/'
-    for file in os.listdir(directory_path):
-        if file.endswith('.txt') and 'spectrum' in file:
-            file_path = directory_path + file
-            nlc_cor_hitlist.find_match(file_path, directory_path)
-            nlc_dpn_hitlist.find_match(file_path, directory_path)
-            nlc_mad_hitlist.find_match(file_path, directory_path)
-            nlc_msd_hitlist.find_match(file_path, directory_path)
-
-    nlc_cor_hitlist.accuracy()
-    nlc_dpn_hitlist.accuracy()
-    nlc_mad_hitlist.accuracy()
-    nlc_msd_hitlist.accuracy()
     print('Total Runtime: {0}'.format(datetime.datetime.now() - start))
-
-main()
