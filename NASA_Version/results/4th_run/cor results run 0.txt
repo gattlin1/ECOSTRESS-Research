@@ -1,0 +1,170 @@
+
+cor: manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt is closest to: mineral.silicate.tectosilicate.fine.tir.analcime_1.jhu.nicolet.spectrum.txt w/ score: 0.845
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt, was 128 spectrum from closest
+
+cor: manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt is closest to: meteorites.carbonaceouschondrite.cv3.fine.tir.allende1.jhu.becknic.spectrum.txt w/ score: 0.689
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt, was 13 spectrum from closest
+
+cor: manmade.road.pavingasphalt.solid.all.0095uuuasp.jhu.becknic.spectrum.txt is closest to: soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt w/ score: 0.976
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt, was 1 spectrum from closest
+
+cor: manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt is closest to: mineral.silicate.tectosilicate.medium.tir.ts-10a.jpl.nicolet.spectrum.txt w/ score: 0.935
+Actual closest compound, manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt, was 185 spectrum from closest
+
+Total Spectrum Misclassified 4
+Average Miss: 81.75
+
+manmade Spectrum Misclassified 4
+Average Miss: 81.75
+
+meteorites Spectrum Misclassified 0
+Average Miss: 0.00
+
+mineral Spectrum Misclassified 0
+Average Miss: 0.00
+
+nonphotosyntheticvegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+rock Spectrum Misclassified 0
+Average Miss: 0.00
+
+soil Spectrum Misclassified 0
+Average Miss: 0.00
+
+vegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+water Spectrum Misclassified 0
+Average Miss: 0.00
+
+cor: manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt is closest to: mineral.silicate.tectosilicate.fine.tir.analcime_1.jhu.nicolet.spectrum.txt w/ score: 0.845
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt, was 128 spectrum from closest
+
+cor: manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt is closest to: meteorites.carbonaceouschondrite.cv3.fine.tir.allende1.jhu.becknic.spectrum.txt w/ score: 0.689
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt, was 13 spectrum from closest
+
+cor: manmade.road.pavingasphalt.solid.all.0095uuuasp.jhu.becknic.spectrum.txt is closest to: soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt w/ score: 0.976
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt, was 1 spectrum from closest
+
+cor: manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt is closest to: mineral.silicate.tectosilicate.medium.tir.ts-10a.jpl.nicolet.spectrum.txt w/ score: 0.935
+Actual closest compound, manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt, was 185 spectrum from closest
+
+Total Spectrum Misclassified 4
+Average Miss: 81.75
+
+manmade Spectrum Misclassified 4
+Average Miss: 81.75
+
+meteorites Spectrum Misclassified 0
+Average Miss: 0.00
+
+mineral Spectrum Misclassified 0
+Average Miss: 0.00
+
+nonphotosyntheticvegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+rock Spectrum Misclassified 0
+Average Miss: 0.00
+
+soil Spectrum Misclassified 0
+Average Miss: 0.00
+
+vegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+water Spectrum Misclassified 0
+Average Miss: 0.00
+
+Calculcated Best Matches at Level 0: 0
+Calculcated Best Matches at Level 1: 0
+Calculcated Best Matches at Level 2: 0
+Calculcated Best Matches at Level 3: 2
+cor: manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt is closest to: mineral.silicate.tectosilicate.fine.tir.analcime_1.jhu.nicolet.spectrum.txt w/ score: 0.845
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt, was 128 spectrum from closest
+
+cor: manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt is closest to: meteorites.carbonaceouschondrite.cv3.fine.tir.allende1.jhu.becknic.spectrum.txt w/ score: 0.689
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt, was 13 spectrum from closest
+
+cor: manmade.road.pavingasphalt.solid.all.0095uuuasp.jhu.becknic.spectrum.txt is closest to: soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt w/ score: 0.976
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt, was 1 spectrum from closest
+
+cor: manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt is closest to: mineral.silicate.tectosilicate.medium.tir.ts-10a.jpl.nicolet.spectrum.txt w/ score: 0.935
+Actual closest compound, manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt, was 185 spectrum from closest
+
+Total Spectrum Misclassified 4
+Average Miss: 81.75
+
+manmade Spectrum Misclassified 4
+Average Miss: 81.75
+
+meteorites Spectrum Misclassified 0
+Average Miss: 0.00
+
+mineral Spectrum Misclassified 0
+Average Miss: 0.00
+
+nonphotosyntheticvegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+rock Spectrum Misclassified 0
+Average Miss: 0.00
+
+soil Spectrum Misclassified 0
+Average Miss: 0.00
+
+vegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+water Spectrum Misclassified 0
+Average Miss: 0.00
+
+Calculcated Best Matches at Level 1: 0
+Calculcated Best Matches at Level 2: 0
+Calculcated Best Matches at Level 3: 0
+Calculcated Best Matches at Level 4: 2
+cor: manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt is closest to: mineral.silicate.tectosilicate.fine.tir.analcime_1.jhu.nicolet.spectrum.txt w/ score: 0.845
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt, was 128 spectrum from closest
+
+cor: manmade.reflectancetarget.none.solid.tir.ilf-17464-2-1-bc.jpl.nicolet.spectrum.txt is closest to: meteorites.carbonaceouschondrite.cv3.fine.tir.allende1.jhu.becknic.spectrum.txt w/ score: 0.689
+Actual closest compound, manmade.reflectancetarget.none.solid.tir.001682.jpl.nicolet.spectrum.txt, was 13 spectrum from closest
+
+cor: manmade.road.pavingasphalt.solid.all.0095uuuasp.jhu.becknic.spectrum.txt is closest to: soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt w/ score: 0.976
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt, was 1 spectrum from closest
+
+cor: manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt is closest to: mineral.silicate.tectosilicate.medium.tir.ts-10a.jpl.nicolet.spectrum.txt w/ score: 0.935
+Actual closest compound, manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt, was 185 spectrum from closest
+
+Total Spectrum Misclassified 4
+Average Miss: 81.75
+
+manmade Spectrum Misclassified 4
+Average Miss: 81.75
+
+meteorites Spectrum Misclassified 0
+Average Miss: 0.00
+
+mineral Spectrum Misclassified 0
+Average Miss: 0.00
+
+nonphotosyntheticvegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+rock Spectrum Misclassified 0
+Average Miss: 0.00
+
+soil Spectrum Misclassified 0
+Average Miss: 0.00
+
+vegetation Spectrum Misclassified 0
+Average Miss: 0.00
+
+water Spectrum Misclassified 0
+Average Miss: 0.00
+
+Calculcated Best Matches at Level 1: 0
+Calculcated Best Matches at Level 2: 0
+Calculcated Best Matches at Level 3: 0
+Calculcated Best Matches at Level 4: 2
+Calculcated Best Matches that aren not same type: 2

@@ -12,4 +12,7 @@ def dpn(spectra_1, spectra_2):
     spectra_1_mag **= 0.5
     spectra_2_mag **= 0.5
 
-    return dot_prod / (spectra_1_mag * spectra_2_mag)
+    if spectra_1_mag == 0 or spectra_2_mag == 0:
+        return 0
+    else:
+        return dot_prod / (spectra_1_mag * spectra_2_mag)

@@ -15,23 +15,24 @@ from pre_process.spectra_point_matcher import match_points
 from copy import deepcopy
 
 class Hitlist:
-    def __init__(self, algorithm, dataset_path):
+    def __init__(self, algorithm, dataset_path, file_title=''):
         self.comparison_type = algorithm
         self.missed_spectrum = []
         self.dataset_path = dataset_path
         self.difference_matrix = self.create_difference_matrix()
+        self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/results_3rd_run/{0} results.txt'.format(self.comparison_type)
-        if not os.path.exists(results_path):
-            open(results_path, 'x', errors='ignore')
-
-        self.file = open(results_path, 'a', errors='ignore')
+        results_path = '../results/4th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        self.results = self.open_file(results_path)
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
-        if not os.path.exists(heatmap_path):
-            open(heatmap_path, 'x', errors='ignore')
+        self.heatmap = self.open_file(heatmap_path)
+    
+    def open_file(self, path):
+        if not os.path.exists(path):
+            open(path, 'x', errors='ignore')
 
-        self.heatmap = open(heatmap_path, 'a', errors='ignore')
+        return open(path, 'a', errors='ignore')
 
     def create_difference_matrix(self):
         difference_matrix = {}
@@ -48,7 +49,7 @@ class Hitlist:
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path)[329:330]:
+        for file in os.listdir(self.dataset_path)[9:15]:
             if file.endswith('.txt') and 'spectrum' in file:
                 file_path = self.dataset_path + file
                 self.find_matches(file_path, self.dataset_path)
@@ -136,18 +137,9 @@ class Hitlist:
         # convert dict to list
         spectra_hitlist = []
         for name, score in self.difference_matrix[spectrum_name].items():
-            spectra_hitlist.append({'name': name, 'score': score})
+            spectra_hitlist.append({'name': name, 'score': score, 'count': 0})
 
-        spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['score'], reverse=True)
-
-        for i in range(len(spectra_hitlist)):
-            if spectra_hitlist[i]['name'] == spectrum_name:
-                spectra_hitlist.pop(i)
-                break
-
-        similarity = []
         compound = spectrum_name.split('.')
-
         for i in range(len(spectra_hitlist)):
             hitlist_compound = spectra_hitlist[i]['name'].split('.')
 
@@ -155,32 +147,43 @@ class Hitlist:
             for j in range(len(compound)):
                 if compound[j] == hitlist_compound[j]:
                     similarity_count += 1
+            spectra_hitlist[i]['count'] = similarity_count
 
-            similarity.append({'compound': spectra_hitlist[i]['name'], 'count': similarity_count})
-
-        similarity = sorted(similarity, key=lambda i: i['count'], reverse=True)
-        actual_closest = similarity[0]['compound']
+        spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['count'], reverse=True)
 
         for i in range(len(spectra_hitlist)):
-            if actual_closest == spectra_hitlist[i]['name']:
+            if spectra_hitlist[i]['name'] == spectrum_name:
+                spectra_hitlist.pop(i)
+                break
+
+        expected_closest = spectra_hitlist[0]['name']
+
+        spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['score'], reverse=True)
+
+        for i in range(len(spectra_hitlist)):
+            if expected_closest == spectra_hitlist[i]['name']:
                 if i > 0:
                     self.missed_spectrum.append([self.comparison_type, spectrum_name, i])
+
                     self.log_info('{0}: {1} is closest to: {2} w/ score: {3:.3f}'.format(self.comparison_type, spectrum_name, spectra_hitlist[0]['name'], spectra_hitlist[0]['score']), Fore.RED)
-                    self.log_info('Actual closest compound, {0}, was {1} spectrum from closest\n'.format(actual_closest, i), Fore.RED)
+                    self.log_info('Actual closest compound, {0}, was {1} spectrum from closest\n'.format(expected_closest, i), Fore.RED)
+                    self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
                 else:
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
+                    self.classification_level[4] += 1
 
     def accuracy(self):
-        average_miss = 0
         missed_categories = {'manmade': [0,0], 'meteorites': [0,0], 'mineral': [0,0], 'nonphotosyntheticvegetation': [0,0], 'rock': [0,0], 'soil': [0,0], 'vegetation': [0,0], 'water':[0,0]}
+        average_miss = 0
 
         color = Fore.GREEN
         if len(self.missed_spectrum) > 0:
             color = Fore.RED
             for entry in self.missed_spectrum:
                 average_miss += entry[2]
+                
+                # this section is used to get the tally of each spectrum misclassified in a certain class
                 spectrum_type = entry[1].split('.')[0]
-
                 if spectrum_type in missed_categories.keys():
                     missed_categories[spectrum_type][0] += 1
                     missed_categories[spectrum_type][1] += entry[2]
@@ -190,7 +193,7 @@ class Hitlist:
         self.log_info('Total Spectrum Misclassified {0}'.format(len(self.missed_spectrum)), color)
         self.log_info('Average Miss: {0:.2f}\n'.format(average_miss), color)
 
-        accuracy = len(self.missed_spectrum) / len(self.difference_matrix)
+        accuracy = 1 - (len(self.missed_spectrum) / len(self.difference_matrix) * 100)
         self.heatmap.write('({0}, {1})\n'.format(accuracy, average_miss))
 
         for category in missed_categories.keys():
@@ -202,6 +205,25 @@ class Hitlist:
 
             self.log_info('Average Miss: {0:.2f}\n'.format(average_miss), color)
 
+        for i in range(1, len(self.classification_level)):
+            s = 'Calculcated Best Matches at Level {0}: {1}'.format(i, self.classification_level[i])
+            self.log_info(s, Fore.YELLOW)
+
+        s = 'Calculcated Best Matches that are not same type: {0}'.format(self.classification_level[i])
+        self.log_info(s, Fore.YELLOW)
+
     def log_info(self, text, color):
         print(color + text + Style.RESET_ALL)
-        self.file.write('\n' + text)
+        self.results.write('\n' + text)
+
+    def add_classification_results(self, unknown_spectrum, known_spectrum):
+        unknown_spectrum = unknown_spectrum.split('.')
+        known_spectrum = known_spectrum.split('.')
+
+        if unknown_spectrum[0] != known_spectrum[0]:
+            self.classification_level[0] += 1
+
+        else:
+            for i in range(1, 4):
+                if unknown_spectrum[i] == known_spectrum[i]:
+                    self.classification_level[i] += 1

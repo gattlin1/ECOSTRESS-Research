@@ -1,80 +1,24 @@
-import sys
-sys.path.append('../../../')
 import math
 import shutil
 import os
 import random
-from algorithms.cor import cor
-from algorithms.dpn import dpn
-from algorithms.mad import mad
-from algorithms.msd import msd
-from make_nasa_dataset import make_nasa_dataset
 
-def move_file(destination, file):
-    # file_split = file.split('ecospeclib-organized/')[1]
-    # file_split = file_split.split('/')[:5]
+def make_ab_pairs(final_path):
+    original_dataset_path = '../ecospeclib-all/'
+    organized_path = '../ecospeclib-organized/'
 
-    # for i in range(len(file_split) + 1):
-    #     if not os.path.exists(destination + '/'.join(file_split[:i])):
-    #         os.mkdir(destination + '/'.join(file_split[:i]))
+    organize_data(original_dataset_path, organized_path)
 
-    shutil.move(file, destination)
+    # ensures we start out with a new dataset
+    if os.path.exists(final_path):
+        shutil.rmtree(final_path)
+    
+    # if the dataset is not present then a directory is created for it
+    if not os.path.exists(final_path):
+        os.mkdir(final_path)
 
-def generate_file_list(file_path):
-    files = []
-    with open(file_path, 'r') as file:
-        files = [line.strip('\n').strip(' ') for line in file.readlines()]
-
-    return files
-
-
-def find_best_match(files, algorithm='cor'):
-    ab_pairs = []
-    for file in files:
-        file = file.replace('\\', '/')
-
-        dataset = make_nasa_dataset(file)
-
-        for other_file in files:
-            other_file = other_file.replace('\\', '/')
-            if file != other_file:
-                other_dataset = make_nasa_dataset(other_file)
-
-                score = 0
-                if algorithm == 'cor':
-                    score = cor(dataset, other_dataset)
-                elif algorithm == 'dpn':
-                    score = dpn(dataset, other_dataset)
-                elif algorithm == 'msd':
-                    score = mad(dataset, other_dataset)
-                elif algorithm == 'mad':
-                    score = msd(dataset, other_dataset)
-
-                pair = {'files': [file, other_file], 'score': score}
-
-                ab_pairs.append(pair)
-
-    ab_pairs = sorted(ab_pairs, key = lambda i: i['score'], reverse=True)
-
-    first_file = ab_pairs[0]['files'][0]
-    second_file = ab_pairs[0]['files'][1]
-
-    move_file(dest_path, first_file)
-    move_file(dest_path, second_file)
-
-if __name__=='__main__':
-    directory_path = '../../ecospeclib-organized/'
-    dest_path = '../../ecospeclib-final-v2/'
-
-    spectrum_to_ignore = generate_file_list('./spectrum_to_ignore.txt')
-    msd_spectrum = generate_file_list('./special_cases.txt')
-
-    if not os.path.exists(dest_path):
-        os.mkdir(dest_path)
-
-    subfolders = [ f.path for f in os.scandir(directory_path) if f.is_dir() ]
+    subfolders = [ f.path for f in os.scandir(organized_path) if f.is_dir() ]
     for folder in subfolders:
-        folder.replace('\\', '/')
         files = []
 
         for f in os.scandir(str(folder)):
@@ -82,20 +26,28 @@ if __name__=='__main__':
                 subfolders.append(f.path)
             else:
                 files.append(f.path)
-
-        # handle file moving based on number of files in directory
+                
         if len(files) == 1:
             shutil.rmtree(folder, ignore_errors=True)
 
         elif len(files) >= 2:
-            valid_directory = True
-            algorithm = 'cor'
-            for entry in spectrum_to_ignore:
-                if entry in files[0]:
-                    valid_directory = False
-            for entry in msd_spectrum:
-                if entry in files[0]:
-                    algorithm = 'mad'
-            if valid_directory:
-                if(algorithm == 'mad'):
-                find_best_match(files, algorithm=algorithm)
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
+
+        elif len(files) >= 3:
+            random.shuffle(files)
+
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
+
+def organize_data(directory_path, dest_path):
+    for file in os.listdir(directory_path):
+        if file.endswith('.txt') and 'spectrum' in file:
+            file_path = directory_path + file
+            new_path = dest_path + '/'.join(file.split('.')[:5])
+            split_file = file.split('.')[:5]
+
+            for i in range(len(split_file) + 1):
+                if not os.path.exists(dest_path + '/'.join(split_file[:i])):
+                    os.mkdir(dest_path + '/'.join(split_file[:i]))
+            shutil.copy(file_path, new_path)

@@ -121,10 +121,12 @@ dmypy.json
 .pyre/
 
 # Dataset
-ecospeclib-final-v2
+ecospeclib-all
+ecospeclib-final
 ecospeclib-organized
 visualization-final-v2
-ecospeclib-all-nlc/
+ecospeclib-all-nlc
+ecospeclib-all-nlc-wavelength
 
 ### VisualStudioCode ###
 .vscode/*

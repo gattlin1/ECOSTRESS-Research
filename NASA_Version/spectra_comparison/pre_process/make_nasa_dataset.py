@@ -5,6 +5,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
+import shutil
 
 def make_nasa_dataset(file_path):
     dataset = []
@@ -19,20 +20,24 @@ def make_nasa_dataset(file_path):
     return dataset
 
 if __name__=='__main__':
-    vis_dir = '../../visualization-final-v2/'
-    directory_path = '../../ecospeclib-final-nlc/'
+    vis_dir = '../../visualization-final-v2-wave/'
+    directory_path = '../../ecospeclib-final-nlc-wavelength/'
+
+    if os.path.exists(vis_dir):
+        shutil.rmtree(vis_dir)
 
     if not os.path.exists(vis_dir):
         os.mkdir(vis_dir)
+
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
-            new_path = vis_dir + '/'.join(file.split('.')[:5])
-            split_file = file.split('.')[:5]
+            # new_path = vis_dir + '/'.join(file.split('.')[:5])
+            # split_file = file.split('.')[:5]
 
-            for i in range(len(split_file) + 1):
-                if not os.path.exists(vis_dir + '/'.join(split_file[:i])):
-                    os.mkdir(vis_dir + '/'.join(split_file[:i]))
+            # for i in range(len(split_file) + 1):
+            #     if not os.path.exists(vis_dir + '/'.join(split_file[:i])):
+            #         os.mkdir(vis_dir + '/'.join(split_file[:i]))
 
             dataset = make_nasa_dataset(file_path)
             dataset = pd.DataFrame(dataset, columns = ['Wavelength', 'Reflectance'])
@@ -43,5 +48,5 @@ if __name__=='__main__':
             plt.ylabel('Reflectance')
             plt.xlabel('Wavelength')
 
-            plt.savefig(vis_dir + '/'.join(split_file) + '/' + file + '.png')
+            plt.savefig(vis_dir + '/' + file + '.png')
             plt.close('all')

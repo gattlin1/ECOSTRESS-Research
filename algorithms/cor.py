@@ -20,4 +20,7 @@ def cor(spectra_1, spectra_2):
     norm_spectra_1 **= 0.5
     norm_spectra_2 **= 0.5
 
-    return nominator / (norm_spectra_1 * norm_spectra_2)
+    if norm_spectra_1 == 0 or norm_spectra_2 == 0:
+        return 0
+    else:
+        return nominator / (norm_spectra_1 * norm_spectra_2)
