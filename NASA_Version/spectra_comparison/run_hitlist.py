@@ -24,7 +24,7 @@ if __name__=='__main__':
     dataset_path = '../ecospeclib-final/'
     nlc_dataset_path = '../ecospeclib-final-nlc/'
 
-    for i in range(1):
+    for i in range(3):
         file_name = 'run {0}'.format(i)
 
         # Setup Dataset
@@ -32,7 +32,7 @@ if __name__=='__main__':
         make_nlc_files(dataset_path, nlc_dataset_path, floor_value=0.3, width=0.5)
 
         processes = []
-        hitlist_types = ['cor']#, 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
+        hitlist_types = ['cor', 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
         for alg in hitlist_types:
             if 'nlc' in alg:
                 p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, file_name))

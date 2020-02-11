@@ -49,7 +49,7 @@ class Hitlist:
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path)[9:15]:
+        for file in os.listdir(self.dataset_path):
             if file.endswith('.txt') and 'spectrum' in file:
                 file_path = self.dataset_path + file
                 self.find_matches(file_path, self.dataset_path)

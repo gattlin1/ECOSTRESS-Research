@@ -28,6 +28,7 @@ class Hitlist:
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
         self.heatmap = self.open_file(heatmap_path)
+        shm = shared_memory.SharedMemory(create=True, size=a.nbytes)
     
     def open_file(self, path):
         if not os.path.exists(path):
