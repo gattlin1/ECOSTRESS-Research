@@ -13,7 +13,8 @@ from algorithms.msd import msd
 from pre_process.make_nasa_dataset import make_nasa_dataset
 from pre_process.spectra_point_matcher import match_points
 from copy import deepcopy
-from multiprocessing import shared_memory
+import multiprocessing
+from multiprocessing import Manager
 
 class Hitlist:
     def __init__(self, algorithm, dataset_path, file_title=''):
@@ -28,8 +29,7 @@ class Hitlist:
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
         self.heatmap = self.open_file(heatmap_path)
-        shm = shared_memory.SharedMemory(create=True, size=a.nbytes)
-    
+
     def open_file(self, path):
         if not os.path.exists(path):
             open(path, 'x', errors='ignore')
@@ -37,7 +37,8 @@ class Hitlist:
         return open(path, 'a', errors='ignore')
 
     def create_difference_matrix(self):
-        difference_matrix = {}
+        #manager = multiprocessing.Manager()
+        difference_matrix = {} #manager.dict()
         for file in os.listdir(self.dataset_path):
             if file.endswith('.txt') and 'spectrum' in file:
                 difference_matrix[file] = {}
@@ -57,32 +58,52 @@ class Hitlist:
                 self.find_matches(file_path, self.dataset_path)
 
     def find_matches(self, file_path, dir_path):
+        files = [file for file in os.listdir(dir_path) if file.endswith('.txt') and 'spectrum' in file]
+        core_count = multiprocessing.cpu_count()
+        chunk_size = int(len(files) / core_count)
+
+        manager = multiprocessing.Manager()
+        return_list = manager.list()
+
+        processes = []
+        for i in range(0, len(files), chunk_size):
+            p = multiprocessing.Process(target=self.match_runner, args=(file_path, dir_path, files[i:i + chunk_size], return_list))
+            processes.append(p)
+            p.start()
+
+        for process in processes:
+            process.join()
+
         unknown_spectrum_name = file_path.split('/')
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
 
-        unknown_spectrum = make_nasa_dataset(file_path)
-
-        for file in os.listdir(dir_path):
-            if self.valid_spectrum_file(file, unknown_spectrum_name):
-                unknown_spectrum_copy = deepcopy(unknown_spectrum)
-                known_spectrum = make_nasa_dataset(dir_path + file)
-
-                # calculating similarity score and then adding it to hitlist
-                unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 5.0)
-
-                score = 0
-                if 'cor' in self.comparison_type:
-                    score = cor(unknown_spectrum_copy, known_spectrum)
-                elif 'dpn' in self.comparison_type:
-                    score = dpn(unknown_spectrum_copy, known_spectrum)
-                elif 'mad' in self.comparison_type:
-                    score = mad(unknown_spectrum_copy, known_spectrum)
-                elif 'msd' in self.comparison_type:
-                    score = msd(unknown_spectrum_copy, known_spectrum)
-
-                self.add_similiarity_score(unknown_spectrum_name, file, score)
+        for entry in return_list:
+            self.add_similiarity_score(unknown_spectrum_name, entry[0], entry[1])
 
         self.get_results(unknown_spectrum_name)
+
+    def match_runner(self, file_path, dir_path, files, shared_list):
+        unknown_spectrum = make_nasa_dataset(file_path)
+
+        for file in files:
+            unknown_spectrum_copy = deepcopy(unknown_spectrum)
+            known_spectrum = make_nasa_dataset(dir_path + file)
+
+            # calculating similarity score and then adding it to hitlist
+            unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 5.0)
+
+            score = 0
+            if 'cor' in self.comparison_type:
+                score = cor(unknown_spectrum_copy, known_spectrum)
+            elif 'dpn' in self.comparison_type:
+                score = dpn(unknown_spectrum_copy, known_spectrum)
+            elif 'mad' in self.comparison_type:
+                score = mad(unknown_spectrum_copy, known_spectrum)
+            elif 'msd' in self.comparison_type:
+                score = msd(unknown_spectrum_copy, known_spectrum)
+
+            entry = [file, score]
+            shared_list.append(entry)
 
 
     def valid_spectrum_file(self, file_name, unknown_spectrum_name):
@@ -141,7 +162,7 @@ class Hitlist:
         for name, score in self.difference_matrix[spectrum_name].items():
             spectra_hitlist.append({'name': name, 'score': score, 'count': 0})
 
-        compound = spectrum_name.split('.')
+        compound = spectrum_name.split('.')[:5]
         for i in range(len(spectra_hitlist)):
             hitlist_compound = spectra_hitlist[i]['name'].split('.')
 
@@ -183,7 +204,7 @@ class Hitlist:
             color = Fore.RED
             for entry in self.missed_spectrum:
                 average_miss += entry[2]
-                
+
                 # this section is used to get the tally of each spectrum misclassified in a certain class
                 spectrum_type = entry[1].split('.')[0]
                 if spectrum_type in missed_categories.keys():
