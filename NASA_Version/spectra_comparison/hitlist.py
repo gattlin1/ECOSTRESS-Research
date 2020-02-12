@@ -27,7 +27,7 @@ class Hitlist:
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
         self.heatmap = self.open_file(heatmap_path)
-    
+
     def open_file(self, path):
         if not os.path.exists(path):
             open(path, 'x', errors='ignore')
@@ -49,7 +49,7 @@ class Hitlist:
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path):
+        for file in os.listdir(self.dataset_path)[:1]:
             if file.endswith('.txt') and 'spectrum' in file:
                 file_path = self.dataset_path + file
                 self.find_matches(file_path, self.dataset_path)
@@ -181,7 +181,7 @@ class Hitlist:
             color = Fore.RED
             for entry in self.missed_spectrum:
                 average_miss += entry[2]
-                
+
                 # this section is used to get the tally of each spectrum misclassified in a certain class
                 spectrum_type = entry[1].split('.')[0]
                 if spectrum_type in missed_categories.keys():

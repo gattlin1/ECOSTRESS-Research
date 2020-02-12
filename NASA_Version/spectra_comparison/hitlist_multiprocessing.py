@@ -21,10 +21,9 @@ class Hitlist:
         self.comparison_type = algorithm
         self.missed_spectrum = []
         self.dataset_path = dataset_path
-        self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/4th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        results_path = '../results/5th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
         self.results = self.open_file(results_path)
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
@@ -36,93 +35,46 @@ class Hitlist:
 
         return open(path, 'a', errors='ignore')
 
-    def create_difference_matrix(self):
-        #manager = multiprocessing.Manager()
-        difference_matrix = {} #manager.dict()
-        for file in os.listdir(self.dataset_path):
-            if file.endswith('.txt') and 'spectrum' in file:
-                difference_matrix[file] = {}
-
-                for other_file in os.listdir(self.dataset_path):
-                    if other_file.endswith('.txt') and 'spectrum' in other_file:
-                        difference_matrix[file][other_file] = 0
-                difference_matrix[file][file] = 1
-
-        return difference_matrix
-
-    def run_spectra(self):
-        # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path):
-            if file.endswith('.txt') and 'spectrum' in file:
-                file_path = self.dataset_path + file
-                self.find_matches(file_path, self.dataset_path)
-
-    def find_matches(self, file_path, dir_path):
-        files = [file for file in os.listdir(dir_path) if file.endswith('.txt') and 'spectrum' in file]
-        core_count = multiprocessing.cpu_count()
-        chunk_size = int(len(files) / core_count)
-
-        manager = multiprocessing.Manager()
-        return_list = manager.list()
-
-        processes = []
-        for i in range(0, len(files), chunk_size):
-            p = multiprocessing.Process(target=self.match_runner, args=(file_path, dir_path, files[i:i + chunk_size], return_list))
-            processes.append(p)
-            p.start()
-
-        for process in processes:
-            process.join()
-
+    def find_matches(self, file_path, files, difference_matrix):
         unknown_spectrum_name = file_path.split('/')
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
 
-        for entry in return_list:
-            self.add_similiarity_score(unknown_spectrum_name, entry[0], entry[1])
-
-        self.get_results(unknown_spectrum_name)
-
-    def match_runner(self, file_path, dir_path, files, shared_list):
         unknown_spectrum = make_nasa_dataset(file_path)
 
         for file in files:
-            unknown_spectrum_copy = deepcopy(unknown_spectrum)
-            known_spectrum = make_nasa_dataset(dir_path + file)
+            if self.valid_spectrum_file(file, file_path, difference_matrix):
+                unknown_spectrum_copy = deepcopy(unknown_spectrum)
+                known_spectrum = make_nasa_dataset(self.dataset_path + file)
 
-            # calculating similarity score and then adding it to hitlist
-            unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 5.0)
+                if file == 'vegetation.shrub.arctostaphylos.glandulosa.vswir.vh122.ucsb.asd.spectrum.txt':
+                    x = 5
 
-            score = 0
-            if 'cor' in self.comparison_type:
-                score = cor(unknown_spectrum_copy, known_spectrum)
-            elif 'dpn' in self.comparison_type:
-                score = dpn(unknown_spectrum_copy, known_spectrum)
-            elif 'mad' in self.comparison_type:
-                score = mad(unknown_spectrum_copy, known_spectrum)
-            elif 'msd' in self.comparison_type:
-                score = msd(unknown_spectrum_copy, known_spectrum)
+                # calculating similarity score and then adding it to hitlist
+                unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 1.0)
 
-            entry = [file, score]
-            shared_list.append(entry)
+                score = 0
+                if 'cor' in self.comparison_type:
+                    score = cor(unknown_spectrum_copy, known_spectrum)
+                elif 'dpn' in self.comparison_type:
+                    score = dpn(unknown_spectrum_copy, known_spectrum)
+                elif 'mad' in self.comparison_type:
+                    score = mad(unknown_spectrum_copy, known_spectrum)
+                elif 'msd' in self.comparison_type:
+                    score = msd(unknown_spectrum_copy, known_spectrum)
+
+                difference_matrix[file] = score
 
 
-    def valid_spectrum_file(self, file_name, unknown_spectrum_name):
-        if not file_name.endswith('.txt'):
-            return False
-        if 'spectrum' not in file_name:
-            return False
-        if not self.uncalculated_spectra_pair(file_name, unknown_spectrum_name):
+    def valid_spectrum_file(self, file_name, unknown_spectrum_name, difference_matrix):
+        if not self.uncalculated_spectra_pair(file_name, difference_matrix):
             return False
         if not self.correct_ir_range(file_name, unknown_spectrum_name):
             return False
 
         return True
 
-    def uncalculated_spectra_pair(self, file_name, unknown_spectrum_name):
-        if self.difference_matrix[file_name][unknown_spectrum_name] == 0:
-            return True
-
-        if self.difference_matrix[unknown_spectrum_name][file_name] == 0:
+    def uncalculated_spectra_pair(self, file_name, difference_matrix):
+        if difference_matrix[file_name] == 0:
             return True
 
         return False
@@ -151,15 +103,17 @@ class Hitlist:
 
         return spectrometer_range
 
-    def add_similiarity_score(self, unknown_spectrum, known_spectrum, score):
-        self.difference_matrix[unknown_spectrum][known_spectrum] = score
-        self.difference_matrix[known_spectrum][unknown_spectrum] = score
+    def add_similiarity_score(self, known_spectrum, score):
+        difference_matrix[known_spectrum] = score
 
-    def get_results(self, spectrum_name):
+        pid = os.getpid
+        print('Process {0} added score'.format(pid))
+
+    def get_results(self, spectrum_name, difference_matrix):
 
         # convert dict to list
         spectra_hitlist = []
-        for name, score in self.difference_matrix[spectrum_name].items():
+        for name, score in difference_matrix[spectrum_name].items():
             spectra_hitlist.append({'name': name, 'score': score, 'count': 0})
 
         compound = spectrum_name.split('.')[:5]
