@@ -11,7 +11,9 @@ import multiprocessing
 import shutil
 import datetime
 
-def nlc_process(files, dataset_path, destination, floor_value, width, process_number):
+def nlc_process(files, dataset_path, destination, floor_value, width):
+    pid = os.getpid()
+
     # loop through spectrum files in a directory and find matches in the hitlist
     for file in files:
         if file.endswith('.txt') and 'spectrum' in file:
@@ -23,7 +25,7 @@ def nlc_process(files, dataset_path, destination, floor_value, width, process_nu
                 for wavelength, reflectance in spectrum:
                     myfile.write('{0}\t {1}\n'.format(wavelength, reflectance))
         #print('process {0} finished file'.format(process_number))
-    print('FINISHED --------------------  PROCESS {0} w/ {1}'.format(process_number, len(files)))
+    print('FINISHED  --------------------   PROCESS {0} w/ {1}'.format(pid, len(files)))
 
 def make_nlc_files(dataset_path, destination, floor_value, width):
     start = datetime.datetime.now()
@@ -41,12 +43,12 @@ def make_nlc_files(dataset_path, destination, floor_value, width):
     chunk_size = int(len(files) / core_count)
 
     #nlc_process(files, dataset_path, destination, floor_value, width, 2)
-    
+
     processes = []
     j = 0
     for i in range(0, len(files), chunk_size):
         j += 1
-        p = multiprocessing.Process(target=nlc_process, args=(files[i:i + chunk_size], dataset_path, destination, floor_value, width, j))
+        p = multiprocessing.Process(target=nlc_process, args=(files[i:i + chunk_size], dataset_path, destination, floor_value, width))
         processes.append(p)
         p.start()
 
@@ -59,4 +61,3 @@ if __name__=='__main__':
     d = '../../ecospeclib-final/'
     s = '../../ecospeclib-final-nlc-wavelength/'
     make_nlc_files(d, s, 0.3, 0.2)
-    
