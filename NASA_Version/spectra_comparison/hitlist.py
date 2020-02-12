@@ -22,7 +22,7 @@ class Hitlist:
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/4th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        results_path = '../results/5th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
         self.results = self.open_file(results_path)
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
@@ -170,6 +170,7 @@ class Hitlist:
                     self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
                 else:
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
+                    
                     self.classification_level[4] += 1
 
     def accuracy(self):

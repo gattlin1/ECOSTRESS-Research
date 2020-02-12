@@ -23,7 +23,7 @@ def nlc_process(files, dataset_path, destination, floor_value, width, process_nu
                 for wavelength, reflectance in spectrum:
                     myfile.write('{0}\t {1}\n'.format(wavelength, reflectance))
         #print('process {0} finished file'.format(process_number))
-    print('FINISHED --------------------   PROCESS {0} w/ {1}'.format(process_number, len(files)))
+    print('FINISHED --------------------  PROCESS {0} w/ {1}'.format(process_number, len(files)))
 
 def make_nlc_files(dataset_path, destination, floor_value, width):
     start = datetime.datetime.now()

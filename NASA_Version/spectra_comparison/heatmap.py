@@ -12,8 +12,8 @@ import numpy as np
 
 # Creates a hitlist for the specified algorithm and gives it the path to
 # the spectrum directory
-def run_hitlist(algorithm, path):
-    created_hitlist = Hitlist(algorithm, path)
+def run_hitlist(algorithm, path, file_title):
+    created_hitlist = Hitlist(algorithm, path, file_title=file_title)
     created_hitlist.run_spectra()
     created_hitlist.accuracy()
 
@@ -30,6 +30,7 @@ if __name__=='__main__':
     # nlc arguments
     floor_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     wavelength_values = [0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
+    i = 1
 
     # For loop to iterate through each
     for f_val in floor_values:
@@ -42,7 +43,7 @@ if __name__=='__main__':
             processes = []
             hitlist_types = ['nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
             for alg in hitlist_types:
-                p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path))
+                p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, i))
                 processes.append(p)
                 p.start()
 

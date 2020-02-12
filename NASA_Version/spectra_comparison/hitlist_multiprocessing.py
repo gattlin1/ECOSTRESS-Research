@@ -24,7 +24,7 @@ class Hitlist:
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/4th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        results_path = '../results/5th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
         self.results = self.open_file(results_path)
 
         heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
@@ -63,11 +63,11 @@ class Hitlist:
         chunk_size = int(len(files) / core_count)
 
         manager = multiprocessing.Manager()
-        return_list = manager.list()
+        shared_list = manager.list()
 
         processes = []
         for i in range(0, len(files), chunk_size):
-            p = multiprocessing.Process(target=self.match_runner, args=(file_path, dir_path, files[i:i + chunk_size], return_list))
+            p = multiprocessing.Process(target=self.match_runner, args=(file_path, dir_path, files[i:i + chunk_size], shared_list))
             processes.append(p)
             p.start()
 
@@ -77,7 +77,7 @@ class Hitlist:
         unknown_spectrum_name = file_path.split('/')
         unknown_spectrum_name = unknown_spectrum_name[len(unknown_spectrum_name) - 1]
 
-        for entry in return_list:
+        for entry in shared_list:
             self.add_similiarity_score(unknown_spectrum_name, entry[0], entry[1])
 
         self.get_results(unknown_spectrum_name)
@@ -103,6 +103,8 @@ class Hitlist:
                 score = msd(unknown_spectrum_copy, known_spectrum)
 
             entry = [file, score]
+            pid = os.getpid()
+            print('{0} found match'.format(pid))
             shared_list.append(entry)
 
 
