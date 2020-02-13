@@ -22,10 +22,10 @@ class Hitlist:
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/5th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        results_path = '../results/6th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
         self.results = self.open_file(results_path)
 
-        heatmap_path = '../results/heatmap/{0} results.txt'.format(self.comparison_type)
+        heatmap_path = '../results/6th_run/heatmap/{0} results.txt'.format(self.comparison_type)
         self.heatmap = self.open_file(heatmap_path)
 
     def open_file(self, path):
@@ -36,7 +36,7 @@ class Hitlist:
 
     def create_difference_matrix(self):
         difference_matrix = {}
-        for file in os.listdir(self.dataset_path):
+        for file in os.listdir(self.dataset_path)[100:200]:
             if file.endswith('.txt') and 'spectrum' in file:
                 difference_matrix[file] = {}
 
@@ -49,7 +49,7 @@ class Hitlist:
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path)[:1]:
+        for file in os.listdir(self.dataset_path):
             if file.endswith('.txt') and 'spectrum' in file:
                 file_path = self.dataset_path + file
                 self.find_matches(file_path, self.dataset_path)
@@ -66,7 +66,7 @@ class Hitlist:
                 known_spectrum = make_nasa_dataset(dir_path + file)
 
                 # calculating similarity score and then adding it to hitlist
-                unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 5.0)
+                unknown_spectrum_copy, known_spectrum = match_points(unknown_spectrum_copy, known_spectrum, 1.0)
 
                 score = 0
                 if 'cor' in self.comparison_type:
@@ -139,14 +139,16 @@ class Hitlist:
         for name, score in self.difference_matrix[spectrum_name].items():
             spectra_hitlist.append({'name': name, 'score': score, 'count': 0})
 
-        compound = spectrum_name.split('.')
+        compound = spectrum_name.split('.')[:5]
         for i in range(len(spectra_hitlist)):
             hitlist_compound = spectra_hitlist[i]['name'].split('.')
 
             similarity_count = 0
-            for j in range(len(compound)):
-                if compound[j] == hitlist_compound[j]:
-                    similarity_count += 1
+            j = 0
+            while j < len(compound) and compound[j] == hitlist_compound[j]:
+                similarity_count += 1
+                j += 1
+
             spectra_hitlist[i]['count'] = similarity_count
 
         spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['count'], reverse=True)
@@ -167,11 +169,10 @@ class Hitlist:
 
                     self.log_info('{0}: {1} is closest to: {2} w/ score: {3:.3f}'.format(self.comparison_type, spectrum_name, spectra_hitlist[0]['name'], spectra_hitlist[0]['score']), Fore.RED)
                     self.log_info('Actual closest compound, {0}, was {1} spectrum from closest\n'.format(expected_closest, i), Fore.RED)
-                    self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
                 else:
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
-                    
-                    self.classification_level[4] += 1
+                
+                self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
 
     def accuracy(self):
         missed_categories = {'manmade': [0,0], 'meteorites': [0,0], 'mineral': [0,0], 'nonphotosyntheticvegetation': [0,0], 'rock': [0,0], 'soil': [0,0], 'vegetation': [0,0], 'water':[0,0]}
@@ -194,8 +195,8 @@ class Hitlist:
         self.log_info('Total Spectrum Misclassified {0}'.format(len(self.missed_spectrum)), color)
         self.log_info('Average Miss: {0:.2f}\n'.format(average_miss), color)
 
-        accuracy = 1 - (len(self.missed_spectrum) / len(self.difference_matrix) * 100)
-        self.heatmap.write('({0}, {1})\n'.format(accuracy, average_miss))
+        accuracy = (1 - len(self.missed_spectrum) / len(self.difference_matrix)) * 100
+        self.heatmap.write('{0}, {1}, {2}\n'.format(accuracy, average_miss, self.classification_level))
 
         for category in missed_categories.keys():
             self.log_info('{0} Spectrum Misclassified {1}'.format(category, missed_categories[category][0]), color)
@@ -210,7 +211,7 @@ class Hitlist:
             s = 'Calculcated Best Matches at Level {0}: {1}'.format(i, self.classification_level[i])
             self.log_info(s, Fore.YELLOW)
 
-        s = 'Calculcated Best Matches that are not same type: {0}'.format(self.classification_level[i])
+        s = 'Calculcated Best Matches that are not same type: {0}'.format(self.classification_level[0])
         self.log_info(s, Fore.YELLOW)
 
     def log_info(self, text, color):
@@ -225,6 +226,7 @@ class Hitlist:
             self.classification_level[0] += 1
 
         else:
-            for i in range(1, 4):
-                if unknown_spectrum[i] == known_spectrum[i]:
-                    self.classification_level[i] += 1
+            i = 1
+            while unknown_spectrum[i - 1] == known_spectrum[i - 1] and i < len(self.classification_level):
+                self.classification_level[i] += 1
+                i += 1
