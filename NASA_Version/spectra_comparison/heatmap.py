@@ -88,10 +88,10 @@ if __name__=='__main__':
     nlc_dataset_path = '../ecospeclib-final-nlc/'
 
     # Create Pairs
-    make_ab_pairs(dataset_path)
+    #make_ab_pairs(dataset_path)
 
     # nlc arguments
-    floor_values = [0.6, 0.7, 0.8, 0.9, 1.0]#[0.1, 0.2, 0.3, 0.4, 0.5]
+    floor_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     wavelength_values = [0.2, 0.4, 0.6, 0.8, 1.0]
     i = 1
 
