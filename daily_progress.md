@@ -44,7 +44,7 @@
 
 ### January 30, 2020
 
-1. Got 2nd test run results. They are better now `that the bad ab pairs are removed, but the vegetation still is throwing a wrench in things. For many it is counting as over half of the missed classifications.
+1. Got 2nd test run results. They are better now that the bad ab pairs are removed, but the vegetation still is throwing a wrench in things. For many it is counting as over half of the missed classifications.
 
 ### February 2, 2020
 
@@ -61,7 +61,25 @@
 
 ### February 6, 2020
 
-1. Added multiprocessing. W/ how I implemented my hitlist. Had to tweak stuff a bit but now I can just pass each one off to it's own core. From what I've seen this should be faster than mapping them in between cores.
+1. Added multiprocessing. w/ how I implemented my hitlist. Had to tweak stuff a bit but now I can just pass each one off to it's own core. From what I've seen this should be faster than mapping them in between cores.
     - With this multiprocessing I want to create a heatmap. I don't feel we can really say these results are correct until we find the best input parameters for nlc (floor and width values). W/ this multiprocessing it should be possible it will just take some time since we will probably need to run the hitlists at least 100 - 1000ish times. Luckily I will be able to still work on the CNN while this is running and shouldn't affect my research too much.
+
+### February 7, 2020
+
+1. Changed the ab pair script to just take 2 random spectra from the dataset.
+2. Created the heatmap.
+
+### February 8, 2020
+
+1. Added multiprocessing to heatmap. It works similar to how the hitlist multiprocessing works. It doesn't utilize all of the cores so going to try to make another version that uses all the cores.
+
+### February 10, 2020
+
+1. Made a version of the heatmap where it uses all cores to classify an entry. The classification time when it is split up between all of the cores though is so short that it seems the cost of having it multiprocessing is not worth it.
+
+### February 12, 2020
+
+1. Made a final version of the heatmap where all of the cores each classify a smaller set of the entries. This was faster
+to classify one algorithm but it kept bottlenecking with all of the processes trying to add to the shared hitlist. If I ran all four of the algorithms then it would actually be slower than the original implementation.
 
 ## NEURAL NETWORK WORK
