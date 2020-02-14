@@ -28,7 +28,7 @@ if __name__=='__main__':
     make_ab_pairs(dataset_path)
     
     # nlc arguments
-    floor_values = [0.1, 0.2, 0.3, 0.4, 0.5]
+    floor_values = [0.6, 0.7, 0.8, 0.9, 1.0]#[0.1, 0.2, 0.3, 0.4, 0.5]
     wavelength_values = [0.2, 0.4, 0.6, 0.8, 1.0]
     i = 1
 
@@ -41,7 +41,7 @@ if __name__=='__main__':
 
             # Start Multiprocessing
             processes = []
-            hitlist_types = ['nlc - cor']#, 'nlc - dpn', 'nlc - mad', 'nlc - msd']
+            hitlist_types = ['cor', 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
             for alg in hitlist_types:
                 p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, i))
                 processes.append(p)
