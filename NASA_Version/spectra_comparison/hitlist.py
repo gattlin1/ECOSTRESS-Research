@@ -22,10 +22,10 @@ class Hitlist:
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
 
-        results_path = '../results/6th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
+        results_path = '../results/7th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
         self.results = self.open_file(results_path)
 
-        heatmap_path = '../results/6th_run/heatmap/{0} results.txt'.format(self.comparison_type)
+        heatmap_path = '../results/7th_run/heatmap/{0} heatmap.txt'.format(self.comparison_type)
         self.heatmap = self.open_file(heatmap_path)
 
     def open_file(self, path):
@@ -36,7 +36,7 @@ class Hitlist:
 
     def create_difference_matrix(self):
         difference_matrix = {}
-        for file in os.listdir(self.dataset_path)[100:200]:
+        for file in os.listdir(self.dataset_path):
             if file.endswith('.txt') and 'spectrum' in file:
                 difference_matrix[file] = {}
 
