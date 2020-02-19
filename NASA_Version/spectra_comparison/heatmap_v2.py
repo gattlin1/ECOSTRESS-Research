@@ -72,7 +72,6 @@ if __name__=='__main__':
 
             for process in processes:
                 process.join()
-                #process.terminate()
 
             for entry in full_hitlist:
                 unknown_spectrum, known_spectrum, score = entry.split(',')

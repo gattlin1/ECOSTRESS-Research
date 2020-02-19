@@ -125,6 +125,7 @@ ecospeclib-all
 ecospeclib-final
 ecospeclib-organized
 visualization-final-v2
+visualization-final
 ecospeclib-all-nlc
 ecospeclib-all-nlc-wavelength
 
@@ -133,6 +134,9 @@ ecospeclib-all-nlc-wavelength
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Dataset
+*.pickle
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

@@ -90,33 +90,32 @@ if __name__=='__main__':
     nlc_dataset_path = '../ecospeclib-final-nlc/'
 
     # Create Pairs
-    #make_ab_pairs(dataset_path)
+    make_ab_pairs(dataset_path)
 
     # nlc arguments
     floor_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     wavelength_values = [0.2, 0.4, 0.6, 0.8, 1.0]
     i = 1
 
-    # # For loop to iterate through each
-    # for f_val in floor_values:
-    #     for w_val in wavelength_values:
+    # For loop to iterate through each
+    for f_val in floor_values:
+        for w_val in wavelength_values:
 
-    #         # Create NLC Files for each hitlist
-    #         make_nlc_files(dataset_path, nlc_dataset_path, floor_value=f_val, width=w_val)
+            # Create NLC Files for each hitlist
+            make_nlc_files(dataset_path, nlc_dataset_path, floor_value=f_val, width=w_val)
 
-    #         # Start Multiprocessing
-    #         processes = []
-    #         hitlist_types = ['cor', 'dpn', 'mad', 'msd', 'nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
-    #         for alg in hitlist_types:
-    #             p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, i))
-    #             processes.append(p)
-    #             p.start()
+            # Start Multiprocessing
+            processes = []
+            hitlist_types = ['nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
+            for alg in hitlist_types:
+                p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, i))
+                processes.append(p)
+                p.start()
 
-    #         for process in processes:
-    #             process.join()
-    #             process.terminate()
+            for process in processes:
+                process.join()
 
-    #         i += 1
+            i += 1
 
     path = '../results/6th_run/heatmap/'
     file_count = len(list(os.listdir(nlc_dataset_path)))

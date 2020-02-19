@@ -51,3 +51,9 @@ def organize_data(directory_path, dest_path):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
+
+
+# original_dataset_path = '../../ecospeclib-all/'
+# organized_path = '../../ecospeclib-organized/'
+
+# organize_data(original_dataset_path, organized_path)
