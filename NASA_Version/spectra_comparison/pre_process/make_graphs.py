@@ -1,4 +1,5 @@
 from make_nasa_dataset import make_nasa_dataset
+from make_ab_pairs import organize_data
 import multiprocessing
 import numpy as np
 import os
@@ -8,10 +9,12 @@ import shutil
 import datetime
 import colorama
 from colorama import Fore, Back, Style
+import tensorflow as tf
 
 def create_graphs(files, directory):
     pid = os.getpid()
     print(Fore.YELLOW + 'Process {0} starting w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
+    progbar = tf.keras.utils.Progbar(len(files))
 
     for file in files:
         split_file = file.split('/')
@@ -32,14 +35,17 @@ def create_graphs(files, directory):
 
         plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png')
         plt.close()
-    
+
     print(Fore.GREEN + 'Process {0} finished w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
 
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../../visualization-final/'
+    vis_dir = '../../visualization-final-v2/'
     directory_path = '../../ecospeclib-organized/'
+    original_dataset = '../../ecospeclib-all/'
+
+    organize_data(original_dataset, directory_path)
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)

@@ -9,11 +9,14 @@ from keras.layers import Conv2D, MaxPooling2D
 import pickle
 
 if __name__=='__main__':
-    X = pickle.load(open('./X.pickle', 'rb'))
-    y = pickle.load(open('./y.pickle', 'rb'))
+    X = pickle.load(open('../X.pickle', 'rb'))
+    y = pickle.load(open('../y.pickle', 'rb'))
 
-    y = keras.utils.to_categorical(y, 8)
-    X = X/255.0
+    num_classes = 8
+
+    y = keras.utils.to_categorical(y, num_classes)
+    X = X / 255
+
 
     model = Sequential()
 
@@ -28,7 +31,7 @@ if __name__=='__main__':
     model.add(Flatten())
     model.add(Dense(32))
 
-    model.add(Dense(1))
+    model.add(Dense(num_classes))
     model.add(Activation('sigmoid'))
 
     model.compile(loss='categorical_crossentropy',
