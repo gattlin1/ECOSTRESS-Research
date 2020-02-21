@@ -7,12 +7,16 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 import pickle
+import os
 
 if __name__=='__main__':
+    num_classes = 8
+    model_name = 'ecospec.video.h5'
+    save_dir = os.path.join(os.getcwd(), 'saved_models')
+
     X = pickle.load(open('../X.pickle', 'rb'))
     y = pickle.load(open('../y.pickle', 'rb'))
 
-    num_classes = 8
 
     y = keras.utils.to_categorical(y, num_classes)
     X = X / 255
@@ -38,4 +42,11 @@ if __name__=='__main__':
                 optimizer='adam',
                 metrics=['accuracy'])
 
-    model.fit(X, y, batch_size=32, epochs=5, validation_split=0.1, shuffle=True)
+    model.fit(X, y, batch_size=32, epochs=25, validation_split=0.2, shuffle=True)
+
+    # Save model and weights
+    if not os.path.isdir(save_dir):
+        os.makedirs(save_dir)
+    model_path = os.path.join(save_dir, model_name)
+    model.save(model_path)
+    print('Saved trained model at %s ' % model_path)

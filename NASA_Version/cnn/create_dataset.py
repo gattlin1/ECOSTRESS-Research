@@ -4,7 +4,6 @@ import os
 import cv2
 import random
 import pickle
-import tensorflow as tf
 
 if __name__=='__main__':
     directory = '../visualization-final'

@@ -9,12 +9,10 @@ import shutil
 import datetime
 import colorama
 from colorama import Fore, Back, Style
-import tensorflow as tf
 
 def create_graphs(files, directory):
     pid = os.getpid()
     print(Fore.YELLOW + 'Process {0} starting w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
-    progbar = tf.keras.utils.Progbar(len(files))
 
     for file in files:
         split_file = file.split('/')
@@ -28,10 +26,10 @@ def create_graphs(files, directory):
         dataset = make_nasa_dataset(file)
         dataset = pd.DataFrame(dataset, columns = ['Wavelength', 'Reflectance'])
 
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(3, 3))
         plt.plot(dataset['Wavelength'], dataset['Reflectance'])
-        plt.ylabel('Reflectance')
-        plt.xlabel('Wavelength')
+        # plt.ylabel('Reflectance')
+        # plt.xlabel('Wavelength')
 
         plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png')
         plt.close()
@@ -41,7 +39,7 @@ def create_graphs(files, directory):
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../../visualization-final-v2/'
+    vis_dir = '../../visualization-final/'
     directory_path = '../../ecospeclib-organized/'
     original_dataset = '../../ecospeclib-all/'
 
