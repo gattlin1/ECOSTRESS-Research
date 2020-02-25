@@ -145,4 +145,7 @@ ecospeclib-all-nlc-wavelength
 ### Virtual Environment ###
 .venv
 
+# Models
+saved_models
+
 # End of https://www.gitignore.io/api/python,jupyternotebooks,visualstudiocode
