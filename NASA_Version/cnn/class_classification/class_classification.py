@@ -8,10 +8,13 @@ import time
 import os
 
 if __name__=='__main__':
-    num_classes = 8
-    dense_layers = [1, 2]
-    layer_sizes = [16, 32, 64]
-    conv_layers = [1, 2, 3]
+    num_classes = 51
+    # dense_layers = [0, 1, 2]
+    # layer_sizes = [16, 32, 64]
+    # conv_layers = [1, 2, 3]
+    dense_layers = [2]
+    layer_sizes = [64]
+    conv_layers = [4]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     X = pickle.load(open('./data/X.pickle', 'rb'))
@@ -40,10 +43,9 @@ if __name__=='__main__':
 
                 model.add(Flatten())
                 for i in range(dense_layer):
-                    model.add(Dense(32))
+                    model.add(Dense(512))
                     model.add(Activation('relu'))
-                    model.add(Dropout(0.2))
-
+                    model.add(Dropout(0.4))
 
                 model.add(Dense(num_classes))
                 model.add(Activation('softmax'))
@@ -52,7 +54,7 @@ if __name__=='__main__':
                             optimizer='adam',
                             metrics=['accuracy'])
 
-                model.fit(X, y, batch_size=32, epochs=10, validation_split=0.2, callbacks=[tensorboard])
+                model.fit(X, y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
 
                 # Save model and weights
                 if not os.path.isdir(save_dir):

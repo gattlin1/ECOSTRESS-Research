@@ -17,7 +17,7 @@ def create_graphs(files, directory):
     for file in files:
         split_file = file.split('/')
         file_name = split_file[len(split_file) - 1]
-        split_file = split_file[len(split_file) - 1].split('.')[:1]
+        split_file = split_file[len(split_file) - 1].split('.')[1:2]
 
         for i in range(1, len(split_file) + 1):
             if not os.path.exists(directory + '/'.join(split_file[:i])):
@@ -28,8 +28,7 @@ def create_graphs(files, directory):
 
         plt.figure(figsize=(3, 3))
         plt.plot(dataset['Wavelength'], dataset['Reflectance'])
-        # plt.ylabel('Reflectance')
-        # plt.xlabel('Wavelength')
+
 
         plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png')
         plt.close()
@@ -53,8 +52,14 @@ if __name__=='__main__':
 
     subfolders = [ f.path for f in os.scandir(directory_path) if f.is_dir() ]
 
-    files = []
+    subsubfolders = []
     for folder in subfolders:
+        for f in os.scandir(folder):
+            if f.is_dir():
+                subsubfolders.append(f.path)
+    
+    files = []
+    for folder in subsubfolders:
         for file in os.listdir(folder):
             if file.endswith('.txt') and 'spectrum' in file:
                 files.append(folder + '/' + file)
@@ -62,6 +67,9 @@ if __name__=='__main__':
     core_count = multiprocessing.cpu_count()
     chunk_size = int(len(files) / core_count)
 
+    # Serial 
+    #create_graphs(files, vis_dir)
+    
     # Multiprocessing to create a hitlist for an entry
     processes = []
     for i in range(0, len(files), chunk_size):
