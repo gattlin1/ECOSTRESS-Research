@@ -6,7 +6,7 @@ import random
 import pickle
 
 if __name__=='__main__':
-    directory = '../../../visualization-final'
+    directory = '../../../visualization-type'
     categories = [folder.name for folder in os.scandir(directory)]
     training_data = []
 

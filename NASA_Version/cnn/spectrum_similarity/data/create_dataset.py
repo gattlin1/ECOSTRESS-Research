@@ -6,36 +6,40 @@ import random
 import pickle
 
 if __name__=='__main__':
-    directory = '../../../visualization-final'
-    categories = [folder.name for folder in os.scandir(directory)]
+    directory = '../../../visualization-similarity'
+    categories = ['non-match', 'match']
     training_data = []
 
-    for category in categories:
-        class_num = categories.index(category)
+    files = sorted([f.name for f in os.scandir(directory)])
 
-        path = os.path.join(directory, category)
-        for img in os.listdir(path):
-            img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
-            training_data.append([img_array, class_num])
+    # Creating matching entries
+    num_class = categories.index('match')
+    for i in range(0, len(files), 2):
+        img_array_1 = cv2.imread(files[i], cv2.IMREAD_GRAYSCALE)
+        img_array_2 = cv2.imread(files[i + 1], cv2.IMREAD_GRAYSCALE)
+        
+        training_data.append([img_array_1, img_array_2, num_class])
 
-    height = training_data[0][0].shape[0]
-    width = training_data[0][0].shape[1]
+    # Creating non-matching entries
 
-    random.shuffle(training_data)
+    # height = training_data[0][0].shape[0]
+    # width = training_data[0][0].shape[1]
 
-    X = []
-    y = []
+    # random.shuffle(training_data)
 
-    for img, label in training_data:
-        X.append(img)
-        y.append(label)
+    # X = []
+    # y = []
 
-    X = np.array(X).reshape(-1, height, width, 1)
+    # for img, label in training_data:
+    #     X.append(img)
+    #     y.append(label)
 
-    pickle_out = open('./X.pickle', 'wb')
-    pickle.dump(X, pickle_out)
-    pickle_out.close()
+    # X = np.array(X).reshape(-1, height, width, 1)
 
-    pickle_out = open('./y.pickle', 'wb')
-    pickle.dump(y, pickle_out)
-    pickle_out.close()
+    # pickle_out = open('./X.pickle', 'wb')
+    # pickle.dump(X, pickle_out)
+    # pickle_out.close()
+
+    # pickle_out = open('./y.pickle', 'wb')
+    # pickle.dump(y, pickle_out)
+    # pickle_out.close()

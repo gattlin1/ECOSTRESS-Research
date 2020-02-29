@@ -24,7 +24,7 @@ if __name__=='__main__':
     for dense_layer in dense_layers:
         for layer_size in layer_sizes:
             for conv_layer in conv_layers:
-                NAME = f'{conv_layer}-conv-{layer_size}-nodes-{dense_layer}-dense-{int(time.time())}.h5'
+                NAME = f'no-axes-{conv_layer}-conv-{layer_size}-nodes-{dense_layer}-dense-{int(time.time())}.h5'
                 tensorboard = tf.keras.callbacks.TensorBoard(log_dir=f'logs\\{NAME}')
 
                 model = Sequential()
@@ -40,7 +40,7 @@ if __name__=='__main__':
 
                 model.add(Flatten())
                 for i in range(dense_layer):
-                    model.add(Dense(32))
+                    model.add(Dense(512))
                     model.add(Activation('relu'))
                     model.add(Dropout(0.2))
 
@@ -52,7 +52,7 @@ if __name__=='__main__':
                             optimizer='adam',
                             metrics=['accuracy'])
 
-                model.fit(X, y, batch_size=32, epochs=10, validation_split=0.2, callbacks=[tensorboard])
+                model.fit(X, y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
 
                 # Save model and weights
                 if not os.path.isdir(save_dir):

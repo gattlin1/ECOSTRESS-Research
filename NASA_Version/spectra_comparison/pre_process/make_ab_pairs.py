@@ -4,8 +4,8 @@ import os
 import random
 
 def make_ab_pairs(final_path):
-    original_dataset_path = '../ecospeclib-all/'
-    organized_path = '../ecospeclib-organized/'
+    original_dataset_path = '../../ecospeclib-all/'
+    organized_path = '../../ecospeclib-organized/'
 
     organize_data(original_dataset_path, organized_path)
 
@@ -44,8 +44,8 @@ def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
-            new_path = dest_path + '/'.join(file.split('.')[:2])
-            split_file = file.split('.')[:2]
+            new_path = dest_path + '/'.join(file.split('.')[:5])
+            split_file = file.split('.')[:5]
 
             for i in range(len(split_file) + 1):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
@@ -53,7 +53,5 @@ def organize_data(directory_path, dest_path):
             shutil.copy(file_path, new_path)
 
 
-# original_dataset_path = '../../ecospeclib-all/'
-# organized_path = '../../ecospeclib-organized/'
-
-# organize_data(original_dataset_path, organized_path)
+f = '../../ecospec-similarity'
+make_ab_pairs(f)
