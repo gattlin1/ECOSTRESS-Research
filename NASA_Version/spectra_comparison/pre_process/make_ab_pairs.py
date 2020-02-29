@@ -51,7 +51,4 @@ def organize_data(directory_path, dest_path):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
-
-
-f = '../../ecospec-similarity'
-make_ab_pairs(f)
+            
