@@ -21,7 +21,7 @@ if __name__=='__main__':
         training_data.append([img_array_1, img_array_2, num_class])
 
     # Creating non-matching entries
-
+    
     # height = training_data[0][0].shape[0]
     # width = training_data[0][0].shape[1]
 
