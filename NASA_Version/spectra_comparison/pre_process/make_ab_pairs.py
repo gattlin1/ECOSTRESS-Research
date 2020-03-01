@@ -30,15 +30,15 @@ def make_ab_pairs(final_path):
         if len(files) == 1:
             shutil.rmtree(folder, ignore_errors=True)
 
-        elif len(files) >= 2:
-            shutil.move(files[0], final_path)
-            shutil.move(files[1], final_path)
+        # elif len(files) >= 2:
+        #     shutil.move(files[0], final_path)
+        #     shutil.move(files[1], final_path)
 
-        elif len(files) >= 3:
-            random.shuffle(files)
+        # elif len(files) >= 3:
+        #     random.shuffle(files)
 
-            shutil.move(files[0], final_path)
-            shutil.move(files[1], final_path)
+        #     shutil.move(files[0], final_path)
+        #     shutil.move(files[1], final_path)
 
 def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
@@ -51,4 +51,6 @@ def organize_data(directory_path, dest_path):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
-            
+
+f = '../../ecospeclib-similarity'
+make_ab_pairs(f)

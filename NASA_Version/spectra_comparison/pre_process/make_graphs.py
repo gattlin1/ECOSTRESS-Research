@@ -17,7 +17,7 @@ def create_graphs(files, directory):
     for file in files:
         split_file = file.split('/')
         file_name = split_file[len(split_file) - 1]
-        split_file = split_file[len(split_file) - 1].split('.')[:0]
+        split_file = split_file[len(split_file) - 1].split('.')[:5]
 
         for i in range(1, len(split_file) + 1):
             if not os.path.exists(directory + '/'.join(split_file[:i])):
@@ -30,7 +30,7 @@ def create_graphs(files, directory):
         plt.plot(dataset['Wavelength'], dataset['Reflectance'])
         plt.axis('off')
 
-        plt.savefig(directory + file_name + '.png')
+        plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png')
         plt.close()
 
     print(Fore.GREEN + 'Process {0} finished w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
@@ -60,7 +60,7 @@ if __name__=='__main__':
     #     for f in os.scandir(folder):
     #         if f.is_dir():
     #             subsubfolders.append(f.path)
-    
+
     # files = []
     # for folder in subsubfolders:
     #     for file in os.listdir(folder):
@@ -70,9 +70,9 @@ if __name__=='__main__':
     core_count = multiprocessing.cpu_count()
     chunk_size = int(len(files) / core_count)
 
-    # Serial 
+    # Serial
     #create_graphs(files, vis_dir)
-    
+
     # Multiprocessing to create a hitlist for an entry
     processes = []
     for i in range(0, len(files), chunk_size):
