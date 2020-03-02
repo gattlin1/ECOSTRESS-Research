@@ -39,22 +39,25 @@ if __name__=='__main__':
     branch_1 = create_model(32)
     branch_2 = create_model(32)
 
-    combined = Concatenate(branch_1, branch_2)
+    combined = Concatenate([branch_1, branch_2])
 
-    combined.add(Dense(num_classes))
-    combined.add(Activation('softmax'))
+    combined_model = Sequential()
+    combined_model.add(combined)
 
-    combined.compile(loss='binary_crossentropy',
+    combined_model.add(Dense(num_classes))
+    combined_model.add(Activation('softmax'))
+
+    combined_model.compile(loss='binary_crossentropy',
                             optimizer='adam',
                             metrics=['accuracy'])
 
-    combined.fit([X[:, 0], X[:, 1]], y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
+    combined_model.fit([X[:, 0], X[:, 1]], y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
 
     # Save model and weights
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     model_path = os.path.join(save_dir, NAME)
-    combined.save(model_path)
+    combined_model.save(model_path)
 
     print('Saved trained model at %s ' % model_path)
 
