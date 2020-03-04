@@ -1,65 +1,80 @@
 from __future__ import print_function
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Input, Concatenate
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 import pickle
 import time
 import os
+import numpy as np
 
-def create_model(layer_size):
-    model = Sequential()
+def create_model(conv_layers, conv_layer_size, dense_layers, dense_layer_size, dropout, shape):
+    branch = Input(shape=shape)
 
-    model.add(Conv2D(layer_size, (3, 3), input_shape=X.shape[1:]))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+    x = Conv2D(conv_layer_size, (3, 3), activation='relu', input_shape=shape)(branch)
+    x = MaxPooling2D(pool_size=(2,2))(x)
 
-    model.add(Conv2D(layer_size, (3, 3)))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(pool_size=(2,2)))
+    for i in range(conv_layers):
+        x = Conv2D(conv_layer_size, (3, 3), activation='relu')(x)
+        x = MaxPooling2D(pool_size=(2,2))(x)
 
-    model.add(Flatten())
-    model.add(Dense(32))
-    model.add(Activation('relu'))
-    model.add(Dropout(0.2))
+    x = Flatten()(x)
+    for i in range(dense_layers):
+        x = Dense(dense_layer_size, activation='relu')(x)
+        x = Dropout(dropout)(x)
+
+    model = Model(branch, x)
 
     return model
 
-
 if __name__=='__main__':
-    NAME = 'spect-simil-model.h5'
+    dense_layers = [2]
+    conv_sizes = [32]
+    conv_layers = [3]
+    dropout = 0.4
     save_dir = os.path.join(os.getcwd(), 'saved_models')
     num_classes = 2
-    X = pickle.load(open('./data/X.pickle', 'rb'))
+    X_1 = pickle.load(open('./data/X_1.pickle', 'rb'))
+    X_2 = pickle.load(open('./data/X_2.pickle', 'rb'))
     y = pickle.load(open('./data/y.pickle', 'rb'))
 
+    #y = tf.keras.utils.to_categorical(y, num_classes)
+    X_1 = X_1 / 255
+    X_2 = X_2 / 255
 
-    tensorboard = tf.keras.callbacks.TensorBoard(log_dir=f'logs\\{NAME}')
+    for dense_layer in dense_layers:
+        for conv_size in conv_sizes:
+            for conv_layer in conv_layers:
+                NAME = f'{conv_layer}-conv-{conv_size}-nodes-{dense_layer}-dense-{int(time.time())}.h5'
+                tensorboard = tf.keras.callbacks.TensorBoard(log_dir=f'logs\\{NAME}')
 
-    branch_1 = create_model(32)
-    branch_2 = create_model(32)
+                # defining 2 input models for each image
+                branch_1 = create_model(conv_layer, conv_size, dense_layer, 512, dropout, X_1.shape[1:])
+                branch_2 = create_model(conv_layer, conv_size, dense_layer, 512, dropout, X_2.shape[1:])
+                
+                # combining the models
+                combined = Concatenate(axis=1)([branch_1.output, branch_2.output])
 
-    combined = Concatenate([branch_1, branch_2])
+                # perform a dense layer to the number of classes
+                z = Dense(1)(combined)
+                z = Activation('softmax')(z)
 
-    combined_model = Sequential()
-    combined_model.add(combined)
+                # final model
+                model = Model(inputs=[branch_1.input, branch_2.input], outputs=z)
+                
+                # sets the model up for training
+                model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-    combined_model.add(Dense(num_classes))
-    combined_model.add(Activation('softmax'))
+                # training the model
+                model.fit([X_1, X_2], y, batch_size=32, epochs=2, validation_split=0.2, callbacks=[tensorboard])
 
-    combined_model.compile(loss='binary_crossentropy',
-                            optimizer='adam',
-                            metrics=['accuracy'])
+                # Save model and weights
+                if not os.path.isdir(save_dir):
+                    os.makedirs(save_dir)
+                model_path = os.path.join(save_dir, NAME)
+                model.save(model_path)
 
-    combined_model.fit([X[:, 0], X[:, 1]], y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard])
-
-    # Save model and weights
-    if not os.path.isdir(save_dir):
-        os.makedirs(save_dir)
-    model_path = os.path.join(save_dir, NAME)
-    combined_model.save(model_path)
-
-    print('Saved trained model at %s ' % model_path)
+                print('Saved trained model at %s ' % model_path)
 
 
     

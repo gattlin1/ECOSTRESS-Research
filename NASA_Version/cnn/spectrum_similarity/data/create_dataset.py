@@ -78,6 +78,11 @@ def get_nonmatching_entries(files, num_class, count_per_type):
     print(f'Nonmatching entries by type: {types_count}')
     return data
 
+def save(destination, data):
+    pickle_out = open(destination, 'wb')
+    pickle.dump(data, pickle_out)
+    pickle_out.close()
+
 
 if __name__=='__main__':
     directory = './visualization-similarity'
@@ -91,30 +96,30 @@ if __name__=='__main__':
     nonmatching_data = get_nonmatching_entries(files, categories.index('non-match'), 2000)
     print(f'Nonmatching entries {len(nonmatching_data)}')
 
-    print(f'Index of match {categories.index("match")}')
-    print(f'Index of non-match {categories.index("non-match")}')
+    print(f'Index of match: {categories.index("match")}')
+    print(f'Index of non-match: {categories.index("non-match")}')
 
     data = matching_data + nonmatching_data
 
-    height = data[0][0].shape[0]
-    width = data[0][0].shape[1]
-
-    for i in range(6):
+    # shuffling the data an random amount of times
+    for i in range(random.randint(1, 10)):
         random.shuffle(data)
 
-    X = []
-    y = []
-
+    # Saving images and expected result to each dataset
+    X_1, X_2, y = [], [], []
     for img_1, img_2, label in data:
-        X.append([img_1, img_2])
+        X_1.append(img_1)
+        X_2.append(img_2)
         y.append(label)
 
-    X = np.array(X).reshape(-1, height, width, 1)
-
-    pickle_out = open('./X.pickle', 'wb')
-    pickle.dump(X, pickle_out)
-    pickle_out.close()
-
-    pickle_out = open('./y.pickle', 'wb')
-    pickle.dump(y, pickle_out)
-    pickle_out.close()
+    # Reshaping the data to be like the original image
+    height = data[0][0].shape[0]
+    width = data[0][0].shape[1]
+    X_1 = np.array(X_1).reshape(-1, height, width, 1)
+    X_2 = np.array(X_2).reshape(-1, height, width, 1)
+    y = np.array(y)
+    
+    # Saving each dataset to the currect directory
+    save('./X_1.pickle', X_1)
+    save('./X_2.pickle', X_2)
+    save('./y.pickle', y)
