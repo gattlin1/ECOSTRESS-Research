@@ -15,13 +15,14 @@ def create_img(file_path):
 
 if __name__=='__main__':
     directory = './visualization-similarity'
-    model = load_model('../saved_models/3-conv-32-nodes-2-dense-1583365012.h5')
+    model = load_model('../saved_models/3-conv-32-nodes-2-dense-1583365723.h5')
 
     image_1 = create_img('../data/visualization-similarity/manmade/concrete/pavingconcrete/solid/all/manmade.concrete.pavingconcrete.solid.all.0092uuu_cnc.jhu.becknic.spectrum.txt.png')
-    image_2 = create_img('../data/visualization-similarity/rock/sedimentary/chemicalprecipitate/solid/all/rock.sedimentary.chemicalprecipitate.solid.all.ward75.jpl.nicolet.spectrum.txt.png')
+    image_2 = create_img('../data/visualization-similarity/manmade/concrete/pavingconcrete/solid/all/manmade.concrete.pavingconcrete.solid.all.0092uuu_cnc.jhu.becknic.spectrum.txt.png')
+    #image_2 = create_img('../data/visualization-similarity/rock/sedimentary/chemicalprecipitate/solid/all/rock.sedimentary.chemicalprecipitate.solid.all.ward75.jpl.nicolet.spectrum.txt.png')
 
     X_1 = [image_2, image_2, image_2, image_2]
     X_2 = [image_2, image_2, image_2, image_2]
-    score = model.predict([X_1[0], X_2[0]])
+    score = model.predict([image_1, image_2])
     print(score)
 

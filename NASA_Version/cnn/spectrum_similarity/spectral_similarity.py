@@ -11,10 +11,10 @@ import numpy as np
 def create_model(conv_layers, conv_layer_size, dense_layers, dense_layer_size, dropout, shape):
     branch = Input(shape=shape)
 
-    x = Conv2D(conv_layer_size, (3, 3), activation='relu', input_shape=shape)(branch)
+    x = Conv2D(conv_layer_size, (3, 3), activation='relu', input_shape=shape)(branch) # possible use leaky relu or lu
     x = MaxPooling2D(pool_size=(2,2))(x)
 
-    for i in range(conv_layers):
+    for i in range(conv_layers): # also add dropouts after conv layers.
         x = Conv2D(conv_layer_size, (3, 3), activation='relu')(x)
         x = MaxPooling2D(pool_size=(2,2))(x)
 
@@ -28,7 +28,7 @@ def create_model(conv_layers, conv_layer_size, dense_layers, dense_layer_size, d
     return model
 
 if __name__=='__main__':
-    dense_layers = [2]
+    dense_layers = [1]
     conv_sizes = [32]
     conv_layers = [3]
     dropout = 0.4
@@ -57,7 +57,7 @@ if __name__=='__main__':
 
                 # perform a dense layer to the number of classes
                 z = Dense(1)(combined)
-                z = Activation('softmax')(z)
+                z = Activation('sigmoid')(z)
 
                 # final model
                 model = Model(inputs=[branch_1.input, branch_2.input], outputs=z)
