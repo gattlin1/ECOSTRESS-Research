@@ -15,14 +15,17 @@ def create_img(file_path):
 
 if __name__=='__main__':
     directory = './visualization-similarity'
-    model = load_model('../saved_models/3-conv-32-nodes-2-dense-1583365723.h5')
+    model = load_model('../saved_models/1-conv-32-nodes-2-dense.h5')
+    im1_path = '../data/visualization-similarity/manmade/concrete/pavingconcrete/solid/all/manmade.concrete.pavingconcrete.solid.all.0092uuu_cnc.jhu.becknic.spectrum.txt.png'
+    im2_path = '../data/visualization-similarity/rock/sedimentary/chemicalprecipitate/solid/all/rock.sedimentary.chemicalprecipitate.solid.all.ward75.jpl.nicolet.spectrum.txt.png'
 
-    image_1 = create_img('../data/visualization-similarity/manmade/concrete/pavingconcrete/solid/all/manmade.concrete.pavingconcrete.solid.all.0092uuu_cnc.jhu.becknic.spectrum.txt.png')
-    image_2 = create_img('../data/visualization-similarity/manmade/concrete/pavingconcrete/solid/all/manmade.concrete.pavingconcrete.solid.all.0092uuu_cnc.jhu.becknic.spectrum.txt.png')
-    #image_2 = create_img('../data/visualization-similarity/rock/sedimentary/chemicalprecipitate/solid/all/rock.sedimentary.chemicalprecipitate.solid.all.ward75.jpl.nicolet.spectrum.txt.png')
+    image_1 = create_img(im1_path)
+    image_2 = create_img(im2_path)
+    score = model.predict([image_1, image_2])
+    print(score)
 
-    X_1 = [image_2, image_2, image_2, image_2]
-    X_2 = [image_2, image_2, image_2, image_2]
+    image_1 = create_img(im1_path)
+    image_2 = create_img(im1_path)
     score = model.predict([image_1, image_2])
     print(score)
 

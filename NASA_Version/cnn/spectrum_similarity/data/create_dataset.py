@@ -40,6 +40,9 @@ def get_matching_entries(files, num_class, count_per_type):
             for j in range(i, len(folder_files)):
                 if types_count[spectrum_type] < count_per_type: # to ensure there isn't a same file ab pair
                     img_array_2 = cv2.imread(folder_files[j], cv2.IMREAD_GRAYSCALE)
+
+                    img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
+
                     data.append([img_array_1, img_array_2, num_class])
 
                     types_count[spectrum_type] += 1
@@ -72,11 +75,23 @@ def get_nonmatching_entries(files, num_class, count_per_type):
             random_file = random.choice(random_folder)
 
             img_array_2 = cv2.imread(random_file, cv2.IMREAD_GRAYSCALE)
+
+            img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
+
             data.append([img_array_1, img_array_2, num_class])
             types_count[spectrum_type] += 1
 
     print(f'Nonmatching entries by type: {types_count}')
     return data
+
+def randomly_flip_graphs(img_array_1, img_array_2):
+    if random.choice([True, False]): # Randomly chooses whether to flip the graphs
+        flip_code = random.choice([-1, 0, 1]) # -1 flips vertically and horizontally, 0 flips vertically, 1 flips horizontally
+
+        img_array_1 = cv2.flip(img_array_1, flip_code)
+        img_array_2 = cv2.flip(img_array_2, flip_code)
+
+    return img_array_1, img_array_2
 
 def save(destination, data):
     pickle_out = open(destination, 'wb')
@@ -88,9 +103,11 @@ if __name__=='__main__':
     directory = './visualization-similarity'
     categories = ['non-match', 'match']
 
+    random.seed(3)
+
     files = get_files(directory)
 
-    matching_data = get_matching_entries(files, categories.index('match'), 2000)
+    matching_data = get_matching_entries(files, categories.index('match'), 1000)
     print(f'Matching entries {len(matching_data)}')
 
     nonmatching_data = get_nonmatching_entries(files, categories.index('non-match'), 2000)

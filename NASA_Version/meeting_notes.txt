@@ -1,5 +1,0 @@
-compare cor w/ best values for nlc-cor
-
-adjust sample/class weights
-
-use softmax on the last layer.
