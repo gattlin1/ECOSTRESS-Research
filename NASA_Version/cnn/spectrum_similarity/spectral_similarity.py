@@ -4,6 +4,7 @@ from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Input, Concatenate
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.callbacks import TensorBoard, EarlyStopping, ModelCheckpoint
+from sklearn.utils import class_weight
 import pickle
 import time
 import os
@@ -44,6 +45,9 @@ if __name__=='__main__':
     X_1 = X_1 / 255
     X_2 = X_2 / 255
 
+    # calculating bias
+    class_weights = class_weight.compute_class_weight('balanced', np.unique(y), y)
+
     for dense_layer in dense_layers:
         for conv_size in conv_sizes:
             for conv_layer in conv_layers:
@@ -56,7 +60,7 @@ if __name__=='__main__':
                 # defining 2 input models for each image
                 branch_1 = create_model(conv_layer, conv_size, dense_layer, 64, dropout, X_1.shape[1:])
                 branch_2 = create_model(conv_layer, conv_size, dense_layer, 64, dropout, X_2.shape[1:])
-                
+
                 # combining the models
                 combined = Concatenate(axis=1)([branch_1.output, branch_2.output])
 
@@ -66,12 +70,13 @@ if __name__=='__main__':
 
                 # final model
                 model = Model(inputs=[branch_1.input, branch_2.input], outputs=z)
-                
+
                 # sets the model up for training
                 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
                 # training the model
-                model.fit([X_1, X_2], y, batch_size=32, epochs=25, validation_split=0.2, callbacks=[tensorboard, es, mcp_save])
+                model.fit([X_1, X_2], y, batch_size=32, epochs=25, validation_split=0.2,
+                          callbacks=[tensorboard, es, mcp_save], class_weight=class_weights)
 
                 # Save model and weights
                 if not os.path.isdir(save_dir):
@@ -82,4 +87,3 @@ if __name__=='__main__':
                 print('Saved trained model at %s ' % model_path)
 
 
-    

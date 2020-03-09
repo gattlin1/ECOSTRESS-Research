@@ -1,6 +1,6 @@
 import sys
 import tensorflow as tf
-from tensorflow.keras.models import Sequential, Model, load_model
+from tensorflow.keras.models import load_model
 import colorama
 from colorama import Fore, Back, Style
 import os
@@ -117,7 +117,7 @@ class Hitlist:
                     self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest\n', Fore.RED)
                 else:
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
-                
+
                 self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
 
     def accuracy(self):
