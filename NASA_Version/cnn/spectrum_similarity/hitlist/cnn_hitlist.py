@@ -12,15 +12,16 @@ class Hitlist:
     def __init__(self, dataset_path, file_title=''):
         self.comparison_type = 'CNN'
         self.missed_spectrum = []
-        self.dataset_path = dataset_path
+        self.dataset = self.get_files(dataset_path)
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
-        self.model = self.load_model('../saved_models/3-conv-32-nodes-2-dense-1583355813.h5')
+        self.model = self.load_model('../saved_models/sequential-1-conv-32-nodes-1-dense.h5')
         results_path = f'./results/{self.comparison_type} results {file_title}.txt'
         self.results = self.open_file(results_path)
+        self.categories = ['non-match, match']
 
     def load_model(self, path):
-        return load_model(path)
+        return load_model(path, custom_objects={'leaky_relu': tf.nn.leaky_relu})
 
     def open_file(self, path):
         if not os.path.exists(path):
@@ -30,40 +31,78 @@ class Hitlist:
 
     def create_difference_matrix(self):
         difference_matrix = {}
-        for file in os.listdir(self.dataset_path):
-            if file.endswith('.txt') and 'spectrum' in file:
+        for file in self.dataset:
+            file = file.replace('\\', '/').split('/')[-1]
+
+            if file.endswith('.png') and 'spectrum' in file:
                 difference_matrix[file] = {}
 
-                for other_file in os.listdir(self.dataset_path):
-                    if other_file.endswith('.txt') and 'spectrum' in other_file:
+                for other_file in self.dataset:
+                    if other_file.endswith('.png') and 'spectrum' in other_file:
+                        other_file = other_file.replace('\\', '/').split('/')[-1]
+
                         difference_matrix[file][other_file] = 0
+
                 difference_matrix[file][file] = 1
 
         return difference_matrix
+    
+    def get_files(self, path):
+        subfolders = [ f.path for f in os.scandir(path) ]
+        files = []
+
+        for folder in subfolders:
+            for f in os.scandir(str(folder)):
+                if f.is_dir():
+                    subfolders.append(f.path)
+                else:
+                    files.append(f.path)
+
+        return files
 
     def run_spectra(self):
         # loop through spectrum files in a directory and find matches in the hitlist
-        for file in os.listdir(self.dataset_path)[:1]:
-            if file.endswith('.txt') and 'spectrum' in file:
-                file_path = self.dataset_path + file
-                self.find_matches(file_path, self.dataset_path)
+        for file in self.dataset:
+            if file.endswith('.png') and 'spectrum' in file:
+                self.find_matches(file)
 
-    def find_matches(self, file_path, dir_path):
-        unknown_spectrum_name = file_path.split('/')[:-1]
-        image_1 = self.create_img(file_path)
+    def find_matches(self, unknown_spectrum_file_path):
+        unknown_spectrum_name = unknown_spectrum_file_path.replace('\\', '/').split('/')[-1]
 
-        for file in os.listdir(dir_path):
-            if self.uncalculated_spectra_pair(unknown_spectrum_name, file):
-                image_2 = self.create_img(file)
+        for histlist_file in self.dataset:
+            hitlist_spectrum_name = histlist_file.replace('\\', '/').split('/')[-1]
+            if self.uncalculated_spectra_pair(unknown_spectrum_name, hitlist_spectrum_name):
+                image_1 = cv2.imread(unknown_spectrum_file_path)
+                image_2 = cv2.imread(histlist_file)
 
-                score = self.model.predict([image_1, image_2], verbose=1)
+                combined = self.combine_spectra(image_1, image_2)
 
-                self.add_similiarity_score(unknown_spectrum_name, file, score)
+                score = self.model.predict_proba([combined])
+
+                score = score[0][0]
+
+                self.add_similiarity_score(unknown_spectrum_name, hitlist_spectrum_name, score)
 
         self.get_results(unknown_spectrum_name)
 
-    def create_img(self, file_path):
-        return cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+    def combine_spectra(self, img_array_1, img_array_2):
+        # set green and red channels to 0
+        img_array_1[:, :, 1] = 0
+        img_array_1[:, :, 2] = 0
+
+        # set blue and red channels to 0
+        img_array_2[:, :, 0] = 0
+        img_array_2[:, :, 2] = 0
+
+        # combine the spectrum
+        combined = img_array_2 + img_array_1
+
+        # normalize data
+        combined = combined / 255
+
+        height, width, depth = combined.shape
+
+        return combined.reshape(-1, height, width, depth)
 
     def uncalculated_spectra_pair(self, file_name, unknown_spectrum_name):
         if self.difference_matrix[file_name][unknown_spectrum_name] == 0:
@@ -75,6 +114,7 @@ class Hitlist:
         return False
 
     def add_similiarity_score(self, unknown_spectrum, known_spectrum, score):
+        # print(f'updating with score: {score}')
         self.difference_matrix[unknown_spectrum][known_spectrum] = score
         self.difference_matrix[known_spectrum][unknown_spectrum] = score
 
@@ -114,8 +154,9 @@ class Hitlist:
                     self.missed_spectrum.append([self.comparison_type, spectrum_name, i])
 
                     self.log_info(f'{self.comparison_type}: {spectrum_name} is closest to: {spectra_hitlist[0]["name"]} w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
-                    self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest\n', Fore.RED)
+                    self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest w/ score {spectra_hitlist[i]["score"]}\n', Fore.RED)
                 else:
+                    self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest w/ score {spectra_hitlist[i]["score"]}\n', Fore.GREEN)
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
                 self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
@@ -138,10 +179,10 @@ class Hitlist:
 
             average_miss /= len(self.missed_spectrum)
 
-        self.log_info(f'Total Spectrum Misclassified {self.missed_spectrum}', color)
         self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
 
         accuracy = (1 - len(self.missed_spectrum) / len(self.difference_matrix)) * 100
+        self.log_info(f'Accuracy: {accuracy}', color)
 
         for category in missed_categories.keys():
             self.log_info(f'{category} Spectrum Misclassified {missed_categories[category][0]}', color)
@@ -151,6 +192,7 @@ class Hitlist:
                 average_miss = missed_categories[category][1] / missed_categories[category][0]
 
             self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
+            self.log_info(f'Total Spectrum Misclassified {len(self.missed_spectrum)}', color)
 
         for i in range(1, len(self.classification_level)):
             s = f'Calculcated Best Matches at Level {i}: {self.classification_level[i]}'
@@ -173,6 +215,6 @@ class Hitlist:
         else:
             i = 1
             while unknown_spectrum[i - 1] == known_spectrum[i - 1] and i < len(self.classification_level):
-                print(unknown_spectrum[i - 1], known_spectrum[i - 1])
+                #print(unknown_spectrum[i - 1], known_spectrum[i - 1])
                 self.classification_level[i] += 1
                 i += 1

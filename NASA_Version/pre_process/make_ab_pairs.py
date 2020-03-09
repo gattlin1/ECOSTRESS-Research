@@ -26,26 +26,28 @@ def make_ab_pairs(final_path):
                 subfolders.append(f.path)
             else:
                 files.append(f.path)
-
+        
         if len(files) == 1:
             shutil.rmtree(folder, ignore_errors=True)
 
-        # elif len(files) >= 2:
-        #     shutil.move(files[0], final_path)
-        #     shutil.move(files[1], final_path)
+        elif len(files) >= 2:
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
 
-        # elif len(files) >= 3:
-        #     random.shuffle(files)
+        elif len(files) >= 3:
+            random.shuffle(files)
 
-        #     shutil.move(files[0], final_path)
-        #     shutil.move(files[1], final_path)
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
+        
+    
 
 def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
-            new_path = dest_path + '/'.join(file.split('.')[:2])
-            split_file = file.split('.')[:2]
+            new_path = dest_path + '/'.join(file.split('.')[:5])
+            split_file = file.split('.')[:5]
 
             for i in range(len(split_file) + 1):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):

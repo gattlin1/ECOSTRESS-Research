@@ -13,7 +13,7 @@ def create_graphs(files, directory):
     print(Fore.YELLOW + 'Process {0} starting w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
 
     for file in files:
-        split_file = file.replace('\\', '/').split('/')
+        split_file = file.replace('//', '/').split('/')
         file_name = split_file[len(split_file) - 1]
         split_file = split_file[len(split_file) - 1].split('.')[:5]
 
@@ -28,7 +28,8 @@ def create_graphs(files, directory):
         plt.plot(dataset['Wavelength'], dataset['Reflectance'])
         plt.axis('off')
 
-        plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png', bbox_inches = 'tight', pad_inches = 0)
+        plt.savefig(directory + '/'.join(split_file) + '/' + file_name + '.png', bbox_inches = 'tight', pad_inches = 0,
+                    facecolor='black', edgecolor='none', cmap='Blues_r')
         plt.close()
 
     print(Fore.GREEN + 'Process {0} finished w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
@@ -36,8 +37,8 @@ def create_graphs(files, directory):
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../../cnn/spectrum_similarity/data/visualization-similarity/'
-    data_dir = '../../ecospeclib-organized/'
+    vis_dir = '../cnn/spectrum_similarity/data/visualization-similarity/'
+    data_dir = '../datasets/ecospeclib-similarity/'
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)
@@ -45,15 +46,16 @@ if __name__=='__main__':
     if not os.path.exists(vis_dir):
         os.mkdir(vis_dir)
 
-    subfolders = [ f.path for f in os.scandir(data_dir) if f.is_dir() ]
-    files = []
-    for folder in subfolders:
+    files = [ f.path for f in os.scandir(data_dir) ]
 
-        for f in os.scandir(str(folder)):
-            if f.is_dir():
-                subfolders.append(f.path)
-            else:
-                files.append(f.path)
+    # files = []
+    # for folder in subfolders:
+
+    #     for f in os.scandir(str(folder)):
+    #         if f.is_dir():
+    #             subfolders.append(f.path)
+    #         else:
+    #             files.append(f.path)
 
 
     core_count = multiprocessing.cpu_count()

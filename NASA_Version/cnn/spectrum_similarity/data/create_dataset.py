@@ -132,10 +132,26 @@ if __name__=='__main__':
     # Reshaping the data to be like the original image
     height = data[0][0].shape[0]
     width = data[0][0].shape[1]
+
+    print(X_1[0].shape)
+
+    print(f'height: {height}')
+    print(f'width: {width}')
+
+    cv2.imshow('x', X_1[0])
+    cv2.waitKey(0)
+
+
     X_1 = np.array(X_1).reshape(-1, height, width, 1)
     X_2 = np.array(X_2).reshape(-1, height, width, 1)
     y = np.array(y)
-    
+
+    height = X_1[0].shape
+
+    print(f'shape: {height}')
+
+    cv2.imshow('x', X_1[0])
+    cv2.waitKey(0)
     # Saving each dataset to the currect directory
     save('./X_1.pickle', X_1)
     save('./X_2.pickle', X_2)
