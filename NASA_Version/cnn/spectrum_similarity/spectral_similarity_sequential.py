@@ -45,22 +45,21 @@ if __name__=='__main__':
                 model.add(Conv2D(layer_size, (3, 3), padding='same', input_shape=X.shape[1:], data_format='channels_first'))
                 model.add(LeakyReLU(alpha=0.1))
                 model.add(Dropout(0.4))
-                # model.add(MaxPooling2D(pool_size=(2,2)))
+                model.add(MaxPooling2D(pool_size=(2,2)))
 
-                # for i in range(conv_layer - 1):
-                #     model.add(Conv2D(layer_size, (3, 3)))
-                #     model.add(LeakyReLU(alpha=0.1))
-                #     model.add(Dropout(0.4))
-                #     model.add(MaxPooling2D(pool_size=(2,2)))
+                for i in range(conv_layer - 1):
+                    model.add(Conv2D(layer_size, (3, 3)))
+                    model.add(LeakyReLU(alpha=0.1))
+                    model.add(Dropout(0.4))
+                    model.add(MaxPooling2D(pool_size=(2,2)))
 
                 model.add(Flatten())
-                # for i in range(dense_layer):
-                #     model.add(Dense(512))
-                #     model.add(LeakyReLU(alpha=0.1))
-                #     model.add(Dropout(0.4))
-                model.add(Dense(4, activation='relu'))
+                for i in range(dense_layer):
+                    model.add(Dense(512))
+                    model.add(LeakyReLU(alpha=0.1))
+                    model.add(Dropout(0.4))
+
                 model.add(Dense(1, activation='sigmoid'))
-                #model.add(Activation('sigmoid'))
 
                 # Setting up model for training.
                 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
