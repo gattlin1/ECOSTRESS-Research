@@ -2,7 +2,7 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, LeakyReLU
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, LeakyReLU, GaussianNoise
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from sklearn.utils import class_weight
 import numpy as np
@@ -13,7 +13,7 @@ import os
 if __name__=='__main__':
     num_classes = 2
     dense_layers = [1]#[1, 2]
-    layer_sizes = [32]#[32, 64, 128]
+    layer_sizes = [64]#[32, 64, 128]
     conv_layers = [1]#[1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
@@ -47,15 +47,20 @@ if __name__=='__main__':
                 model.add(Dropout(0.4))
                 model.add(MaxPooling2D(pool_size=(2,2)))
 
+                model.add(GaussianNoise(0.5))
+                model.add(LeakyReLU(alpha=0.1))
+                
                 for i in range(conv_layer - 1):
                     model.add(Conv2D(layer_size, (3, 3)))
                     model.add(LeakyReLU(alpha=0.1))
                     model.add(Dropout(0.4))
                     model.add(MaxPooling2D(pool_size=(2,2)))
+                    model.add(GaussianNoise(0.5))
+                    model.add(LeakyReLU(alpha=0.1))
 
                 model.add(Flatten())
                 for i in range(dense_layer):
-                    model.add(Dense(512))
+                    model.add(Dense(32))
                     model.add(LeakyReLU(alpha=0.1))
                     model.add(Dropout(0.4))
 

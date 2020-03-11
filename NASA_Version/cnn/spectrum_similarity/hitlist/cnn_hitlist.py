@@ -114,7 +114,6 @@ class Hitlist:
         return False
 
     def add_similiarity_score(self, unknown_spectrum, known_spectrum, score):
-        # print(f'updating with score: {score}')
         self.difference_matrix[unknown_spectrum][known_spectrum] = score
         self.difference_matrix[known_spectrum][unknown_spectrum] = score
 
@@ -215,6 +214,5 @@ class Hitlist:
         else:
             i = 1
             while unknown_spectrum[i - 1] == known_spectrum[i - 1] and i < len(self.classification_level):
-                #print(unknown_spectrum[i - 1], known_spectrum[i - 1])
                 self.classification_level[i] += 1
                 i += 1
