@@ -106,7 +106,7 @@ def combine_spectra(img_array_1, img_array_2):
 
     # combine the spectrum
     combined = img_array_2 + img_array_1
-  
+
     return combined
 
 
@@ -149,5 +149,5 @@ if __name__=='__main__':
     y = np.array(y)
 
     # Saving each dataset to the currect directory
-    save('./X_combined_channel.pickle', X)
-    save('./y_combined_channel.pickle', y)
+    #save('./X_combined_channel.pickle', X)
+    #save('./y_combined_channel.pickle', y)

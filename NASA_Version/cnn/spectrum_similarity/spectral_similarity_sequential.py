@@ -13,7 +13,7 @@ import os
 if __name__=='__main__':
     num_classes = 2
     dense_layers = [1]#[1, 2]
-    layer_sizes = [64]#[32, 64, 128]
+    layer_sizes = [32]#[32, 64, 128]
     conv_layers = [1]#[1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
@@ -49,8 +49,8 @@ if __name__=='__main__':
 
                 model.add(GaussianNoise(0.5))
                 model.add(LeakyReLU(alpha=0.1))
-                
-                for i in range(conv_layer - 1):
+
+                for i in range(conv_layer):
                     model.add(Conv2D(layer_size, (3, 3)))
                     model.add(LeakyReLU(alpha=0.1))
                     model.add(Dropout(0.4))
@@ -60,7 +60,7 @@ if __name__=='__main__':
 
                 model.add(Flatten())
                 for i in range(dense_layer):
-                    model.add(Dense(32))
+                    model.add(Dense(64))
                     model.add(LeakyReLU(alpha=0.1))
                     model.add(Dropout(0.4))
 
@@ -70,5 +70,5 @@ if __name__=='__main__':
                 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
                 # Training model
-                model.fit(X, y, batch_size=32, epochs=25, validation_split=0.2,
+                model.fit(X, y, batch_size=32, epochs=50, validation_split=0.2,
                           callbacks=[tensorboard, es, mcp_save], class_weight=class_weights)

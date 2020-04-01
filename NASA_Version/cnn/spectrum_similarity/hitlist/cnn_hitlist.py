@@ -46,7 +46,7 @@ class Hitlist:
                 difference_matrix[file][file] = 1
 
         return difference_matrix
-    
+
     def get_files(self, path):
         subfolders = [ f.path for f in os.scandir(path) ]
         files = []
@@ -155,7 +155,6 @@ class Hitlist:
                     self.log_info(f'{self.comparison_type}: {spectrum_name} is closest to: {spectra_hitlist[0]["name"]} w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
                     self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest w/ score {spectra_hitlist[i]["score"]}\n', Fore.RED)
                 else:
-                    self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest w/ score {spectra_hitlist[i]["score"]}\n', Fore.GREEN)
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
                 self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
