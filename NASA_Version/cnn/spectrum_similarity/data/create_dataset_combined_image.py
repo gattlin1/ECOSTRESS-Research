@@ -149,5 +149,5 @@ if __name__=='__main__':
     y = np.array(y)
 
     # Saving each dataset to the currect directory
-    #save('./X_combined_channel.pickle', X)
-    #save('./y_combined_channel.pickle', y)
+    save('./X_combined_channel.pickle', X)
+    save('./y_combined_channel.pickle', y)
