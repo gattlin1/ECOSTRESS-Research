@@ -10,7 +10,7 @@ if __name__=='__main__':
     # paths to spectrum directories
     dataset_path = '../data/visualization-similarity'
 
-    created_hitlist = Hitlist(dataset_path, str(datetime.datetime.now().strftime('%Y%m%d-%H%M%S')))
+    created_hitlist = Hitlist(dataset_path, str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss')))
     created_hitlist.run_spectra()
     created_hitlist.accuracy()
 

@@ -15,7 +15,7 @@ class Hitlist:
         self.dataset = self.get_files(dataset_path)
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
-        self.model = self.load_model('../saved_models/sequential-1-conv-32-nodes-1-dense.h5')
+        self.model = self.load_model('../saved_models/sequential-1-conv-64-conv nodes-1-dense-128-dense nodes.h5')
         results_path = f'./results/{self.comparison_type} results {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
@@ -58,6 +58,8 @@ class Hitlist:
                 else:
                     files.append(f.path)
 
+        print(f'File Count: {len(files)}')
+
         return files
 
     def run_spectra(self):
@@ -78,7 +80,6 @@ class Hitlist:
                 combined = self.combine_spectra(image_1, image_2)
 
                 score = self.model.predict_proba([combined])
-
                 score = score[0][0]
 
                 self.add_similiarity_score(unknown_spectrum_name, hitlist_spectrum_name, score)
@@ -152,15 +153,22 @@ class Hitlist:
                 if i > 0:
                     self.missed_spectrum.append([self.comparison_type, spectrum_name, i])
 
-                    self.log_info(f'{self.comparison_type}: {spectrum_name} is closest to: {spectra_hitlist[0]["name"]} w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
-                    self.log_info(f'Actual closest compound, {expected_closest}, was {i} spectrum from closest w/ score {spectra_hitlist[i]["score"]}\n', Fore.RED)
+                    self.log_info(f'{self.comparison_type}: {spectrum_name} ' \
+                                  f'is closest to: {spectra_hitlist[0]["name"]} ' \
+                                  f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
+
+                    self.log_info(f'Actual closest compound, {expected_closest},' \
+                                  f'was {i} spectrum from closest w/ score ' \
+                                  f'{spectra_hitlist[i]["score"]}\n', Fore.RED)
                 else:
                     print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
                 self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
 
     def accuracy(self):
-        missed_categories = {'manmade': [0,0], 'meteorites': [0,0], 'mineral': [0,0], 'nonphotosyntheticvegetation': [0,0], 'rock': [0,0], 'soil': [0,0], 'vegetation': [0,0], 'water':[0,0]}
+        missed_categories = {'manmade': [0,0], 'meteorites': [0,0], 'mineral': [0,0],
+                             'nonphotosyntheticvegetation': [0,0], 'rock': [0,0],
+                             'soil': [0,0], 'vegetation': [0,0], 'water':[0,0]}
         average_miss = 0
 
         color = Fore.GREEN

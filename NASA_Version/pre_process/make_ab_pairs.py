@@ -26,7 +26,7 @@ def make_ab_pairs(final_path):
                 subfolders.append(f.path)
             else:
                 files.append(f.path)
-        
+
         if len(files) == 1:
             shutil.rmtree(folder, ignore_errors=True)
 
@@ -39,8 +39,8 @@ def make_ab_pairs(final_path):
 
             shutil.move(files[0], final_path)
             shutil.move(files[1], final_path)
-        
-    
+
+
 
 def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
@@ -54,5 +54,7 @@ def organize_data(directory_path, dest_path):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
 
-f = '../datasets/ecospeclib-similarity'
-make_ab_pairs(f)
+f = '../datasets/ecospeclib-all/'
+dest = '../cnn/spectrum_similarity/data/ecospeclib-raw/'
+
+organize_data(f, dest)

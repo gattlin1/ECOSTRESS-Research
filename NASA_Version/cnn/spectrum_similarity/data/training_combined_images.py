@@ -72,18 +72,18 @@ def get_nonmatching_entries(files, num_class, count_per_type):
 
                 img_array_2 = cv2.imread(random_file)
 
-                cv2.imshow('1b', img_array_1)
-                cv2.imshow('2b', img_array_2)
+                #cv2.imshow('1b', img_array_1)
+                #cv2.imshow('2b', img_array_2)
 
                 img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
 
-                cv2.imshow('1a', img_array_1)
-                cv2.imshow('2a', img_array_2)
+                #cv2.imshow('1a', img_array_1)
+                #cv2.imshow('2a', img_array_2)
 
                 combined = combine_spectra(img_array_1, img_array_2)
 
-                cv2.imshow('combined', combined)
-                cv2.waitKey(0)
+                #cv2.imshow('combined', combined)
+                #cv2.waitKey(0)
                 data.append([combined, num_class])
                 types_count += 1
 

@@ -34,7 +34,7 @@ def get_matching_entries(files, num_class, count_per_type):
             types_count[spectrum_type] = 0
 
         for i in range(len(folder_files)):
-            for j in range(i, len(folder_files)):
+            for j in range(i + 1, len(folder_files)):
                 if types_count[spectrum_type] < count_per_type: # to ensure there isn't a same file ab pair
                     img_array_1 = cv2.imread(folder_files[i])
                     img_array_2 = cv2.imread(folder_files[j])
