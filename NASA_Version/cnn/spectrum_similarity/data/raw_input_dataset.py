@@ -9,6 +9,7 @@ import math
 
 sys.path.append('../../../')
 from pre_process.make_nasa_dataset import make_nasa_dataset
+from pre_process.spectra_point_matcher import create_matched_spectra
 
 def get_files(directory):
     subfolders = [ f.path for f in os.scandir(directory) ]
@@ -48,6 +49,10 @@ def get_matching_entries(files, num_class, count_per_type):
                 if types_count[spectrum_type] < count_per_type:
                     spectrum_1 = make_nasa_dataset(folder_files[i])
                     spectrum_2 = make_nasa_dataset(folder_files[j])
+
+                    spectrum_1, spectrum_2 = create_matched_spectra(spectrum_1, spectrum_2, 5.0)
+                    spectrum_1 = [x[1] for x in spectrum_1]
+                    spectrum_2 = [x[1] for x in spectrum_2]
 
                     normalize(spectrum_1)
                     normalize(spectrum_2)
@@ -89,6 +94,10 @@ def get_nonmatching_entries(files, num_class, count_per_type):
 
             spectrum_2 = make_nasa_dataset(random_file)
 
+            spectrum_1, spectrum_2 = create_matched_spectra(spectrum_1, spectrum_2, 5.0)
+            spectrum_1 = [x[1] for x in spectrum_1]
+            spectrum_2 = [x[1] for x in spectrum_2]
+
             normalize(spectrum_1)
             normalize(spectrum_2)
 
@@ -103,11 +112,15 @@ def get_nonmatching_entries(files, num_class, count_per_type):
     return data
 
 def normalize(spectrum):
-    min_y = min(x[1] for x in spectrum)
-    max_y = max(x[1] for x in spectrum)
+    min_y = min(spectrum)
+    max_y = max(spectrum)
 
-    for points in ((spectrum)):
-        points[1] = (points[1] - min_y) / (max_y - min_y)
+    for i in range(len(spectrum)):
+        if abs(max_y - min_y) == 0:
+            spectrum[i] = 0
+        else:
+            spectrum[i] = (spectrum[i] - min_y) / (max_y - min_y)
+            spectrum[i] = round(spectrum[i], 1)
 
 def randomly_flip_graphs(spectrum_1, spectrum_2):
     if random.choice([True, False]): # Randomly chooses whether to flip the graphs
@@ -128,8 +141,8 @@ def randomly_flip_graphs(spectrum_1, spectrum_2):
             flip_vert(spectrum_2)
 
 def flip_vert(spectrum):
-    for point in spectrum:
-        point[1] = 1 - point[1]
+    for i in range(len(spectrum)):
+        spectrum[i] = 1 - spectrum[i]
 
 def flip_hori(spectrum):
     spectrum.reverse()
@@ -142,9 +155,10 @@ def save(destination, data):
 def make_consistent_spectra_len(data):
     max_len = 0
     for entry in data:
-        pair_max = max(len(entry[0][0]), len(entry[0][1]))
-        if pair_max > max_len:
-            max_len = pair_max
+        entry_max_len = max(len(entry[0][0]), len(entry[0][1]))
+
+        if entry_max_len > max_len:
+            max_len = entry_max_len
 
     print(f'max_len: {max_len}')
 
@@ -152,7 +166,7 @@ def make_consistent_spectra_len(data):
         for spectrum in entry[0]:
             if len(spectrum) < max_len:
                 difference = max_len - len(spectrum)
-                dummy_values = [[0, 0]] * difference
+                dummy_values = [0] * difference
                 spectrum += dummy_values
 
 def create_training(files):
@@ -177,12 +191,20 @@ def create_training(files):
 
     # Saving images and expected result to each dataset
     X, y = [], []
-    for img, label in data:
-        X.append(img)
+    for spectra_pair, label in data:
+        X.append(spectra_pair)
         y.append(label)
 
-    X = np.array(X)
+        print(len(spectra_pair[0]))
+        print(len(spectra_pair[1]))
+        break
+
+    X = np.array(X).reshape(-1, len(spectra_pair[0]), 2)
+    print(X[0])
+    print(X.shape)
     y = np.array(y)
+    print(y[0])
+    print(y.shape)
 
     # Saving each dataset to the currect directory
     save('X_train.pickle', X)
@@ -211,6 +233,10 @@ def create_validation(files):
 
             spectrum_1 = make_nasa_dataset(files[i])
             spectrum_2 = make_nasa_dataset(files[j])
+            spectrum_1, spectrum_2 = create_matched_spectra(spectrum_1, spectrum_2, 5.0)
+
+            spectrum_1 = [x[1] for x in spectrum_1]
+            spectrum_2 = [x[1] for x in spectrum_2]
 
             normalize(spectrum_1)
             normalize(spectrum_2)
@@ -225,7 +251,7 @@ def create_validation(files):
     # save hitlist entries
     save('Hitlist_Entries.pickle', hitlist_entries)
 
-    print(len(hitlist_entries))
+    print(f'len(hitlist_entries): {len(hitlist_entries)}')
 
 if __name__=='__main__':
     directory = './ecospeclib-raw'
@@ -238,4 +264,4 @@ if __name__=='__main__':
     print(f'len(training): {len(training)}, len(validation): {len(validation)}')
 
     create_training(training)
-    create_validation(validation)
+    #create_validation(validation)

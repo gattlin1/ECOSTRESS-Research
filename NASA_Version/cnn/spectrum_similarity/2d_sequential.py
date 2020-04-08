@@ -12,10 +12,10 @@ import os
 
 if __name__=='__main__':
     num_classes = 2
-    dense_layer_sizes = [32] #[32, 64, 128, 256]
-    dense_layers = [1] #[1, 2]
-    conv_layer_sizes = [64] #[32, 64, 128]
-    conv_layers = [3] #[1, 2]
+    dense_layer_sizes = [64] #[32, 64, 128, 256]
+    dense_layers = [3] #[1, 2]
+    conv_layer_sizes = [32] #[32, 64, 128]
+    conv_layers = [2] #[1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):
@@ -45,15 +45,12 @@ if __name__=='__main__':
                                                 monitor='val_loss', mode='min')
 
                     model = Sequential()
-
                     model.add(Conv2D(conv_size, (3,3),
                                     padding='same', input_shape=X.shape[1:],
                                     data_format='channels_first'))
                     model.add(LeakyReLU(alpha=0.1))
                     model.add(Dropout(0.4))
                     model.add(MaxPooling2D(pool_size=(2,2)))
-
-                    # model.add(GaussianNoise(0.5))
                     model.add(LeakyReLU(alpha=0.1))
 
                     for i in range(conv_layer):
