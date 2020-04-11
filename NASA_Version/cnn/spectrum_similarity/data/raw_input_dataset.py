@@ -192,14 +192,10 @@ def create_training(files):
     # Saving images and expected result to each dataset
     X, y = [], []
     for spectra_pair, label in data:
-        X.append(spectra_pair)
+        X.append(list(zip(spectra_pair[0], spectra_pair[1])))
         y.append(label)
 
-        print(len(spectra_pair[0]))
-        print(len(spectra_pair[1]))
-        break
-
-    X = np.array(X).reshape(-1, len(spectra_pair[0]), 2)
+    X = np.array(X)
     print(X[0])
     print(X.shape)
     y = np.array(y)
@@ -227,14 +223,12 @@ def create_validation(files):
         for j in range(i + 1, len(files)):
             spec_1_name = files[i].replace('\\', '/')
             spec_1_name = spec_1_name.split('/')[-1]
-            spec_2_name = files[i].replace('\\', '/')
+            spec_2_name = files[j].replace('\\', '/')
             spec_2_name = spec_2_name.split('/')[-1]
-
 
             spectrum_1 = make_nasa_dataset(files[i])
             spectrum_2 = make_nasa_dataset(files[j])
             spectrum_1, spectrum_2 = create_matched_spectra(spectrum_1, spectrum_2, 5.0)
-
             spectrum_1 = [x[1] for x in spectrum_1]
             spectrum_2 = [x[1] for x in spectrum_2]
 
@@ -243,10 +237,15 @@ def create_validation(files):
 
             randomly_flip_graphs(spectrum_1, spectrum_2)
             combined = [spectrum_1, spectrum_2]
+
             hitlist_entries.append([combined, [spec_1_name, spec_2_name]])
 
     # need to have a way to make sure the len between val and training is the same
     make_consistent_spectra_len(hitlist_entries)
+
+    for i in range(len(hitlist_entries)):
+        hitlist_entries[i][0] = list(zip(hitlist_entries[i][0][0],
+                                         hitlist_entries[i][0][1]))
 
     # save hitlist entries
     save('Hitlist_Entries.pickle', hitlist_entries)
@@ -263,5 +262,5 @@ if __name__=='__main__':
     training, validation = split_data(files, validation_split=0.2)
     print(f'len(training): {len(training)}, len(validation): {len(validation)}')
 
-    create_training(training)
-    #create_validation(validation)
+    #create_training(training)
+    create_validation(validation)

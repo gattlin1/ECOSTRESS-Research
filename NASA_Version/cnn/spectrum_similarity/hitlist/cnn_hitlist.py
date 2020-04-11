@@ -15,7 +15,7 @@ class Hitlist:
         self.dataset = self.get_files(dataset_path)
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
-        self.model = self.load_model('../saved_models/sequential-1-conv-64-conv nodes-1-dense-128-dense nodes.h5')
+        self.model = self.load_model('../saved_models/1d-sequential.h5')
         results_path = f'./results/{self.comparison_type} results {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
@@ -85,34 +85,6 @@ class Hitlist:
                 self.add_similiarity_score(unknown_spectrum_name, hitlist_spectrum_name, score)
 
         self.get_results(unknown_spectrum_name)
-
-    def combine_spectra(self, img_array_1, img_array_2):
-        # set green and red channels to 0
-        img_array_1[:, :, 1] = 0
-        img_array_1[:, :, 2] = 0
-
-        # set blue and red channels to 0
-        img_array_2[:, :, 0] = 0
-        img_array_2[:, :, 2] = 0
-
-        # combine the spectrum
-        combined = img_array_2 + img_array_1
-
-        # normalize data
-        combined = combined / 255
-
-        height, width, depth = combined.shape
-
-        return combined.reshape(-1, height, width, depth)
-
-    def uncalculated_spectra_pair(self, file_name, unknown_spectrum_name):
-        if self.difference_matrix[file_name][unknown_spectrum_name] == 0:
-            return True
-
-        if self.difference_matrix[unknown_spectrum_name][file_name] == 0:
-            return True
-
-        return False
 
     def add_similiarity_score(self, unknown_spectrum, known_spectrum, score):
         self.difference_matrix[unknown_spectrum][known_spectrum] = score

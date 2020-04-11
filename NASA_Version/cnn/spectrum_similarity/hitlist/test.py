@@ -9,11 +9,10 @@ import random
 import pickle
 
 if __name__=='__main__':
-    directory = './visualization-similarity'
-    model = load_model('../saved_models/sequential-1-conv-32-nodes-1-dense.h5', custom_objects={'leaky_relu': tf.nn.leaky_relu})
+    model = load_model('../saved_models/1d-sequential.h5')
 
-    X = pickle.load(open('../data/X_combined_channel.pickle', 'rb'))
-    X = X / 255
+    X = pickle.load(open('../data/Hitlist_Entries.pickle', 'rb'))
+    X = [x[0] for x in X]
     ynew = model.predict_proba([X[40: 70]])
     ynew1 = model.predict_classes([X[40: 70]])
     # show the inputs and predicted outputs
