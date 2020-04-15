@@ -12,13 +12,14 @@ if __name__=='__main__':
     model = load_model('../saved_models/1d-sequential.h5')
 
     X = pickle.load(open('../data/Hitlist_Entries.pickle', 'rb'))
-    X = [x[0] for x in X]
-    ynew = model.predict_proba([X[40: 70]])
-    ynew1 = model.predict_classes([X[40: 70]])
+    new_x = []
+    new_y = []
+    for x in X[40:70]:
+        new_x.append(x[0])
+        new_y.append(x[1])
+    ynew = model.predict_proba(new_x)
+    ynew1 = model.predict_classes(new_x)
     # show the inputs and predicted outputs
     for i in range(len(ynew)):
-        print(f"X[{i}], Predicted Val = {ynew[i]}, Predicted Class = {ynew1[i]}")
-        cv2.imshow(f'X[{i}]', X[i])
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
+        print(new_y[i][0], new_y[i][1])
+        print(f"X[{i}], Val = {ynew[i]},Class = {ynew1[i]}")

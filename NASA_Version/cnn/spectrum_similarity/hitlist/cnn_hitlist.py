@@ -9,19 +9,19 @@ from os import path
 import cv2
 
 class Hitlist:
-    def __init__(self, dataset_path, file_title=''):
+    def __init__(self, dataset, model_path, file_title=''):
         self.comparison_type = 'CNN'
         self.missed_spectrum = []
-        self.dataset = self.get_files(dataset_path)
-        self.difference_matrix = self.create_difference_matrix()
+        self.dataset = dataset
+        self.difference_matrix = {}
         self.classification_level = [0, 0, 0, 0, 0]
-        self.model = self.load_model('../saved_models/1d-sequential.h5')
+        self.model = self.load_model(model_path)
         results_path = f'./results/{self.comparison_type} results {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
 
     def load_model(self, path):
-        return load_model(path, custom_objects={'leaky_relu': tf.nn.leaky_relu})
+        return load_model(path)
 
     def open_file(self, path):
         if not os.path.exists(path):
@@ -29,113 +29,78 @@ class Hitlist:
 
         return open(path, 'a', errors='ignore')
 
-    def create_difference_matrix(self):
-        difference_matrix = {}
-        for file in self.dataset:
-            file = file.replace('\\', '/').split('/')[-1]
+    def find_matches(self):
+        X, spectra_entries = [], []
+        for pair, spectra_names in self.dataset:
+            X.append(pair)
+            spectra_entries.append(spectra_names)
+        scores = self.model.predict_proba(X)
 
-            if file.endswith('.png') and 'spectrum' in file:
-                difference_matrix[file] = {}
-
-                for other_file in self.dataset:
-                    if other_file.endswith('.png') and 'spectrum' in other_file:
-                        other_file = other_file.replace('\\', '/').split('/')[-1]
-
-                        difference_matrix[file][other_file] = 0
-
-                difference_matrix[file][file] = 1
-
-        return difference_matrix
-
-    def get_files(self, path):
-        subfolders = [ f.path for f in os.scandir(path) ]
-        files = []
-
-        for folder in subfolders:
-            for f in os.scandir(str(folder)):
-                if f.is_dir():
-                    subfolders.append(f.path)
-                else:
-                    files.append(f.path)
-
-        print(f'File Count: {len(files)}')
-
-        return files
-
-    def run_spectra(self):
-        # loop through spectrum files in a directory and find matches in the hitlist
-        for file in self.dataset:
-            if file.endswith('.png') and 'spectrum' in file:
-                self.find_matches(file)
-
-    def find_matches(self, unknown_spectrum_file_path):
-        unknown_spectrum_name = unknown_spectrum_file_path.replace('\\', '/').split('/')[-1]
-
-        for histlist_file in self.dataset:
-            hitlist_spectrum_name = histlist_file.replace('\\', '/').split('/')[-1]
-            if self.uncalculated_spectra_pair(unknown_spectrum_name, hitlist_spectrum_name):
-                image_1 = cv2.imread(unknown_spectrum_file_path)
-                image_2 = cv2.imread(histlist_file)
-
-                combined = self.combine_spectra(image_1, image_2)
-
-                score = self.model.predict_proba([combined])
-                score = score[0][0]
-
-                self.add_similiarity_score(unknown_spectrum_name, hitlist_spectrum_name, score)
-
-        self.get_results(unknown_spectrum_name)
+        for i in range(len(scores)):
+            self.add_similiarity_score(spectra_entries[i][0], spectra_entries[i][1],
+                scores[i][0])
+        self.get_results()
 
     def add_similiarity_score(self, unknown_spectrum, known_spectrum, score):
+        self.add_key(unknown_spectrum)
+        self.add_key(known_spectrum)
         self.difference_matrix[unknown_spectrum][known_spectrum] = score
         self.difference_matrix[known_spectrum][unknown_spectrum] = score
 
-    def get_results(self, spectrum_name):
+    def add_key(self, name):
+        if name not in self.difference_matrix:
+            self.difference_matrix[name] = {}
 
-        # convert dict to list
-        spectra_hitlist = []
-        for name, score in self.difference_matrix[spectrum_name].items():
-            spectra_hitlist.append({'name': name, 'score': score, 'count': 0})
+    def get_results(self):
+        for spectrum_name, entries in self.difference_matrix.items():
+            spectra_hitlist = []
+            for comp_spectrum_name, score in entries.items():
+                spectra_hitlist.append({'name': comp_spectrum_name, 'score': score,
+                    'count': 0})
 
-        compound = spectrum_name.split('.')[:5]
-        for i in range(len(spectra_hitlist)):
-            hitlist_compound = spectra_hitlist[i]['name'].split('.')
+            compound = spectrum_name.split('.')[:5]
+            for i in range(len(spectra_hitlist)):
+                hitlist_compound = spectra_hitlist[i]['name'].split('.')
 
-            similarity_count = 0
-            j = 0
-            while j < len(compound) and compound[j] == hitlist_compound[j]:
-                similarity_count += 1
-                j += 1
+                similarity_count = 0
+                j = 0
+                while j < len(compound) and compound[j] == hitlist_compound[j]:
+                    similarity_count += 1
+                    j += 1
 
-            spectra_hitlist[i]['count'] = similarity_count
+                spectra_hitlist[i]['count'] = similarity_count
 
-        spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['count'], reverse=True)
+            spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['count'],
+                reverse=True)
 
-        for i in range(len(spectra_hitlist)):
-            if spectra_hitlist[i]['name'] == spectrum_name:
-                spectra_hitlist.pop(i)
-                break
+            for i in range(len(spectra_hitlist)):
+                if spectra_hitlist[i]['name'] == spectrum_name:
+                    spectra_hitlist.pop(i)
+                    break
 
-        expected_closest = spectra_hitlist[0]['name']
+            expected_closest = spectra_hitlist[0]['name']
 
-        spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['score'], reverse=True)
+            spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['score'],
+                reverse=True)
 
-        for i in range(len(spectra_hitlist)):
-            if expected_closest == spectra_hitlist[i]['name']:
-                if i > 0:
-                    self.missed_spectrum.append([self.comparison_type, spectrum_name, i])
+            for i in range(len(spectra_hitlist)):
+                if expected_closest == spectra_hitlist[i]['name']:
+                    if i > 0:
+                        self.missed_spectrum.append([self.comparison_type,
+                            spectrum_name, i])
 
-                    self.log_info(f'{self.comparison_type}: {spectrum_name} ' \
-                                  f'is closest to: {spectra_hitlist[0]["name"]} ' \
-                                  f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
+                        self.log_info(f'{self.comparison_type}: {spectrum_name} ' \
+                            f'is closest to: {spectra_hitlist[0]["name"]} ' \
+                            f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
 
-                    self.log_info(f'Actual closest compound, {expected_closest},' \
-                                  f'was {i} spectrum from closest w/ score ' \
-                                  f'{spectra_hitlist[i]["score"]}\n', Fore.RED)
-                else:
-                    print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
+                        self.log_info(f'Actual closest compound, {expected_closest},' \
+                            f'was {i} spectrum from closest w/ score ' \
+                            f'{spectra_hitlist[i]["score"]}\n', Fore.RED)
+                    else:
+                        print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
-                self.add_classification_results(spectrum_name, spectra_hitlist[0]['name'])
+                    self.add_classification_results(spectrum_name,
+                        spectra_hitlist[0]['name'])
 
     def accuracy(self):
         missed_categories = {'manmade': [0,0], 'meteorites': [0,0], 'mineral': [0,0],
@@ -159,8 +124,8 @@ class Hitlist:
 
         self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
 
-        accuracy = (1 - len(self.missed_spectrum) / len(self.difference_matrix)) * 100
-        self.log_info(f'Accuracy: {accuracy}', color)
+        accuracy = (1 - len(self.missed_spectrum) / len(self.difference_matrix))
+        self.log_info(f'Accuracy: {accuracy:.4f}', color)
 
         for category in missed_categories.keys():
             self.log_info(f'{category} Spectrum Misclassified {missed_categories[category][0]}', color)
@@ -170,13 +135,16 @@ class Hitlist:
                 average_miss = missed_categories[category][1] / missed_categories[category][0]
 
             self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
-            self.log_info(f'Total Spectrum Misclassified {len(self.missed_spectrum)}', color)
+
+        self.log_info(f'Total Spectrum Misclassified {len(self.missed_spectrum)}', color)
 
         for i in range(1, len(self.classification_level)):
-            s = f'Calculcated Best Matches at Level {i}: {self.classification_level[i]}'
+            class_acc = self.classification_level[i] / len(self.difference_matrix)
+            s = f'Calculcated Best Matches at Level {i}: {class_acc:.4f}'
             self.log_info(s, Fore.YELLOW)
 
-        s = f'Calculcated Best Matches that are not same type: {self.classification_level[0]}'
+        non_type_acc = self.classification_level[0] / len(self.difference_matrix)
+        s = f'Calculcated Best Matches that are not same type: {non_type_acc:.4f}'
         self.log_info(s, Fore.YELLOW)
 
     def log_info(self, text, color):

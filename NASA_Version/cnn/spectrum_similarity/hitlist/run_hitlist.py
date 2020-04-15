@@ -2,16 +2,19 @@ import os
 import datetime
 import time
 from cnn_hitlist import Hitlist
+import pickle
 import shutil
 
 if __name__=='__main__':
     start = datetime.datetime.now()
 
     # paths to spectrum directories
-    dataset_path = '../data/visualization-similarity'
+    dataset_path = X = pickle.load(open('../data/Hitlist_Entries.pickle', 'rb'))
+    model_path = '../saved_models/1d-sequential.h5'
+    results_name = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
 
-    created_hitlist = Hitlist(dataset_path, str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss')))
-    created_hitlist.run_spectra()
+    created_hitlist = Hitlist(dataset_path, model_path, results_name)
+    created_hitlist.find_matches()
     created_hitlist.accuracy()
 
     print('Total Runtime: {0}'.format(datetime.datetime.now() - start))
