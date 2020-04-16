@@ -172,10 +172,10 @@ def make_consistent_spectra_len(data):
 def create_training(files):
     categories = ['non-match', 'match']
 
-    matching_data = get_matching_entries(files, categories.index('match'), 1000)
+    matching_data = get_matching_entries(files, categories.index('match'), 2000)
     print(f'Matching entries {len(matching_data)}')
 
-    nonmatching_data = get_nonmatching_entries(files, categories.index('non-match'), 1000)
+    nonmatching_data = get_nonmatching_entries(files, categories.index('non-match'), 2000)
     print(f'Nonmatching entries {len(nonmatching_data)}')
 
     print(f'Index of match: {categories.index("match")}')
@@ -262,5 +262,5 @@ if __name__=='__main__':
     training, validation = split_data(files, validation_split=0.2)
     print(f'len(training): {len(training)}, len(validation): {len(validation)}')
 
-    #create_training(training)
+    create_training(training)
     create_validation(validation)

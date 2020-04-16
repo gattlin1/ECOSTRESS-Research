@@ -12,18 +12,18 @@ import os
 
 if __name__=='__main__':
     num_classes = 2
-    dense_layer_sizes = [64] #[32, 64, 128, 256]
-    dense_layers = [3] #[1, 2]
+    dense_layer_sizes = [32] #[32, 64, 128, 256]
+    dense_layers = [1] #[1, 2]
     conv_layer_sizes = [32] #[32, 64, 128]
-    conv_layers = [2] #[1, 2]
+    conv_layers = [1] #[1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
 
     # Loading in data
-    X = pickle.load(open('./data/X_train.pickle', 'rb'))
-    y = pickle.load(open('./data/y_train.pickle', 'rb'))
+    X = pickle.load(open('./data/X_train_2d.pickle', 'rb'))
+    y = pickle.load(open('./data/y_train_2d.pickle', 'rb'))
 
     # calculating bias
     class_weights = class_weight.compute_class_weight('balanced', np.unique(y), y)
@@ -34,8 +34,8 @@ if __name__=='__main__':
         for dense_size in dense_layer_sizes:
             for conv_size in conv_layer_sizes:
                 for conv_layer in conv_layers:
-                    NAME = f'sequential-{conv_layer}-conv-{conv_size}-conv nodes-' \
-                           f'{dense_layer}-dense-{dense_size}-dense nodes.h5'
+                    NAME = '2d-sequential.h5'#f'sequential-{conv_layer}-conv-{conv_size}-conv nodes-' \
+                           #f'{dense_layer}-dense-{dense_size}-dense nodes.h5'
 
                     # Setting up callbacks for model
                     tensorboard = TensorBoard(log_dir=f'logs\\sequential\\{NAME}')

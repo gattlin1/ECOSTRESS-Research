@@ -7,6 +7,7 @@ import os
 import os.path
 from os import path
 import cv2
+import numpy as np
 
 class Hitlist:
     def __init__(self, dataset, model_path, file_title=''):
@@ -34,6 +35,7 @@ class Hitlist:
         for pair, spectra_names in self.dataset:
             X.append(pair)
             spectra_entries.append(spectra_names)
+        X = np.array(X)
         scores = self.model.predict_proba(X)
 
         for i in range(len(scores)):
@@ -148,8 +150,8 @@ class Hitlist:
         self.log_info(s, Fore.YELLOW)
 
     def log_info(self, text, color):
-        print(color + text + Style.RESET_ALL)
         self.results.write('\n' + text)
+        print(color + text + Style.RESET_ALL)
 
     def add_classification_results(self, unknown_spectrum, known_spectrum):
         unknown_spectrum = unknown_spectrum.split('.')

@@ -1,7 +1,7 @@
 from __future__ import print_function
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
+from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, BatchNormalization
 from tensorflow.keras.layers import Conv1D, MaxPooling1D, GlobalAveragePooling1D, LeakyReLU, GaussianNoise
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from sklearn.utils import class_weight
@@ -12,10 +12,10 @@ import os
 
 if __name__=='__main__':
     num_classes = 2
-    dense_layer_sizes = [75] #[32, 64, 128, 256]
+    dense_layer_sizes = [100] #[32, 64, 128, 256]
     dense_layers = [2] #[1, 2]
     conv_layer_sizes = [100] #[32, 64, 128]
-    conv_layers = [3] #[1, 2]
+    conv_layers = [2] #[1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):

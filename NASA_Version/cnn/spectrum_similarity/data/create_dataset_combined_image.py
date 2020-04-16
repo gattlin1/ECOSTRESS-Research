@@ -22,6 +22,11 @@ def get_files(directory):
 
     return files
 
+def split_data(data, validation_split=0.1):
+    split_point = int(len(data) * (1 - validation_split))
+
+    return data[:split_point], data[split_point + 1:]
+
 def get_matching_entries(files, num_class, count_per_type):
     data = []
     types_count = {} # dict that keeps track of all entries we have of a specific type
@@ -115,15 +120,8 @@ def save(destination, data):
     pickle.dump(data, pickle_out)
     pickle_out.close()
 
-
-if __name__=='__main__':
-    directory = './visualization-similarity'
+def create_training(files):
     categories = ['non-match', 'match']
-
-    random.seed(3)
-
-    files = get_files(directory)
-
     matching_data = get_matching_entries(files, categories.index('match'), 1000)
     print(f'Matching entries {len(matching_data)}')
 
@@ -149,5 +147,51 @@ if __name__=='__main__':
     y = np.array(y)
 
     # Saving each dataset to the currect directory
-    save('./X_combined_channel.pickle', X)
-    save('./y_combined_channel.pickle', y)
+    save('./X_train_2d.pickle', X)
+    save('./y_train_2d.pickle', y)
+
+def make_ab_pairs(files):
+    pairs = []
+    for i in range(len(files)):
+        random.shuffle(files[i])
+        pairs.append(files[i][0])
+        pairs.append(files[i][1])
+    return pairs
+
+def create_validation(files):
+    files = make_ab_pairs(files)
+    print(f'len(folders): {len(files)}')
+    hitlist_entries = []
+
+    for i in range(len(files) - 1):
+        for j in range(i + 1, len(files)):
+            spec_1_name = files[i].replace('\\', '/')
+            spec_1_name = spec_1_name.split('/')[-1]
+            spec_2_name = files[j].replace('\\', '/')
+            spec_2_name = spec_2_name.split('/')[-1]
+
+            img_array_1 = cv2.imread(files[i])
+            img_array_2 = cv2.imread(files[j])
+
+            img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
+
+            combined = combine_spectra(img_array_1, img_array_2)
+
+            hitlist_entries.append([combined, [spec_1_name, spec_2_name]])
+
+    # save hitlist entries
+    save('Hitlist_Entries_2d.pickle', hitlist_entries)
+
+    print(f'len(hitlist_entries): {len(hitlist_entries)}')
+if __name__=='__main__':
+    directory = './visualization-similarity'
+    random.seed(3)
+
+    files = get_files(directory)
+    random.shuffle(files)
+
+    training, validation = split_data(files, validation_split=0.2)
+    print(f'len(training): {len(training)}, len(validation): {len(validation)}')
+
+    create_training(training)
+    create_validation(validation)
