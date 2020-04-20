@@ -1,0 +1,496 @@
+
+vegetation.tree.cedrus.deodara.tir.jpl104.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl133.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.cedrus.deodara.tir.jpl103.jpl.nicolet.spectrum.txt.png,was 30 spectrum from closest w/ score 0.9943339824676514
+
+vegetation.tree.cedrus.deodara.tir.jpl103.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.cedrus.deodara.tir.jpl104.jpl.nicolet.spectrum.txt.png,was 19 spectrum from closest w/ score 0.9943339824676514
+
+mineral.silicate.phyllosilicate.medium.vswir.ps-12c.jpl.beckman.spectrum.txt.png is closest to: mineral.sulfide.none.medium.vswir.s-11a.jpl.beckman.spectrum.txt.png w/ score: 0.997
+Actual closest compound, mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png,was 101 spectrum from closest w/ score 0.9470260143280029
+
+mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.fine.tir.quartz_1.jhu.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.silicate.phyllosilicate.medium.vswir.ps-12c.jpl.beckman.spectrum.txt.png,was 131 spectrum from closest w/ score 0.9470260143280029
+
+mineral.element.none.fine.tir.e-2a.jpl.nicolet.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.fine.tir.ts-6a.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.element.none.fine.tir.e-1a.jpl.nicolet.spectrum.txt.png,was 22 spectrum from closest w/ score 0.9954107403755188
+
+mineral.element.none.fine.tir.e-1a.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.gneis.coarse.all.gneiss5.jhu.becknic.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.element.none.fine.tir.e-2a.jpl.nicolet.spectrum.txt.png,was 23 spectrum from closest w/ score 0.9954107403755188
+
+vegetation.tree.abies.concolor.vswir.vh257.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.abies.concolor.vswir.vh256.ucsb.asd.spectrum.txt.png,was 48 spectrum from closest w/ score 0.9844856262207031
+
+vegetation.tree.abies.concolor.vswir.vh256.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.abies.concolor.vswir.vh257.ucsb.asd.spectrum.txt.png,was 59 spectrum from closest w/ score 0.9844856262207031
+
+vegetation.tree.acacia.caven.vswir.jpl139.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.quercus.virginana.vswir.jpl186.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.acacia.caven.vswir.jpl140.jpl.asd.spectrum.txt.png,was 3 spectrum from closest w/ score 0.999660849571228
+
+vegetation.tree.acacia.caven.vswir.jpl140.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.acacia.caven.vswir.jpl139.jpl.asd.spectrum.txt.png w/ score: 1.000
+vegetation.shrub.ceanothus.megacarpus.vswir.vh024.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.shrub.ceanothus.megacarpus.vswir.vh022.ucsb.asd.spectrum.txt.png,was 96 spectrum from closest w/ score 0.976350724697113
+
+vegetation.shrub.ceanothus.megacarpus.vswir.vh022.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.shrub.ceanothus.megacarpus.vswir.vh024.ucsb.asd.spectrum.txt.png,was 73 spectrum from closest w/ score 0.976350724697113
+
+nonphotosyntheticvegetation.flowers.calocedrus.decurrens.tir.vh268.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.flowers.calocedrus.decurrens.tir.vh266.ucsb.nicolet.spectrum.txt.png,was 14 spectrum from closest w/ score 0.997075080871582
+
+nonphotosyntheticvegetation.flowers.calocedrus.decurrens.tir.vh266.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.flowers.calocedrus.decurrens.tir.vh268.ucsb.nicolet.spectrum.txt.png,was 18 spectrum from closest w/ score 0.997075080871582
+
+mineral.silicate.cyclosilicate.coarse.vswir.cs-1a.jpl.beckman.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png,was 86 spectrum from closest w/ score 0.9821977019309998
+
+mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png is closest to: rock.metamorphic.gneis.coarse.all.gneiss5.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.silicate.cyclosilicate.coarse.vswir.cs-1a.jpl.beckman.spectrum.txt.png,was 37 spectrum from closest w/ score 0.9821977019309998
+
+vegetation.tree.salix.babylonica.tir.jpl183.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.salix.babylonica.tir.jpl184.jpl.nicolet.spectrum.txt.png,was 1 spectrum from closest w/ score 0.998465895652771
+
+vegetation.tree.salix.babylonica.tir.jpl184.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.salix.babylonica.tir.jpl183.jpl.nicolet.spectrum.txt.png,was 3 spectrum from closest w/ score 0.998465895652771
+
+nonphotosyntheticvegetation.bark.acer.rubrum.tir.acru-1-81.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.bark.acer.rubrum.tir.acru-2-82.ucsb.nicolet.spectrum.txt.png,was 4 spectrum from closest w/ score 0.9984997510910034
+
+nonphotosyntheticvegetation.bark.acer.rubrum.tir.acru-2-82.ucsb.nicolet.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.acer.rubrum.tir.acru-1-81.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+meteorites.achondrite.howardite.fine.tir.bialystok.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, meteorites.achondrite.howardite.fine.tir.bholghati.jhu.becknic.spectrum.txt.png,was 1 spectrum from closest w/ score 0.997211754322052
+
+meteorites.achondrite.howardite.fine.tir.bholghati.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png w/ score: 0.999
+Actual closest compound, meteorites.achondrite.howardite.fine.tir.bialystok.jhu.becknic.spectrum.txt.png,was 2 spectrum from closest w/ score 0.997211754322052
+
+nonphotosyntheticvegetation.leaves.none.none.vswir.ll-1-87y.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png,was 26 spectrum from closest w/ score 0.9937036633491516
+
+nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-2-84.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.leaves.none.none.vswir.ll-1-87y.ucsb.asd.spectrum.txt.png,was 32 spectrum from closest w/ score 0.9937036633491516
+
+vegetation.tree.quercus.douglasii.vswir.vh178.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.quercus.douglasii.vswir.vh173.ucsb.asd.spectrum.txt.png,was 62 spectrum from closest w/ score 0.9780496954917908
+
+vegetation.tree.quercus.douglasii.vswir.vh173.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.acacia.caven.vswir.jpl139.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.quercus.douglasii.vswir.vh178.ucsb.asd.spectrum.txt.png,was 84 spectrum from closest w/ score 0.9780496954917908
+
+vegetation.tree.ficus.craterostoma.tir.jpl091.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl133.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.ficus.craterostoma.tir.jpl195.jpl.nicolet.spectrum.txt.png,was 29 spectrum from closest w/ score 0.9931036829948425
+
+vegetation.tree.ficus.craterostoma.tir.jpl195.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.ficus.craterostoma.tir.jpl091.jpl.nicolet.spectrum.txt.png,was 42 spectrum from closest w/ score 0.9931036829948425
+
+rock.metamorphic.marble.coarse.all.marble3.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.felsic.fine.all.granite_h2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png,was 55 spectrum from closest w/ score 0.99369215965271
+
+rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.nesosilicate.fine.tir.ns-3b.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.marble.coarse.all.marble3.jhu.becknic.spectrum.txt.png,was 31 spectrum from closest w/ score 0.99369215965271
+
+vegetation.tree.aloe.bainesii.tir.jpl058.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-1-67.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, vegetation.tree.aloe.bainesii.tir.jpl057.jpl.nicolet.spectrum.txt.png,was 56 spectrum from closest w/ score 0.9880648255348206
+
+vegetation.tree.aloe.bainesii.tir.jpl057.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png w/ score: 0.998
+Actual closest compound, vegetation.tree.aloe.bainesii.tir.jpl058.jpl.nicolet.spectrum.txt.png,was 58 spectrum from closest w/ score 0.9880648255348206
+
+vegetation.shrub.baccharis.pilularis.vswir.vh002.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.baccharis.pilularis.vswir.vh194.ucsb.asd.spectrum.txt.png,was 64 spectrum from closest w/ score 0.9747836589813232
+
+vegetation.shrub.baccharis.pilularis.vswir.vh194.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.baccharis.pilularis.vswir.vh002.ucsb.asd.spectrum.txt.png,was 70 spectrum from closest w/ score 0.9747836589813232
+
+nonphotosyntheticvegetation.needles.pinus.coulteri.tir.vh341.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.needles.pinus.coulteri.tir.vh340.ucsb.nicolet.spectrum.txt.png,was 27 spectrum from closest w/ score 0.99439537525177
+
+nonphotosyntheticvegetation.needles.pinus.coulteri.tir.vh340.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.needles.pinus.coulteri.tir.vh341.ucsb.nicolet.spectrum.txt.png,was 30 spectrum from closest w/ score 0.99439537525177
+
+vegetation.tree.acacia.visco.vswir.jpl159.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.acacia.visco.vswir.jpl196.jpl.asd.spectrum.txt.png,was 13 spectrum from closest w/ score 0.9967709183692932
+
+vegetation.tree.acacia.visco.vswir.jpl196.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.acacia.visco.vswir.jpl159.jpl.asd.spectrum.txt.png,was 10 spectrum from closest w/ score 0.9967709183692932
+
+rock.igneous.mafic.solid.vswir.ward40.jpl.perkin.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.igneous.mafic.solid.vswir.ward39.jpl.perkin.spectrum.txt.png,was 24 spectrum from closest w/ score 0.9942268133163452
+
+rock.igneous.mafic.solid.vswir.ward39.jpl.perkin.spectrum.txt.png is closest to: meteorites.achondrite.howardite.fine.tir.bialystok.jhu.becknic.spectrum.txt.png w/ score: 0.996
+Actual closest compound, rock.igneous.mafic.solid.vswir.ward40.jpl.perkin.spectrum.txt.png,was 13 spectrum from closest w/ score 0.9942268133163452
+
+vegetation.grass.avena.fatua.vswir.vh352.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl135.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.grass.avena.fatua.vswir.vh353.ucsb.asd.spectrum.txt.png,was 10 spectrum from closest w/ score 0.9976045489311218
+
+vegetation.grass.avena.fatua.vswir.vh353.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.grass.avena.fatua.vswir.vh352.ucsb.asd.spectrum.txt.png,was 9 spectrum from closest w/ score 0.9976045489311218
+
+rock.metamorphic.quartzite.solid.vswir.ward94.jpl.perkin.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.metamorphic.quartzite.solid.vswir.ward93.jpl.perkin.spectrum.txt.png,was 91 spectrum from closest w/ score 0.9730919003486633
+
+rock.metamorphic.quartzite.solid.vswir.ward93.jpl.perkin.spectrum.txt.png is closest to: rock.metamorphic.schist.solid.all.ward84.jpl.nicolet.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.metamorphic.quartzite.solid.vswir.ward94.jpl.perkin.spectrum.txt.png,was 96 spectrum from closest w/ score 0.9730919003486633
+
+vegetation.tree.pinus.ponderosa.vswir.vh067.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.pinus.ponderosa.vswir.vh157.ucsb.asd.spectrum.txt.png,was 32 spectrum from closest w/ score 0.9886958599090576
+
+vegetation.tree.pinus.ponderosa.vswir.vh157.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.pinus.ponderosa.vswir.vh067.ucsb.asd.spectrum.txt.png,was 31 spectrum from closest w/ score 0.9886958599090576
+
+vegetation.tree.taxodium.mucronatum.vswir.jpl229.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.taxodium.mucronatum.vswir.jpl119.jpl.asd.spectrum.txt.png w/ score: 0.999
+vegetation.tree.taxodium.mucronatum.vswir.jpl119.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.taxodium.mucronatum.vswir.jpl229.jpl.asd.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9994674324989319
+
+rock.metamorphic.slate.solid.vswir.ward91.jpl.perkin.spectrum.txt.png is closest to: mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.metamorphic.slate.solid.vswir.ward92.jpl.perkin.spectrum.txt.png,was 55 spectrum from closest w/ score 0.9852429628372192
+
+rock.metamorphic.slate.solid.vswir.ward92.jpl.perkin.spectrum.txt.png is closest to: mineral.element.none.fine.tir.e-2a.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, rock.metamorphic.slate.solid.vswir.ward91.jpl.perkin.spectrum.txt.png,was 83 spectrum from closest w/ score 0.9852429628372192
+
+vegetation.tree.ficus.platypoda.vswir.jpl194.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.ficus.platypoda.vswir.jpl122.jpl.asd.spectrum.txt.png,was 3 spectrum from closest w/ score 0.9997691512107849
+
+vegetation.tree.ficus.platypoda.vswir.jpl122.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.ficus.platypoda.vswir.jpl194.jpl.asd.spectrum.txt.png,was 1 spectrum from closest w/ score 0.9997691512107849
+
+vegetation.tree.quercus.virginana.vswir.jpl186.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.quercus.virginana.vswir.jpl107.jpl.asd.spectrum.txt.png,was 49 spectrum from closest w/ score 0.9872825145721436
+
+vegetation.tree.quercus.virginana.vswir.jpl107.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.quercus.virginana.vswir.jpl186.jpl.asd.spectrum.txt.png,was 51 spectrum from closest w/ score 0.9872825145721436
+
+mineral.silicate.sorosilicate.coarse.vswir.ss-4a.jpl.beckman.spectrum.txt.png is closest to: vegetation.shrub.ceanothus.megacarpus.tir.vh215.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.sorosilicate.coarse.vswir.ss-1a.jpl.beckman.spectrum.txt.png,was 2 spectrum from closest w/ score 0.9977148771286011
+
+mineral.silicate.sorosilicate.coarse.vswir.ss-1a.jpl.beckman.spectrum.txt.png is closest to: vegetation.tree.acer.rubrum.tir.acru-1-13.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.sorosilicate.coarse.vswir.ss-4a.jpl.beckman.spectrum.txt.png,was 5 spectrum from closest w/ score 0.9977148771286011
+
+soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt.png is closest to: soil.inceptisol.haplumbrept.none.all.86p4561.jhu.becknic.spectrum.txt.png w/ score: 0.996
+soil.inceptisol.haplumbrept.none.all.86p4561.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png w/ score: 0.997
+Actual closest compound, soil.inceptisol.haplumbrept.none.all.88p4699.jhu.becknic.spectrum.txt.png,was 1 spectrum from closest w/ score 0.9961853623390198
+
+mineral.oxide.none.coarse.tir.o-8a.jpl.nicolet.spectrum.txt.png is closest to: mineral.sulfide.none.coarse.tir.s-1a.jpl.nicolet.spectrum.txt.png w/ score: 0.997
+Actual closest compound, mineral.oxide.none.coarse.tir.chromite_1.jhu.nicolet.spectrum.txt.png,was 56 spectrum from closest w/ score 0.9852377772331238
+
+mineral.oxide.none.coarse.tir.chromite_1.jhu.nicolet.spectrum.txt.png is closest to: mineral.silicate.nesosilicate.fine.tir.ns-3b.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.oxide.none.coarse.tir.o-8a.jpl.nicolet.spectrum.txt.png,was 71 spectrum from closest w/ score 0.9852377772331238
+
+meteorites.carbonaceouschondrite.c4.fine.tir.karoonda1.jhu.becknic.spectrum.txt.png is closest to: meteorites.achondrite.shergottite.fine.tir.alha77005.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, meteorites.carbonaceouschondrite.c4.fine.tir.karoonda3.jhu.becknic.spectrum.txt.png,was 2 spectrum from closest w/ score 0.9983274340629578
+
+meteorites.carbonaceouschondrite.c4.fine.tir.karoonda3.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.fine.tir.ts-6a.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, meteorites.carbonaceouschondrite.c4.fine.tir.karoonda1.jhu.becknic.spectrum.txt.png,was 1 spectrum from closest w/ score 0.9983274340629578
+
+mineral.carbonate.none.solid.tir.dolomite_1.jhu.nicolet.spectrum.txt.png is closest to: mineral.carbonate.none.solid.tir.dolomite_3.jhu.nicolet.spectrum.txt.png w/ score: 0.999
+mineral.carbonate.none.solid.tir.dolomite_3.jhu.nicolet.spectrum.txt.png is closest to: rock.metamorphic.gneis.coarse.all.gneiss5.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.carbonate.none.solid.tir.dolomite_1.jhu.nicolet.spectrum.txt.png,was 1 spectrum from closest w/ score 0.999138593673706
+
+rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.gneis.fine.all.gneiss4.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png,was 21 spectrum from closest w/ score 0.9978571534156799
+
+rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png is closest to: mineral.silicate.nesosilicate.fine.tir.ns-3b.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9978571534156799
+
+mineral.hydroxide.none.solid.tir.goethite_2.jhu.nicolet.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.fine.tir.quartz_1.jhu.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.hydroxide.none.solid.tir.goethite_1.jhu.nicolet.spectrum.txt.png,was 35 spectrum from closest w/ score 0.994290828704834
+
+mineral.hydroxide.none.solid.tir.goethite_1.jhu.nicolet.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.hydroxide.none.solid.tir.goethite_2.jhu.nicolet.spectrum.txt.png,was 52 spectrum from closest w/ score 0.994290828704834
+
+rock.sedimentary.conglomerate.solid.all.ward49.jpl.nicolet.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward49.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.acer.pensylvanicum.tir.acpe-1-67.ucsb.nicolet.spectrum.txt.png,was 18 spectrum from closest w/ score 0.9980350136756897
+
+vegetation.tree.acer.pensylvanicum.tir.acpe-1-67.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png,was 13 spectrum from closest w/ score 0.9980350136756897
+
+rock.metamorphic.gneis.coarse.all.gneiss1.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.gneis.coarse.all.gneiss5.jhu.becknic.spectrum.txt.png,was 28 spectrum from closest w/ score 0.9879819750785828
+
+rock.metamorphic.gneis.coarse.all.gneiss5.jhu.becknic.spectrum.txt.png is closest to: mineral.carbonate.none.solid.tir.dolomite_3.jhu.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.gneis.coarse.all.gneiss1.jhu.becknic.spectrum.txt.png,was 45 spectrum from closest w/ score 0.9879819750785828
+
+rock.metamorphic.schist.solid.all.ward90.jpl.nicolet.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.schist.solid.all.ward84.jpl.nicolet.spectrum.txt.png,was 2 spectrum from closest w/ score 0.998029887676239
+
+rock.metamorphic.schist.solid.all.ward84.jpl.nicolet.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.schist.solid.all.ward90.jpl.nicolet.spectrum.txt.png,was 2 spectrum from closest w/ score 0.998029887676239
+
+rock.igneous.ultramafic.fine.all.picrite_h2.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.ultramafic.fine.all.ijolite_h1.jhu.becknic.spectrum.txt.png,was 21 spectrum from closest w/ score 0.9933700561523438
+
+rock.igneous.ultramafic.fine.all.ijolite_h1.jhu.becknic.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-1-67.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, rock.igneous.ultramafic.fine.all.picrite_h2.jhu.becknic.spectrum.txt.png,was 18 spectrum from closest w/ score 0.9933700561523438
+
+vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.acacia.visco.vswir.jpl159.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9985126852989197
+
+vegetation.tree.bambusa.tuldoides.vswir.jpl146.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.quercus.virginana.vswir.jpl186.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png,was 11 spectrum from closest w/ score 0.9985126852989197
+
+vegetation.tree.tipuana.tipu.tir.jpl235.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.tipuana.tipu.tir.jpl251.jpl.nicolet.spectrum.txt.png,was 3 spectrum from closest w/ score 0.99872225522995
+
+vegetation.tree.tipuana.tipu.tir.jpl251.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.tipuana.tipu.tir.jpl235.jpl.nicolet.spectrum.txt.png,was 6 spectrum from closest w/ score 0.99872225522995
+
+mineral.sulfide.none.medium.vswir.s-11a.jpl.beckman.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.sulfide.none.medium.vswir.s-3a.jpl.perkin.spectrum.txt.png,was 154 spectrum from closest w/ score 0.8559774160385132
+
+mineral.sulfide.none.medium.vswir.s-3a.jpl.perkin.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward34.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.sulfide.none.medium.vswir.s-11a.jpl.beckman.spectrum.txt.png,was 149 spectrum from closest w/ score 0.8559774160385132
+
+meteorites.achondrite.shergottite.fine.tir.eeta79001.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, meteorites.achondrite.shergottite.fine.tir.alha77005.jhu.becknic.spectrum.txt.png,was 44 spectrum from closest w/ score 0.9936087131500244
+
+meteorites.achondrite.shergottite.fine.tir.alha77005.jhu.becknic.spectrum.txt.png is closest to: meteorites.carbonaceouschondrite.c4.fine.tir.karoonda1.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, meteorites.achondrite.shergottite.fine.tir.eeta79001.jhu.becknic.spectrum.txt.png,was 40 spectrum from closest w/ score 0.9936087131500244
+
+nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-1-83.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.acacia.visco.vswir.jpl196.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-2-84.ucsb.asd.spectrum.txt.png,was 93 spectrum from closest w/ score 0.982627809047699
+
+nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-2-84.ucsb.asd.spectrum.txt.png is closest to: nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-1-83.ucsb.asd.spectrum.txt.png,was 78 spectrum from closest w/ score 0.982627809047699
+
+meteorites.carbonaceouschondrite.co.fine.tir.lance1.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.fine.tir.ts-6a.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, meteorites.carbonaceouschondrite.co.fine.tir.lance2.jhu.becknic.spectrum.txt.png,was 37 spectrum from closest w/ score 0.9943776726722717
+
+meteorites.carbonaceouschondrite.co.fine.tir.lance2.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png w/ score: 0.998
+Actual closest compound, meteorites.carbonaceouschondrite.co.fine.tir.lance1.jhu.becknic.spectrum.txt.png,was 40 spectrum from closest w/ score 0.9943776726722717
+
+vegetation.tree.bambusa.beecheyana.vswir.jpl133.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl135.jpl.asd.spectrum.txt.png w/ score: 1.000
+vegetation.tree.bambusa.beecheyana.vswir.jpl135.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl133.jpl.asd.spectrum.txt.png w/ score: 1.000
+mineral.phosphate.none.medium.vswir.p-1a.jpl.perkin.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.phosphate.none.medium.vswir.p-3a.jpl.perkin.spectrum.txt.png,was 40 spectrum from closest w/ score 0.9920708537101746
+
+mineral.phosphate.none.medium.vswir.p-3a.jpl.perkin.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.phosphate.none.medium.vswir.p-1a.jpl.perkin.spectrum.txt.png,was 49 spectrum from closest w/ score 0.9920708537101746
+
+mineral.arsenate.none.fine.vswir.a-1a.jpl.beckman.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-1-83.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.arsenate.none.fine.vswir.a-2a.jpl.beckman.spectrum.txt.png,was 64 spectrum from closest w/ score 0.9879814982414246
+
+mineral.arsenate.none.fine.vswir.a-2a.jpl.beckman.spectrum.txt.png is closest to: vegetation.tree.betula.papyrifera.tir.bepa-2-35.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.arsenate.none.fine.vswir.a-1a.jpl.beckman.spectrum.txt.png,was 50 spectrum from closest w/ score 0.9879814982414246
+
+vegetation.tree.ficus.macrophylla_columnaris.vswir.jpl094.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.beecheyana.vswir.jpl135.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.ficus.macrophylla_columnaris.vswir.jpl095.jpl.asd.spectrum.txt.png,was 21 spectrum from closest w/ score 0.9942697286605835
+
+vegetation.tree.ficus.macrophylla_columnaris.vswir.jpl095.jpl.asd.spectrum.txt.png is closest to: vegetation.shrub.heteromeles.arbutifolia.vswir.vh018.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.ficus.macrophylla_columnaris.vswir.jpl094.jpl.asd.spectrum.txt.png,was 13 spectrum from closest w/ score 0.9942697286605835
+
+manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt.png is closest to: vegetation.tree.casimiroa.edulis.vswir.jpl217.jpl.asd.spectrum.txt.png w/ score: 0.998
+Actual closest compound, manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt.png,was 16 spectrum from closest w/ score 0.995281994342804
+
+manmade.road.tar.solid.all.0099uuutar.jhu.becknic.spectrum.txt.png is closest to: mineral.silicate.sorosilicate.coarse.vswir.ss-4a.jpl.beckman.spectrum.txt.png w/ score: 0.998
+Actual closest compound, manmade.road.tar.solid.all.0100uuutar.jhu.becknic.spectrum.txt.png,was 16 spectrum from closest w/ score 0.995281994342804
+
+rock.igneous.ultramafic.solid.all.ward45.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.ultramafic.solid.all.picrite_h1.jhu.becknic.spectrum.txt.png,was 86 spectrum from closest w/ score 0.9827913641929626
+
+rock.igneous.ultramafic.solid.all.picrite_h1.jhu.becknic.spectrum.txt.png is closest to: mineral.hydroxide.none.solid.tir.goethite_1.jhu.nicolet.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.igneous.ultramafic.solid.all.ward45.jpl.nicolet.spectrum.txt.png,was 48 spectrum from closest w/ score 0.9827913641929626
+
+vegetation.shrub.aloe.arborescens.vswir.jpl077.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.casimiroa.edulis.vswir.jpl217.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.aloe.arborescens.vswir.jpl076.jpl.asd.spectrum.txt.png,was 1 spectrum from closest w/ score 0.9983149766921997
+
+vegetation.shrub.aloe.arborescens.vswir.jpl076.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.acacia.visco.vswir.jpl196.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.aloe.arborescens.vswir.jpl077.jpl.asd.spectrum.txt.png,was 4 spectrum from closest w/ score 0.9983149766921997
+
+vegetation.tree.quercus.ilex.tir.jpl232.jpl.nicolet.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-1a.jpl.beckman.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.quercus.ilex.tir.jpl255.jpl.nicolet.spectrum.txt.png,was 9 spectrum from closest w/ score 0.9961304664611816
+
+vegetation.tree.quercus.ilex.tir.jpl255.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.quercus.ilex.tir.jpl232.jpl.nicolet.spectrum.txt.png,was 16 spectrum from closest w/ score 0.9961304664611816
+
+vegetation.tree.cedrus.deodara.vswir.jpl104.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.cedrus.deodara.vswir.jpl212.jpl.asd.spectrum.txt.png,was 47 spectrum from closest w/ score 0.9855117201805115
+
+vegetation.tree.cedrus.deodara.vswir.jpl212.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.betula.papyrifera.vswir.bepa-2-35.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.cedrus.deodara.vswir.jpl104.jpl.asd.spectrum.txt.png,was 49 spectrum from closest w/ score 0.9855117201805115
+
+mineral.silicate.tectosilicate.coarse.vswir.ts-1c.jpl.perkin.spectrum.txt.png is closest to: mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.tectosilicate.coarse.vswir.ts-1a.jpl.perkin.spectrum.txt.png,was 33 spectrum from closest w/ score 0.9944601058959961
+
+mineral.silicate.tectosilicate.coarse.vswir.ts-1a.jpl.perkin.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.tectosilicate.coarse.vswir.ts-1c.jpl.perkin.spectrum.txt.png,was 30 spectrum from closest w/ score 0.9944601058959961
+
+mineral.phosphate.none.coarse.vswir.p-4a.jpl.beckman.spectrum.txt.png is closest to: vegetation.tree.cedrus.deodara.vswir.jpl104.jpl.asd.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.phosphate.none.coarse.vswir.p-3a.jpl.beckman.spectrum.txt.png,was 30 spectrum from closest w/ score 0.9912648797035217
+
+mineral.phosphate.none.coarse.vswir.p-3a.jpl.beckman.spectrum.txt.png is closest to: mineral.hydroxide.none.solid.tir.goethite_1.jhu.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.phosphate.none.coarse.vswir.p-4a.jpl.beckman.spectrum.txt.png,was 71 spectrum from closest w/ score 0.9912648797035217
+
+vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.cedrus.deodara.vswir.jpl104.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png,was 19 spectrum from closest w/ score 0.9971666932106018
+
+vegetation.tree.chorisia.insignis.vswir.jpl136.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.betula.papyrifera.vswir.bepa-2-35.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.chorisia.insignis.vswir.jpl240.jpl.asd.spectrum.txt.png,was 15 spectrum from closest w/ score 0.9971666932106018
+
+rock.metamorphic.gneis.fine.all.gneiss2.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.gneis.fine.all.gneiss4.jhu.becknic.spectrum.txt.png,was 16 spectrum from closest w/ score 0.9951750040054321
+
+rock.metamorphic.gneis.fine.all.gneiss4.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.metamorphic.gneis.fine.all.gneiss2.jhu.becknic.spectrum.txt.png,was 33 spectrum from closest w/ score 0.9951750040054321
+
+rock.sedimentary.siliceou.solid.vswir.ward57.jpl.perkin.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, rock.sedimentary.siliceou.solid.vswir.ward77.jpl.perkin.spectrum.txt.png,was 63 spectrum from closest w/ score 0.9882535934448242
+
+rock.sedimentary.siliceou.solid.vswir.ward77.jpl.perkin.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png w/ score: 0.998
+Actual closest compound, rock.sedimentary.siliceou.solid.vswir.ward57.jpl.perkin.spectrum.txt.png,was 66 spectrum from closest w/ score 0.9882535934448242
+
+vegetation.shrub.heteromeles.arbutifolia.vswir.vh133.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.betula.papyrifera.vswir.bepa-1-31.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.shrub.heteromeles.arbutifolia.vswir.vh018.ucsb.asd.spectrum.txt.png,was 68 spectrum from closest w/ score 0.9733515977859497
+
+vegetation.shrub.heteromeles.arbutifolia.vswir.vh018.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.ficus.macrophylla_columnaris.vswir.jpl095.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.shrub.heteromeles.arbutifolia.vswir.vh133.ucsb.asd.spectrum.txt.png,was 84 spectrum from closest w/ score 0.9733515977859497
+
+vegetation.shrub.ceanothus.megacarpus.tir.vh211.ucsb.nicolet.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-2-84.ucsb.asd.spectrum.txt.png w/ score: 0.998
+Actual closest compound, vegetation.shrub.ceanothus.megacarpus.tir.vh215.ucsb.nicolet.spectrum.txt.png,was 16 spectrum from closest w/ score 0.9958598017692566
+
+vegetation.shrub.ceanothus.megacarpus.tir.vh215.ucsb.nicolet.spectrum.txt.png is closest to: nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.ceanothus.megacarpus.tir.vh211.ucsb.nicolet.spectrum.txt.png,was 16 spectrum from closest w/ score 0.9958598017692566
+
+vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png,was 2 spectrum from closest w/ score 0.9990957975387573
+
+vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.tipuana.tipu.tir.jpl235.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png,was 2 spectrum from closest w/ score 0.9990957975387573
+
+vegetation.tree.pinus.ponderosa.tir.vh255.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.pinus.ponderosa.tir.vh163.ucsb.nicolet.spectrum.txt.png,was 29 spectrum from closest w/ score 0.9961119294166565
+
+vegetation.tree.pinus.ponderosa.tir.vh163.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.pinus.ponderosa.tir.vh255.ucsb.nicolet.spectrum.txt.png,was 30 spectrum from closest w/ score 0.9961119294166565
+
+mineral.silicate.nesosilicate.fine.tir.ns-3b.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.silicate.nesosilicate.fine.tir.almandine_1.jhu.nicolet.spectrum.txt.png,was 45 spectrum from closest w/ score 0.9931313395500183
+
+mineral.silicate.nesosilicate.fine.tir.almandine_1.jhu.nicolet.spectrum.txt.png is closest to: mineral.sulfide.none.coarse.tir.s-1a.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.nesosilicate.fine.tir.ns-3b.jpl.nicolet.spectrum.txt.png,was 46 spectrum from closest w/ score 0.9931313395500183
+
+mineral.silicate.tectosilicate.fine.tir.ts-6a.jpl.nicolet.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-2a.jpl.perkin.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.silicate.tectosilicate.fine.tir.quartz_1.jhu.nicolet.spectrum.txt.png,was 4 spectrum from closest w/ score 0.99835604429245
+
+mineral.silicate.tectosilicate.fine.tir.quartz_1.jhu.nicolet.spectrum.txt.png is closest to: mineral.silicate.phyllosilicate.medium.vswir.ps-13b.jpl.perkin.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.silicate.tectosilicate.fine.tir.ts-6a.jpl.nicolet.spectrum.txt.png,was 2 spectrum from closest w/ score 0.99835604429245
+
+vegetation.shrub.juniperus.chinensis.tir.jpl098.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.tipuana.tipu.tir.jpl235.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.juniperus.chinensis.tir.jpl097.jpl.nicolet.spectrum.txt.png,was 32 spectrum from closest w/ score 0.9937825798988342
+
+vegetation.shrub.juniperus.chinensis.tir.jpl097.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.juniperus.chinensis.tir.jpl098.jpl.nicolet.spectrum.txt.png,was 42 spectrum from closest w/ score 0.9937825798988342
+
+mineral.sulfide.none.coarse.tir.s-8a.jpl.nicolet.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.sulfide.none.coarse.tir.s-1a.jpl.nicolet.spectrum.txt.png,was 32 spectrum from closest w/ score 0.9944472312927246
+
+mineral.sulfide.none.coarse.tir.s-1a.jpl.nicolet.spectrum.txt.png is closest to: rock.sedimentary.siliceou.solid.all.ward57.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.sulfide.none.coarse.tir.s-8a.jpl.nicolet.spectrum.txt.png,was 25 spectrum from closest w/ score 0.9944472312927246
+
+rock.sedimentary.shale.solid.all.phop008.usgs.perknic.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-1-83.ucsb.asd.spectrum.txt.png w/ score: 0.997
+Actual closest compound, rock.sedimentary.shale.solid.all.ward54.jpl.nicolet.spectrum.txt.png,was 76 spectrum from closest w/ score 0.9767642617225647
+
+rock.sedimentary.shale.solid.all.ward54.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.sedimentary.shale.solid.all.phop008.usgs.perknic.spectrum.txt.png,was 82 spectrum from closest w/ score 0.9767642617225647
+
+manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt.png is closest to: nonphotosyntheticvegetation.flowers.calocedrus.decurrens.tir.vh268.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0674uuuasp.jhu.becknic.spectrum.txt.png,was 52 spectrum from closest w/ score 0.9921220541000366
+
+manmade.road.pavingasphalt.solid.all.0674uuuasp.jhu.becknic.spectrum.txt.png is closest to: nonphotosyntheticvegetation.bark.pinus.strobus.vswir.pist-1-83.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, manmade.road.pavingasphalt.solid.all.0096uuuasp.jhu.becknic.spectrum.txt.png,was 47 spectrum from closest w/ score 0.9921220541000366
+
+vegetation.tree.betula.papyrifera.vswir.bepa-2-35.ucsb.asd.spectrum.txt.png is closest to: vegetation.tree.bambusa.tuldoides.vswir.jpl147.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.betula.papyrifera.vswir.bepa-1-31.ucsb.asd.spectrum.txt.png,was 54 spectrum from closest w/ score 0.9852391481399536
+
+vegetation.tree.betula.papyrifera.vswir.bepa-1-31.ucsb.asd.spectrum.txt.png is closest to: vegetation.shrub.heteromeles.arbutifolia.vswir.vh133.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.betula.papyrifera.vswir.bepa-2-35.ucsb.asd.spectrum.txt.png,was 56 spectrum from closest w/ score 0.9852391481399536
+
+mineral.arsenate.none.medium.tir.a-2a.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.arsenate.none.medium.tir.a-1a.jpl.nicolet.spectrum.txt.png,was 72 spectrum from closest w/ score 0.987940788269043
+
+mineral.arsenate.none.medium.tir.a-1a.jpl.nicolet.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.arsenate.none.medium.tir.a-2a.jpl.nicolet.spectrum.txt.png,was 59 spectrum from closest w/ score 0.987940788269043
+
+vegetation.tree.acer.rubrum.tir.acru-1-13.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-73.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.acer.rubrum.tir.acru-3-23.ucsb.nicolet.spectrum.txt.png,was 30 spectrum from closest w/ score 0.9945210218429565
+
+vegetation.tree.acer.rubrum.tir.acru-3-23.ucsb.nicolet.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward49.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, vegetation.tree.acer.rubrum.tir.acru-1-13.ucsb.nicolet.spectrum.txt.png,was 40 spectrum from closest w/ score 0.9945210218429565
+
+vegetation.tree.casimiroa.edulis.vswir.jpl217.jpl.asd.spectrum.txt.png is closest to: vegetation.tree.cedrus.deodara.vswir.jpl104.jpl.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.casimiroa.edulis.vswir.jpl144.jpl.asd.spectrum.txt.png,was 4 spectrum from closest w/ score 0.9997326731681824
+
+vegetation.tree.casimiroa.edulis.vswir.jpl144.jpl.asd.spectrum.txt.png is closest to: vegetation.shrub.heteromeles.arbutifolia.vswir.vh133.ucsb.asd.spectrum.txt.png w/ score: 1.000
+Actual closest compound, vegetation.tree.casimiroa.edulis.vswir.jpl217.jpl.asd.spectrum.txt.png,was 2 spectrum from closest w/ score 0.9997326731681824
+
+rock.sedimentary.siliceou.solid.all.ward57.jpl.nicolet.spectrum.txt.png is closest to: mineral.sulfide.none.coarse.tir.s-1a.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.sedimentary.siliceou.solid.all.ward77.jpl.nicolet.spectrum.txt.png,was 32 spectrum from closest w/ score 0.9929413795471191
+
+rock.sedimentary.siliceou.solid.all.ward77.jpl.nicolet.spectrum.txt.png is closest to: mineral.silicate.tectosilicate.medium.tir.ts-17a.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, rock.sedimentary.siliceou.solid.all.ward57.jpl.nicolet.spectrum.txt.png,was 22 spectrum from closest w/ score 0.9929413795471191
+
+vegetation.tree.betula.papyrifera.tir.bepa-1-31.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.shrub.ceanothus.spinosus.tir.vh128.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.betula.papyrifera.tir.bepa-2-35.ucsb.nicolet.spectrum.txt.png,was 4 spectrum from closest w/ score 0.9977380037307739
+
+vegetation.tree.betula.papyrifera.tir.bepa-2-35.ucsb.nicolet.spectrum.txt.png is closest to: nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.betula.papyrifera.tir.bepa-1-31.ucsb.nicolet.spectrum.txt.png,was 5 spectrum from closest w/ score 0.9977380037307739
+
+rock.igneous.felsic.fine.all.granite_h5.jhu.becknic.spectrum.txt.png is closest to: rock.igneous.basic.solid.all.ward02.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.felsic.fine.all.granite_h2.jhu.becknic.spectrum.txt.png,was 65 spectrum from closest w/ score 0.9873778223991394
+
+rock.igneous.felsic.fine.all.granite_h2.jhu.becknic.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.999
+Actual closest compound, rock.igneous.felsic.fine.all.granite_h5.jhu.becknic.spectrum.txt.png,was 60 spectrum from closest w/ score 0.9873778223991394
+
+mineral.hydroxide.none.fine.vswir.oh-1a.jpl.beckman.spectrum.txt.png is closest to: nonphotosyntheticvegetation.leaves.none.none.vswir.vh357.ucsb.asd.spectrum.txt.png w/ score: 0.999
+Actual closest compound, mineral.hydroxide.none.fine.vswir.oh-3a.jpl.beckman.spectrum.txt.png,was 129 spectrum from closest w/ score 0.9673161506652832
+
+mineral.hydroxide.none.fine.vswir.oh-3a.jpl.beckman.spectrum.txt.png is closest to: mineral.silicate.cyclosilicate.coarse.vswir.cs-1a.jpl.beckman.spectrum.txt.png w/ score: 0.997
+Actual closest compound, mineral.hydroxide.none.fine.vswir.oh-1a.jpl.beckman.spectrum.txt.png,was 96 spectrum from closest w/ score 0.9673161506652832
+
+vegetation.shrub.ceanothus.spinosus.tir.vh007.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.rubus.occidentalis.tir.ruoc-1-71.ucsb.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, vegetation.shrub.ceanothus.spinosus.tir.vh128.ucsb.nicolet.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9976886510848999
+
+vegetation.shrub.ceanothus.spinosus.tir.vh128.ucsb.nicolet.spectrum.txt.png is closest to: vegetation.tree.acer.pensylvanicum.tir.acpe-2-69.ucsb.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.shrub.ceanothus.spinosus.tir.vh007.ucsb.nicolet.spectrum.txt.png,was 8 spectrum from closest w/ score 0.9976886510848999
+
+vegetation.tree.bambusa.tuldoides.tir.jpl215.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.tipuana.tipu.tir.jpl251.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9983200430870056
+
+vegetation.tree.bambusa.tuldoides.tir.jpl216.jpl.nicolet.spectrum.txt.png is closest to: vegetation.tree.ficus.craterostoma.tir.jpl195.jpl.nicolet.spectrum.txt.png w/ score: 0.999
+Actual closest compound, vegetation.tree.bambusa.tuldoides.tir.jpl215.jpl.nicolet.spectrum.txt.png,was 8 spectrum from closest w/ score 0.9983200430870056
+
+mineral.silicate.tectosilicate.medium.tir.ts-1c.jpl.nicolet.spectrum.txt.png is closest to: rock.metamorphic.marble.coarse.all.marble2.jhu.becknic.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.tectosilicate.medium.tir.ts-17a.jpl.nicolet.spectrum.txt.png,was 5 spectrum from closest w/ score 0.9965758919715881
+
+mineral.silicate.tectosilicate.medium.tir.ts-17a.jpl.nicolet.spectrum.txt.png is closest to: rock.sedimentary.conglomerate.solid.all.ward48.jpl.nicolet.spectrum.txt.png w/ score: 0.998
+Actual closest compound, mineral.silicate.tectosilicate.medium.tir.ts-1c.jpl.nicolet.spectrum.txt.png,was 6 spectrum from closest w/ score 0.9965758919715881
+
+Average Miss: 36.30
+
+manmade Spectrum Misclassified 4
+Average Miss: 32.75
+
+meteorites Spectrum Misclassified 8
+Average Miss: 20.88
+
+mineral Spectrum Misclassified 35
+Average Miss: 51.80
+
+nonphotosyntheticvegetation Spectrum Misclassified 9
+Average Miss: 35.78
+
+rock Spectrum Misclassified 28
+Average Miss: 44.29
+
+soil Spectrum Misclassified 1
+Average Miss: 1.00
+
+vegetation Spectrum Misclassified 66
+Average Miss: 27.38
+
+water Spectrum Misclassified 0
+Average Miss: 0.00
+
+Total Spectrum Misclassified 151
+../saved_models/same-padding-1-conv-32-conv nodes-2-dense-32-dense nodes-0.1-alpha val.h5
+Calculcated Best Matches at Level 1: 0.6438
+Calculcated Best Matches at Level 2: 0.3750
+Calculcated Best Matches at Level 3: 0.0563
+Calculcated Best Matches at Level 4: 0.0563
+Calculcated Best Matches that are not same type: 0.3563
