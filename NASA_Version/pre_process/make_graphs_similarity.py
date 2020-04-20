@@ -1,4 +1,7 @@
 from make_nasa_dataset import make_nasa_dataset
+import sys
+sys.path.append('../')
+from algorithms.nlc_wavelength_partition import nlc_wavelength_range
 import multiprocessing
 import os
 import matplotlib.pyplot as plt
@@ -22,6 +25,7 @@ def create_graphs(files, directory):
                 os.mkdir(directory + '/'.join(split_file[:i]))
 
         dataset = make_nasa_dataset(file)
+        dataset = nlc_wavelength_range(dataset, 0.2, 0.2)
         dataset = pd.DataFrame(dataset, columns = ['Wavelength', 'Reflectance'])
 
         plt.figure(figsize=(3, .15))
@@ -37,7 +41,7 @@ def create_graphs(files, directory):
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../cnn/spectrum_similarity/data/visualization-similarity/'
+    vis_dir = '../cnn/spectrum_similarity/data/visualization-similarity-nlc/'
     data_dir = '../datasets/ecospeclib-similarity/'
 
     if os.path.exists(vis_dir):

@@ -1,4 +1,4 @@
-def nlc(spectrum, floor_value= 0.3, width=9):
+def nlc(spectrum, floor_value=0.3, width=9):
     floor(spectrum, floor_value)
     results = []
 
@@ -12,7 +12,7 @@ def nlc(spectrum, floor_value= 0.3, width=9):
 
 
         new_absorb = right_section / (left_section + right_section)
-            
+
         results.append([spectrum[i][0] , new_absorb])
 
     return results

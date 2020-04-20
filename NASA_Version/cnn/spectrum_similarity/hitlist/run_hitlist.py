@@ -7,14 +7,16 @@ import shutil
 
 if __name__=='__main__':
     start = datetime.datetime.now()
+    model_dir = '../saved_models/'
+    dataset_path = X = pickle.load(open('../data/pickles/Hitlist_Entries_2d_nlc.pickle', 'rb'))
+    for file in os.listdir(model_dir):
+        if file.endswith('.h5'):
+            model_path = os.path.join(model_dir, file)
+            # paths to spectrum directories
+            results_name = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
 
-    # paths to spectrum directories
-    dataset_path = X = pickle.load(open('../data/Hitlist_Entries_2d.pickle', 'rb'))
-    model_path = '../saved_models/2d-sequential.h5'
-    results_name = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
-
-    created_hitlist = Hitlist(dataset_path, model_path, results_name)
-    created_hitlist.find_matches()
-    created_hitlist.accuracy()
+            created_hitlist = Hitlist(dataset_path, model_path, results_name)
+            created_hitlist.find_matches()
+            created_hitlist.accuracy()
 
     print('Total Runtime: {0}'.format(datetime.datetime.now() - start))

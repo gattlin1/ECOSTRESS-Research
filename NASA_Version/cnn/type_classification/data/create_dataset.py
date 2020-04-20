@@ -33,10 +33,10 @@ if __name__=='__main__':
 
     X = np.array(X).reshape(-1, height, width, 1)
 
-    pickle_out = open('./X.pickle', 'wb')
+    pickle_out = open('./pickles/X.pickle', 'wb')
     pickle.dump(X, pickle_out)
     pickle_out.close()
 
-    pickle_out = open('./y.pickle', 'wb')
+    pickle_out = open('./pickles/y.pickle', 'wb')
     pickle.dump(y, pickle_out)
     pickle_out.close()

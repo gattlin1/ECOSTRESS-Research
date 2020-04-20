@@ -9,17 +9,18 @@ import random
 import pickle
 
 if __name__=='__main__':
-    model = load_model('../saved_models/1d-sequential.h5')
+    model = load_model('../saved_models/same-padding-2-conv-16-conv nodes-1-dense-32-dense nodes-0.01-alpha val.h5')
 
-    X = pickle.load(open('../data/Hitlist_Entries.pickle', 'rb'))
-    new_x = []
-    new_y = []
-    for x in X[40:70]:
-        new_x.append(x[0])
-        new_y.append(x[1])
-    ynew = model.predict_proba(new_x)
-    ynew1 = model.predict_classes(new_x)
+    data_X = pickle.load(open('../data/Hitlist_Entries_2d.pickle', 'rb'))
+    X, spectra_entries = [], []
+    for pair, spectra_names in data_X[:160]:
+        cv2.imshow('pair', pair)
+        cv2.waitKey(0)
+        X.append(pair)
+        spectra_entries.append(spectra_names)
+    X = np.array(X)
+    X = X / 255
+    ynew = model.predict_proba(X)
     # show the inputs and predicted outputs
     for i in range(len(ynew)):
-        print(new_y[i][0], new_y[i][1])
-        print(f"X[{i}], Val = {ynew[i]},Class = {ynew1[i]}")
+        print(f"{spectra_entries[i][0]}, {spectra_entries[i][1]}\n Val = {ynew[i]}")

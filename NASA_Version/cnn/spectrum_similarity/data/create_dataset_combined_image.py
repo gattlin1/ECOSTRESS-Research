@@ -147,8 +147,8 @@ def create_training(files):
     y = np.array(y)
 
     # Saving each dataset to the currect directory
-    save('./X_train_2d.pickle', X)
-    save('./y_train_2d.pickle', y)
+    save('./pickles/X_train_2d_nlc.pickle', X)
+    save('./pickles/y_train_2d_nlc.pickle', y)
 
 def make_ab_pairs(files):
     pairs = []
@@ -180,11 +180,12 @@ def create_validation(files):
             hitlist_entries.append([combined, [spec_1_name, spec_2_name]])
 
     # save hitlist entries
-    save('Hitlist_Entries_2d.pickle', hitlist_entries)
+    save('./pickles/Hitlist_Entries_2d_nlc.pickle', hitlist_entries)
 
     print(f'len(hitlist_entries): {len(hitlist_entries)}')
+
 if __name__=='__main__':
-    directory = './visualization-similarity'
+    directory = './visualization-similarity-nlc'
     random.seed(3)
 
     files = get_files(directory)

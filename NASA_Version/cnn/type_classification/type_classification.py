@@ -32,7 +32,7 @@ if __name__=='__main__':
                 NAME = f'{conv_layer}-conv-{layer_size}-nodes-{dense_layer}-dense-{int(time.time())}.h5'
 
                 # Setting up callbacks for model
-                tensorboard = TensorBoard(log_dir=f'logs\\15x300-images\\{NAME}')
+                tensorboard = TensorBoard(log_dir=f'logs\\{NAME}')
                 es = EarlyStopping(monitor='val_loss', patience=2, min_delta=0.0001)
                 mcp_save = ModelCheckpoint(f'{save_dir}/{NAME}', save_best_only=True, monitor='val_loss', mode='min')
 

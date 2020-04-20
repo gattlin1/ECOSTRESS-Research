@@ -16,7 +16,7 @@ def create_graphs(files, directory):
 
     for file in files:
         file_name = file.split('/')[-1]
-        split_file = file_name.split('.')[1:2]
+        split_file = file_name.split('.')[:1]
 
         for i in range(0, len(split_file) + 1):
             new_dir = f'{directory}/{"/".join(split_file[:i])}'
@@ -31,7 +31,8 @@ def create_graphs(files, directory):
         plt.axis('off')
 
         picture_path = f'{directory}/{"/".join(split_file)}/{file_name}.png'
-        plt.savefig(picture_path, bbox_inches = 'tight', pad_inches = 0)
+        plt.savefig(picture_path, bbox_inches = 'tight', pad_inches = 0,
+            facecolor='black', edgecolor='none', cmap='Blues_r')
         plt.close()
 
     print(Fore.GREEN + 'Process {0} finished w/ {1} files'.format(pid, len(files)) + Style.RESET_ALL)
@@ -39,8 +40,8 @@ def create_graphs(files, directory):
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../cnn/class_classification/data/visualization-class'
-    directory_path = '../datasets/ecospeclib-organized/'
+    vis_dir = '../cnn/type_classification/data/visualization-type'
+    directory_path = '../datasets/ecospeclib-type/'
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)
@@ -59,7 +60,7 @@ if __name__=='__main__':
                 subsubfolders.append(f.path)
 
     files = []
-    for folder in subsubfolders:
+    for folder in subfolders:
         for file in os.listdir(folder):
             if file.endswith('.txt') and 'spectrum' in file:
                 files.append(folder + '/' + file)

@@ -16,8 +16,8 @@ class Hitlist:
         self.dataset = dataset
         self.difference_matrix = {}
         self.classification_level = [0, 0, 0, 0, 0]
-        self.model = self.load_model(model_path)
-        results_path = f'./results/{self.comparison_type} results {file_title}.txt'
+        self.model_path = model_path
+        results_path = f'./results/nlc/{model_path.split("/")[-1]} {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
 
@@ -31,12 +31,14 @@ class Hitlist:
         return open(path, 'a', errors='ignore')
 
     def find_matches(self):
+        model = self.load_model(self.model_path)
         X, spectra_entries = [], []
         for pair, spectra_names in self.dataset:
             X.append(pair)
             spectra_entries.append(spectra_names)
         X = np.array(X)
-        scores = self.model.predict_proba(X)
+        X = X / 255
+        scores = model.predict_proba(X)
 
         for i in range(len(scores)):
             self.add_similiarity_score(spectra_entries[i][0], spectra_entries[i][1],
@@ -87,19 +89,19 @@ class Hitlist:
 
             for i in range(len(spectra_hitlist)):
                 if expected_closest == spectra_hitlist[i]['name']:
+                    self.log_info(f'{spectrum_name} ' \
+                        f'is closest to: {spectra_hitlist[0]["name"]} ' \
+                        f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED, False)
                     if i > 0:
-                        self.missed_spectrum.append([self.comparison_type,
-                            spectrum_name, i])
+                        self.missed_spectrum.append([spectrum_name, i])
 
-                        self.log_info(f'{self.comparison_type}: {spectrum_name} ' \
-                            f'is closest to: {spectra_hitlist[0]["name"]} ' \
-                            f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED)
 
                         self.log_info(f'Actual closest compound, {expected_closest},' \
                             f'was {i} spectrum from closest w/ score ' \
-                            f'{spectra_hitlist[i]["score"]}\n', Fore.RED)
+                            f'{spectra_hitlist[i]["score"]}\n', Fore.RED, False)
                     else:
-                        print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
+                        pass
+                        # print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
                     self.add_classification_results(spectrum_name,
                         spectra_hitlist[0]['name'])
@@ -114,44 +116,42 @@ class Hitlist:
         if len(self.missed_spectrum) > 0:
             color = Fore.RED
             for entry in self.missed_spectrum:
-                average_miss += entry[2]
+                average_miss += entry[1]
 
                 # this section is used to get the tally of each spectrum misclassified in a certain class
-                spectrum_type = entry[1].split('.')[0]
+                spectrum_type = entry[0].split('.')[0]
                 if spectrum_type in missed_categories.keys():
                     missed_categories[spectrum_type][0] += 1
-                    missed_categories[spectrum_type][1] += entry[2]
+                    missed_categories[spectrum_type][1] += entry[1]
 
             average_miss /= len(self.missed_spectrum)
 
-        self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
-
-        accuracy = (1 - len(self.missed_spectrum) / len(self.difference_matrix))
-        self.log_info(f'Accuracy: {accuracy:.4f}', color)
+        self.log_info(f'Average Miss: {average_miss:.2f}\n', color, False)
 
         for category in missed_categories.keys():
-            self.log_info(f'{category} Spectrum Misclassified {missed_categories[category][0]}', color)
+            self.log_info(f'{category} Spectrum Misclassified {missed_categories[category][0]}', color, False)
 
             average_miss = 0
             if missed_categories[category][0] > 0:
                 average_miss = missed_categories[category][1] / missed_categories[category][0]
 
-            self.log_info(f'Average Miss: {average_miss:.2f}\n', color)
+            self.log_info(f'Average Miss: {average_miss:.2f}\n', color, False)
 
-        self.log_info(f'Total Spectrum Misclassified {len(self.missed_spectrum)}', color)
-
+        self.log_info(f'Total Spectrum Misclassified {len(self.missed_spectrum)}', color, False)
+        self.log_info(self.model_path, Fore.LIGHTMAGENTA_EX, True)
         for i in range(1, len(self.classification_level)):
             class_acc = self.classification_level[i] / len(self.difference_matrix)
             s = f'Calculcated Best Matches at Level {i}: {class_acc:.4f}'
-            self.log_info(s, Fore.YELLOW)
+            self.log_info(s, Fore.YELLOW, True)
 
         non_type_acc = self.classification_level[0] / len(self.difference_matrix)
         s = f'Calculcated Best Matches that are not same type: {non_type_acc:.4f}'
-        self.log_info(s, Fore.YELLOW)
+        self.log_info(s, Fore.YELLOW, True)
 
-    def log_info(self, text, color):
+    def log_info(self, text, color, print_text):
         self.results.write('\n' + text)
-        print(color + text + Style.RESET_ALL)
+        if print_text:
+            print(color + text + Style.RESET_ALL)
 
     def add_classification_results(self, unknown_spectrum, known_spectrum):
         unknown_spectrum = unknown_spectrum.split('.')

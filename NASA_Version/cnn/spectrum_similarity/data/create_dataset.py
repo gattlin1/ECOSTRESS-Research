@@ -153,6 +153,6 @@ if __name__=='__main__':
     cv2.imshow('x', X_1[0])
     cv2.waitKey(0)
     # Saving each dataset to the currect directory
-    save('./X_1.pickle', X_1)
-    save('./X_2.pickle', X_2)
-    save('./y.pickle', y)
+    save('./pickles/X_1.pickle', X_1)
+    save('./pickles/X_2.pickle', X_2)
+    save('./pickles/y.pickle', y)
