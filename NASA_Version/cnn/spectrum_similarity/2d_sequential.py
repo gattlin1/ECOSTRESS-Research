@@ -16,7 +16,7 @@ if __name__=='__main__':
     dense_layers = [1, 2]
     conv_layer_sizes = [16, 32, 64]
     conv_layers = [1, 2]
-    alpha_vals = [0.01, 0.1, 0.2, 0.3]
+    alpha_vals = [0.1] # [0.01, 0.1, 0.2, 0.3]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):

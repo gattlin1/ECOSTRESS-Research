@@ -1,9 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import os
 import cv2
 import random
+import math
 import pickle
+import sys
+sys.path.append('../../../')
+
+from pre_process.make_nasa_dataset import make_nasa_dataset
+from pre_process.spectra_point_matcher import match_points
 
 def get_files(directory):
     subfolders = [ f.path for f in os.scandir(directory) ]
@@ -27,6 +34,24 @@ def split_data(data, validation_split=0.1):
 
     return data[:split_point], data[split_point + 1:]
 
+def make_graph(spectrum, name):
+    dataset = pd.DataFrame(spectrum, columns = ['Wavelength', 'Reflectance'])
+
+    plt.figure(figsize=(3, .15))
+    plt.plot(dataset['Wavelength'], dataset['Reflectance'])
+    plt.axis('off')
+
+    plt.savefig(f'{name}.png', bbox_inches = 'tight', pad_inches = 0,
+                facecolor='black', edgecolor='none', cmap='Blues_r')
+    plt.close()
+
+def pre_process_spectra(file_1, file_2, threshold_diff):
+    spectrum_1 = make_nasa_dataset(file_1)
+    spectrum_2 = make_nasa_dataset(file_2)
+    spectrum_1, spectrum_2 = match_points(spectrum_1, spectrum_2, threshold_diff)
+    graph_1 = make_graph(spectrum_1, 'spectrum_1')
+    graph_2 = make_graph(spectrum_2, 'spectrum_2')
+
 def get_matching_entries(files, num_class, count_per_type):
     data = []
     types_count = {} # dict that keeps track of all entries we have of a specific type
@@ -41,13 +66,12 @@ def get_matching_entries(files, num_class, count_per_type):
         for i in range(len(folder_files)):
             for j in range(i + 1, len(folder_files)):
                 if types_count[spectrum_type] < count_per_type: # to ensure there isn't a same file ab pair
-                    img_array_1 = cv2.imread(folder_files[i])
-                    img_array_2 = cv2.imread(folder_files[j])
+                    pre_process_spectra(folder_files[i], folder_files[j], 5.0)
 
+                    img_array_1 = cv2.imread('./spectrum_1.png')
+                    img_array_2 = cv2.imread('./spectrum_2.png')
                     img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
-
                     combined = combine_spectra(img_array_1, img_array_2)
-
                     data.append([combined, num_class])
 
                     types_count[spectrum_type] += 1
@@ -67,7 +91,6 @@ def get_nonmatching_entries(files, num_class, count_per_type):
             types_count[spectrum_type] = 0
 
         for file in folder_files:
-            img_array_1 = cv2.imread(file)
 
             # While loop to get a folder that is not the same as the first spectrum's folder
             random_folder = []
@@ -79,10 +102,10 @@ def get_nonmatching_entries(files, num_class, count_per_type):
 
             random_file = random.choice(random_folder)
 
-            img_array_2 = cv2.imread(random_file)
-
+            pre_process_spectra(file, random_file, 5.0)
+            img_array_1 = cv2.imread('./spectrum_1.png')
+            img_array_2 = cv2.imread('./spectrum_2.png')
             img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
-
             combined = combine_spectra(img_array_1, img_array_2)
 
             data.append([combined, num_class])
@@ -147,8 +170,8 @@ def create_training(files):
     y = np.array(y)
 
     # Saving each dataset to the currect directory
-    save('./pickles/X_train_2d_nlc.pickle', X)
-    save('./pickles/y_train_2d_nlc.pickle', y)
+    save('./pickles/X_train_2d.pickle', X)
+    save('./pickles/y_train_2d.pickle', y)
 
 def make_ab_pairs(files):
     pairs = []
@@ -158,20 +181,26 @@ def make_ab_pairs(files):
         pairs.append(files[i][1])
     return pairs
 
-def create_validation(files):
+def create_validation(files, josh_dataset):
     files = make_ab_pairs(files)
     print(f'len(folders): {len(files)}')
     hitlist_entries = []
 
     for i in range(len(files) - 1):
+        print(f'{i} out of {len(files) - 1}')
         for j in range(i + 1, len(files)):
-            spec_1_name = files[i].replace('\\', '/')
-            spec_1_name = spec_1_name.split('/')[-1]
-            spec_2_name = files[j].replace('\\', '/')
-            spec_2_name = spec_2_name.split('/')[-1]
+            pre_process_spectra(files[i], files[j], 5.0)
 
-            img_array_1 = cv2.imread(files[i])
-            img_array_2 = cv2.imread(files[j])
+            spec_1_name = files[i].replace('\\', '/').split('/')
+            spec_2_name = files[j].replace('\\', '/').split('/')
+            if josh_dataset:
+                spec_1_name = spec_1_name[-1]
+                spec_2_name = spec_2_name[-1]
+            else:
+                spec_1_name = spec_1_name[-1]
+                spec_2_name = spec_2_name[-1]
+            img_array_1 = cv2.imread('./spectrum_1.png')
+            img_array_2 = cv2.imread('./spectrum_2.png')
 
             img_array_1, img_array_2 = randomly_flip_graphs(img_array_1, img_array_2)
 
@@ -180,12 +209,12 @@ def create_validation(files):
             hitlist_entries.append([combined, [spec_1_name, spec_2_name]])
 
     # save hitlist entries
-    save('./pickles/Hitlist_Entries_2d_nlc.pickle', hitlist_entries)
+    save('./pickles/Hitlist_Entries_2d.pickle', hitlist_entries)
 
     print(f'len(hitlist_entries): {len(hitlist_entries)}')
 
 if __name__=='__main__':
-    directory = './visualization-similarity-nlc'
+    directory = './ecospeclib-raw'
     random.seed(3)
 
     files = get_files(directory)
@@ -194,5 +223,5 @@ if __name__=='__main__':
     training, validation = split_data(files, validation_split=0.2)
     print(f'len(training): {len(training)}, len(validation): {len(validation)}')
 
-    create_training(training)
-    create_validation(validation)
+    # create_training(training)
+    create_validation(validation, False)

@@ -48,6 +48,6 @@ def create_matched_spectra(spectra1, spectra2, threshold_difference):
         closest_index = get_closest_value_index(spectra2, wavenumber)
         if abs(wavenumber - spectra2[closest_index][0]) < threshold_difference:
             matched_spectra1.append([wavenumber, absorbance])
-            matched_spectra2.append(spectra2[closest_index])
+            matched_spectra2.append([wavenumber, spectra2[closest_index][1]])
 
     return matched_spectra1, matched_spectra2

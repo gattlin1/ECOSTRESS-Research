@@ -16,7 +16,7 @@ def create_graphs(files, directory):
 
     for file in files:
         file_name = file.split('/')[-1]
-        split_file = file_name.split('.')[:1]
+        split_file = file_name.split('.')[1:2]
 
         for i in range(0, len(split_file) + 1):
             new_dir = f'{directory}/{"/".join(split_file[:i])}'
@@ -40,7 +40,7 @@ def create_graphs(files, directory):
 if __name__=='__main__':
     start = datetime.datetime.now()
 
-    vis_dir = '../cnn/type_classification/data/visualization-type'
+    vis_dir = '../cnn/class_classification/data/visualization-class'
     directory_path = '../datasets/ecospeclib-type/'
 
     if os.path.exists(vis_dir):

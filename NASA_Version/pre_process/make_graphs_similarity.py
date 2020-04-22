@@ -25,7 +25,6 @@ def create_graphs(files, directory):
                 os.mkdir(directory + '/'.join(split_file[:i]))
 
         dataset = make_nasa_dataset(file)
-        dataset = nlc_wavelength_range(dataset, 0.2, 0.2)
         dataset = pd.DataFrame(dataset, columns = ['Wavelength', 'Reflectance'])
 
         plt.figure(figsize=(3, .15))

@@ -17,7 +17,7 @@ class Hitlist:
         self.difference_matrix = {}
         self.classification_level = [0, 0, 0, 0, 0]
         self.model_path = model_path
-        results_path = f'./results/nlc/{model_path.split("/")[-1]} {file_title}.txt'
+        results_path = f'./results/spectra_match/{model_path.split("/")[-1]} {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
 

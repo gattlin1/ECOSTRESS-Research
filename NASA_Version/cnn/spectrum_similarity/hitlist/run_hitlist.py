@@ -8,7 +8,7 @@ import shutil
 if __name__=='__main__':
     start = datetime.datetime.now()
     model_dir = '../saved_models/'
-    dataset_path = X = pickle.load(open('../data/pickles/Hitlist_Entries_2d_nlc.pickle', 'rb'))
+    dataset_path = pickle.load(open('../data/pickles/Hitlist_Entries_2d.pickle', 'rb'))
     for file in os.listdir(model_dir):
         if file.endswith('.h5'):
             model_path = os.path.join(model_dir, file)
