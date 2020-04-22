@@ -32,7 +32,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -120,16 +119,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Dataset
-ecospeclib-all
-ecospeclib-final
-ecospeclib-organized
-visualization-final-v2
-visualization-final
-ecospeclib-all-nlc
-ecospeclib-all-nlc-wavelength
-
-### VisualStudioCode ###
+## VisualStudioCode ###
 .vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
