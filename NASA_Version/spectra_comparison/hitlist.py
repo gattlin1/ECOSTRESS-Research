@@ -4,12 +4,8 @@ sys.path.append('../../')
 import colorama
 from colorama import Fore, Back, Style
 import os
-import os.path
 from os import path
-from algorithms.cor import cor
-from algorithms.mad import mad
-from algorithms.dpn import dpn
-from algorithms.msd import msd
+from algorithms.similarty_algorithms import *
 from pre_process.make_nasa_dataset import make_nasa_dataset
 from pre_process.spectra_point_matcher import match_points
 from copy import deepcopy

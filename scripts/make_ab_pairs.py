@@ -1,3 +1,5 @@
+# Authors: Gattlin Walker
+# Script file to create an organized dataset structure
 import math
 import shutil
 import os
@@ -51,8 +53,8 @@ def organize_data(directory_path, dest_path):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
-
-f = '../datasets/ecospeclib-all/'
-dest = '../datasets/ecospeclib-class/'
-organize_data(f, dest)
-#make_ab_pairs(dest)
+if __name__ =='__main__':
+    f = '../datasets/ecospeclib-all/'
+    dest = '../datasets/ecospeclib-class/'
+    organize_data(f, dest)
+    #make_ab_pairs(dest)
