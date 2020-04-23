@@ -1,3 +1,8 @@
+# Authors: Gattlin Walker
+# script file to generate a pickle of the dataset for spectrum type
+# this will generate a X.pickle which is a list of lists. Each individual list
+# is the image array and second entry of classification output
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -5,38 +10,46 @@ import cv2
 import random
 import pickle
 
+def save(data, path):
+    pickle_out = open(path, 'wb')
+    pickle.dump(data, pickle_out)
+    pickle_out.close()
+
 if __name__=='__main__':
-    directory = './visualization-type'
-    categories = [folder.name for folder in os.scandir(directory)]
-    training_data = []
+    directory = '../../../datasets/ecospeclib-graphs'
+    categories = {}
+    dataset = []
 
-    for category in categories:
-        class_num = categories.index(category)
+    random.seed(3)
 
-        path = os.path.join(directory, category)
-        for img in os.listdir(path):
-            img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
+    for file in os.scandir(directory):
+        if '.tir.' in file.name:
+            s_type = file.name.split('.')[0]
+            if s_type in categories:
+                categories[s_type].append(file.path)
+            else:
+                categories[s_type] = [file.path]
 
-            training_data.append([img_array, class_num])
+    print(f'{len(categories.keys())} Categories')
 
-    height = training_data[0][0].shape[0]
-    width = training_data[0][0].shape[1]
+    type_num = 0
+    for _, files in categories.items():
+        for file in files:
+            img = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
+            dataset.append([img, type_num])
+        type_num += 1
 
-    random.shuffle(training_data)
+    print(f'len(dataset): {len(dataset)}')
 
-    X = []
-    y = []
+    random.shuffle(dataset)
+    X, y = [], []
+    for img, label in dataset:
+      X.append(img)
+      y.append(label)
 
-    for img, label in training_data:
-        X.append(img)
-        y.append(label)
-
+    height = dataset[0][0].shape[0]
+    width = dataset[0][0].shape[1]
     X = np.array(X).reshape(-1, height, width, 1)
 
-    pickle_out = open('./pickles/X.pickle', 'wb')
-    pickle.dump(X, pickle_out)
-    pickle_out.close()
-
-    pickle_out = open('./pickles/y.pickle', 'wb')
-    pickle.dump(y, pickle_out)
-    pickle_out.close()
+    save(X, 'X.pickle')
+    save(y, 'y.pickle')
