@@ -11,18 +11,23 @@ from pre_process.spectra_point_matcher import match_points
 from copy import deepcopy
 
 class Hitlist:
-    def __init__(self, algorithm, dataset_path, file_title=''):
+    def __init__(self, algorithm, dataset_path):
         self.comparison_type = algorithm
         self.missed_spectrum = []
         self.dataset_path = dataset_path
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
+        self.results, self.heatmap = self.setup_results(algorithm) 
 
-        results_path = '../results/9th_run/{0} results {1}.txt'.format(self.comparison_type, file_title)
-        self.results = self.open_file(results_path)
+    def setup_results(self, algorithm):
+        time = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
+        results_path = f'../results/{time}/{algorithm} results.txt'
+        results = self.open_file(results_path)
 
-        heatmap_path = '../results/9th_run/heatmap/{0} heatmap.txt'.format(self.comparison_type)
-        self.heatmap = self.open_file(heatmap_path)
+        heatmap_path = f'../results/{time}/heatmap/{algorithm} heatmap.txt'
+        heatmap = self.open_file(heatmap_path)
+        return results, heatmap
+
 
     def open_file(self, path):
         if not os.path.exists(path):
