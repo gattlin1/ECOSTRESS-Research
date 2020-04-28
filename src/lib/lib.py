@@ -17,7 +17,7 @@ def create_spectrum(file_path):
                 line[1] = float(line[1])
                 spectrum.append([line[0], line[1]])
 
-    return spectrum 
+    return spectrum
 
 # Pearson Correlation Coefficient (cor)
 # @param spectrum_1: The first spectrum to be compared
@@ -46,7 +46,7 @@ def cor(spectrum_1, spectrum_2):
 # @param spectrum_1: The first spectrum to be compared
 # @param spectrum_2: The second spectrum to be compared
 # @return: return 1 / distance to be computed as a similarity score instead
-# of a distance score. If the distance between the two spectra is 0 then 
+# of a distance score. If the distance between the two spectra is 0 then
 # math.inf is returned due to the fact that a distance of 0 means the two
 # spectra are the same.
 def msd(spectrum_1, spectrum_2):
@@ -64,7 +64,7 @@ def msd(spectrum_1, spectrum_2):
 # @param spectrum_1: The first spectrum to be compared
 # @param spectrum_2: The second spectrum to be compared
 # @return: return 1 / distance to be computed as a similarity score instead
-# of a distance score. If the distance between the two spectra is 0 then 
+# of a distance score. If the distance between the two spectra is 0 then
 # math.inf is returned due to the fact that a distance of 0 means the two
 # spectra are the same.
 def mad(spectrum_1, spectrum_2):
@@ -78,7 +78,7 @@ def mad(spectrum_1, spectrum_2):
     else:
         return 1 / distance
 
-# Cosine Similarity (dpn) 
+# Cosine Similarity (dpn)
 # @param spectrum_1: The first spectrum to be compared
 # @param spectrum_2: The second spectrum to be compared
 # @return: the cosine similarity calculation. Does return 0 if the magnitude of
@@ -104,8 +104,8 @@ def dpn(spectrum_1, spectrum_2):
 
 # Normalized Local Change (index version)
 # @param spectrum: the spectrum to be processed with nlc
-# @param floor_value: Value to floor the spectrum by 
-# @param width: number of indexes considered when calculating the value for a 
+# @param floor_value: Value to floor the spectrum by
+# @param width: number of indexes considered when calculating the value for a
 # certain point
 def nlc(spectrum, floor_value=0.3, width=9):
     floor(spectrum, floor_value)
@@ -126,16 +126,16 @@ def nlc(spectrum, floor_value=0.3, width=9):
 
 # Normalized Local Change (wavelength version)
 # @param spectrum: the spectrum to be processed with nlc
-# @param floor_value: Value to floor the spectrum by 
-# @param width: number of indexes considered when calculating the value for a 
+# @param floor_value: Value to floor the spectrum by
+# @param width: number of indexes considered when calculating the value for a
 # certain point
 def nlc_wavelength_range(spectrum, floor_value=0.3, width=1.5):
     floor(spectrum, floor_value)
     results = []
 
     for i in range(len(spectrum)):
-        left_sum, left_count, left_avg = 0, 0, 0 
-        right_sum, right_count, right_avg = 0, 0, 0 
+        left_sum, left_count, left_avg = 0, 0, 0
+        right_sum, right_count, right_avg = 0, 0, 0
 
         j = 1
         in_bounds = True
@@ -167,16 +167,16 @@ def nlc_wavelength_range(spectrum, floor_value=0.3, width=1.5):
 
 # Pre-processing method used to match up the individual points of one spectrum
 # to the other. This method is used as the entry point to sort the two spectra
-# and determine which way they will be matched. Currently the method finds out 
-# which spectrum has the lowest starting position and matches the other 
+# and determine which way they will be matched. Currently the method finds out
+# which spectrum has the lowest starting position and matches the other
 # spectrum's points to its points. This may not be the best way to do it but it
-# ensures consistency because results can vary depending which spectrum is 
+# ensures consistency because results can vary depending which spectrum is
 # getting mapped and which spectrum is staying the same.
 # @param spectrum_1: first spectrum to have points matched
 # @param spectrum_2: second spectrum to have points matched
 # @param max_difference: maximum difference between the two x values of the
 # points to be considered.
-# @return: the two spectra that now have matched points 
+# @return: the two spectra that now have matched points
 def match_points(spectrum_1, spectrum_2, max_difference):
     spectrum_1.sort(key = lambda x: x[0])
     spectrum_2.sort(key = lambda x: x[0])
