@@ -22,7 +22,7 @@ def create_graphs(files, directory):
 
     for file in files:
         file_name = file.split('/')[-1]
-        split_file = file_name.split('.')[1:1]
+        split_file = file_name.split('.')[:0]
 
         for i in range(0, len(split_file) + 1):
             new_dir = f'{directory}/{"/".join(split_file[:i])}'
@@ -37,9 +37,6 @@ def create_graphs(files, directory):
         plt.plot(x_vals, y_vals)
         plt.axis('off')
 
-        if 'mineral.' in file_name:
-            file_name = '.'.join(file_name.split('.')[1:])
-
         picture_path = f'{directory}/{"/".join(split_file)}/{file_name}.png'
         plt.savefig(picture_path, bbox_inches = 'tight', pad_inches = 0,
             facecolor='black', edgecolor='none', cmap='Blues_r')
@@ -49,8 +46,8 @@ def create_graphs(files, directory):
 
 if __name__=='__main__':
     start = datetime.datetime.now()
-    vis_dir = '../datasets/ecospeclib-graphs/'
-    directory_path = '../datasets/ecospeclib-all/'
+    vis_dir = '../../datasets/ecospeclib-graphs/'
+    directory_path = '../../datasets/ecospeclib-all/'
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)

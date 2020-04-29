@@ -1,9 +1,9 @@
 # Authors: Gattlin Walker
-# Keras Sequential CNN used to classify a ECOSTRESS spectrum by it's class. 
+# Keras Sequential CNN used to classify a ECOSTRESS spectrum by it's class.
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D,
+from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D,\
                                     MaxPooling2D, LeakyReLU, GaussianNoise
 from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
 from sklearn.utils import class_weight
@@ -29,7 +29,7 @@ if __name__=='__main__':
     y = pickle.load(open('./data/y.pickle', 'rb'))
 
     # calculating bias
-    class_weights = class_weight.compute_class_weight('balanced', 
+    class_weights = class_weight.compute_class_weight('balanced',
         np.unique(y), y)
 
     y = tf.keras.utils.to_categorical(y, num_classes)
@@ -46,7 +46,7 @@ if __name__=='__main__':
 
                         # Setting up callbacks for model
                         tensorboard = TensorBoard(log_dir=f'logs\\{NAME}')
-                        es = EarlyStopping(monitor='val_loss', patience=2, 
+                        es = EarlyStopping(monitor='val_loss', patience=2,
                             min_delta=0.0001)
 
                         model = Sequential()
@@ -61,7 +61,7 @@ if __name__=='__main__':
                             model.add(Conv2D(conv_size, (3,3), padding='same'))
                             model.add(LeakyReLU(alpha=alpha_val))
                             model.add(Dropout(0.4))
-                            model.add(MaxPooling2D(pool_size=(2,2), 
+                            model.add(MaxPooling2D(pool_size=(2,2),
                                 padding='same'))
                             model.add(LeakyReLU(alpha=alpha_val))
 
@@ -78,6 +78,6 @@ if __name__=='__main__':
                                     optimizer='adam', metrics=['accuracy'])
 
                         # Training model
-                        model.fit(X, y, batch_size=32, epochs=100, 
-                            validation_split=0.2, callbacks=[tensorboard, es], 
+                        model.fit(X, y, batch_size=32, epochs=100,
+                            validation_split=0.2, callbacks=[tensorboard, es],
                             class_weight=class_weights)

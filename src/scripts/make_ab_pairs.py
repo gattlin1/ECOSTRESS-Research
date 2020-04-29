@@ -46,8 +46,8 @@ def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
-            new_path = dest_path + '/'.join(file.split('.')[1:2])
-            split_file = file.split('.')[1:2]
+            new_path = dest_path + '/'.join(file.split('.')[:1])
+            split_file = file.split('.')[:1]
 
             for i in range(len(split_file) + 1):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
@@ -55,7 +55,7 @@ def organize_data(directory_path, dest_path):
             shutil.copy(file_path, new_path)
 
 if __name__ =='__main__':
-    f = '../datasets/ecospeclib-all/'
-    dest = '../datasets/ecospeclib-class/'
+    f = '../../datasets/ecospeclib-all/'
+    dest = '../../datasets/ecospeclib-organized/'
     organize_data(f, dest)
     #make_ab_pairs(dest)

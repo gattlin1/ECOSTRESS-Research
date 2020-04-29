@@ -1,10 +1,10 @@
 import os
 import shutil
 import datetime
+from lib.lib import nlc
 from hitlist import Hitlist
-from algorithms.nlc import nlc
-from pre_process.make_nlc_files import make_nlc_files
-from pre_process.make_ab_pairs import make_ab_pairs
+from scripts.make_nlc_files import make_nlc_files
+from scripts.make_ab_pairs import make_ab_pairs
 import multiprocessing
 import matplotlib
 import matplotlib.pyplot as plt
@@ -65,7 +65,7 @@ def create_heatmap(title, heatmap, floor_values, wavelength_values):
     ax.set_xticklabels(floor_values)
 
     ax.set_ylabel('Wavelength')
-    ax.set_yticklabels(wavelength_values[::-1])    
+    ax.set_yticklabels(wavelength_values[::-1])
 
     # Rotate the tick labels and set their alignment.
     plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
