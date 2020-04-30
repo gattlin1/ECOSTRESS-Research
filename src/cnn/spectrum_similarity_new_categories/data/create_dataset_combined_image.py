@@ -9,49 +9,20 @@ import pickle
 import sys
 sys.path.append('../../../')
 
-from pre_process.make_nasa_dataset import make_nasa_dataset
-from pre_process.spectra_point_matcher import match_points
-
 def get_files(directory):
-    categories = []
-    rules = {
-        'manmade.': {'exclusions': [
-            'generalconstructionmaterial',
-            'roofingmaterial',
-            'reflectancetarget']},
-        'mineral.': {'exclusions': []},
-        'rock.igneous.': {'exclusions': ['intermediate', 'feslic']},
-        'rock.metamorphic.': {'exclusions': []},
-        'rock.sedimentary.': {'exclusions': ['carbonate']},
-        'vegetation.': {'exclusions': []},
-        'water': {'exclusions': []}
-    }
-    for file in os.scandir(directory):
-        if '.vswir.' not in file.name:
-            for rule in rules.keys():
-                substr = file.name.find(rule)
-                if substr == 0:
-                    excluded = False
-                    for ex in rules[rule]['exclusions']:
-                        if ex in file.name:
-                            excluded = True
-                            break
-                    if not excluded:
-                        file_name = file.name
-                        if 'vegetation.' not in file_name and\
-                            'water.' not in file_name:
-                            file_name = file.name[substr + len(rule):]
-                        s_type = file_name.split('.')[0]
-
-                        if s_type in categories:
-                            index = categories.index[s_type]
-                            categories[index][1].append(file.path)
-                        else:
-                            categories.append[[s_type, [file.path]]]
+    subfolders = [ f.path for f in os.scandir(directory) ]
     files = []
-    for _, file_group in categories:
-        if len(file_group) >= 2:
-            files.append(file_group)
+
+    for folder in subfolders:
+        folder_files = []
+        for f in os.scandir(str(folder)):
+            if f.is_dir():
+                subfolders.append(f.path)
+            else:
+                folder_files.append(f.path)
+
+        if len(folder_files) >= 2:
+            files.append(folder_files)
 
     return files
 
@@ -245,7 +216,7 @@ def create_validation(files, josh_dataset):
     print(f'len(hitlist_entries): {len(hitlist_entries)}')
 
 if __name__=='__main__':
-    directory = './ecospeclib-raw'
+    directory = '../../../../datasets/ecospeclib-new-categories-graphs'
     random.seed(3)
 
     files = get_files(directory)
@@ -254,5 +225,5 @@ if __name__=='__main__':
     training, validation = split_data(files, validation_split=0.2)
     print(f'len(training): {len(training)}, len(validation): {len(validation)}')
 
-    # create_training(training)
+    create_training(training)
     create_validation(validation, False)

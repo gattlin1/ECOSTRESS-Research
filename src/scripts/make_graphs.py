@@ -18,14 +18,22 @@ from colorama import Fore, Back, Style
 
 def create_graphs(files, directory):
     pid = os.getpid()
-    print(Fore.YELLOW + f'Process {pid} starting w/ {len(files)} files')
+    print(Fore.YELLOW + f'Process {pid} starting w/ {len(files)} files'
+        + Style.RESET_ALL)
 
     for file in files:
+        file = file.replace('\\', '/')
         file_name = file.split('/')[-1]
-        split_file = file_name.split('.')[:0]
+        split_path = []
+        if '.tir.' in file_name:
+            split_path = file_name[:file_name.find('.tir.')+4] \
+            .split('.')
+        else:
+            split_path = file_name[:file_name.find('.all.')+4] \
+            .split('.')
 
-        for i in range(0, len(split_file) + 1):
-            new_dir = f'{directory}/{"/".join(split_file[:i])}'
+        for i in range(0, len(split_path) + 1):
+            new_dir = f'{directory}/{"/".join(split_path[:i])}'
             if not os.path.exists(new_dir):
                 os.mkdir(new_dir)
 
@@ -37,17 +45,18 @@ def create_graphs(files, directory):
         plt.plot(x_vals, y_vals)
         plt.axis('off')
 
-        picture_path = f'{directory}/{"/".join(split_file)}/{file_name}.png'
+        picture_path = f'{directory}/{"/".join(split_path)}/{file_name}.png'
         plt.savefig(picture_path, bbox_inches = 'tight', pad_inches = 0,
             facecolor='black', edgecolor='none', cmap='Blues_r')
         plt.close()
 
-    print(Fore.GREEN + f'Process {pid} finished w/ {len(files)} files')
+    print(Fore.GREEN + f'Process {pid} finished w/ {len(files)} files' +
+        Style.RESET_ALL)
 
 if __name__=='__main__':
     start = datetime.datetime.now()
-    vis_dir = '../../datasets/ecospeclib-graphs/'
-    directory_path = '../../datasets/ecospeclib-all/'
+    vis_dir = '../../datasets/ecospeclib-new-categories-graphs/'
+    directory_path = '../../datasets/ecospeclib-new-categories/'
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)

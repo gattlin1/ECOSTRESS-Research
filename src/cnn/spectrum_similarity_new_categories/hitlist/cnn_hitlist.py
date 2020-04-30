@@ -21,7 +21,7 @@ class Hitlist:
         self.difference_matrix = {}
         self.classification_level = [0, 0, 0, 0, 0]
         self.model_path = model_path
-        results_path = f'./results/spectra_match/{model_path.split("/")[-1]}' \
+        results_path = f'./results/{model_path.split("/")[-1]}' \
                        f'{file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
@@ -49,7 +49,7 @@ class Hitlist:
         for i in range(len(scores)):
             self.add_similiarity_score(
                     entries[i][0],
-                    entries[i][1], 
+                    entries[i][1],
                     scores[i][0])
         self.get_results()
 
