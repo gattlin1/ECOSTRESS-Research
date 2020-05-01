@@ -1,0 +1,22 @@
+
+0.png is closest to: 1.png w/ score: 1.000
+1.png is closest to: 0.png w/ score: 1.000
+3.png is closest to: 2.png w/ score: 0.830
+Actual closest compound, 0.png,was 1 spectrum from closest w/ score 0.7669394016265869
+
+2.png is closest to: 5.png w/ score: 0.990
+Actual closest compound, 0.png,was 5 spectrum from closest w/ score 0.7761348485946655
+
+6.png is closest to: 5.png w/ score: 0.999
+Actual closest compound, 0.png,was 3 spectrum from closest w/ score 0.7008446455001831
+
+5.png is closest to: 6.png w/ score: 0.999
+Actual closest compound, 0.png,was 3 spectrum from closest w/ score 0.703753650188446
+
+4.png is closest to: 6.png w/ score: 0.998
+Actual closest compound, 0.png,was 3 spectrum from closest w/ score 0.6433538198471069
+
+Average Miss: 3.00
+
+Total Spectrum Misclassified 5
+../saved_models/same-padding-2-conv-64-conv nodes-2-dense-32-dense nodes-0.1-alpha val.h5

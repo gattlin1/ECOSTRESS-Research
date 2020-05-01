@@ -17,7 +17,7 @@ class Hitlist:
         self.difference_matrix = {}
         self.classification_level = [0, 0, 0, 0, 0]
         self.model_path = model_path
-        results_path = f'./results/josh_dataset/{model_path.split("/")[-1]} {file_title}.txt'
+        results_path = f'./results/{model_path.split("/")[-1]} {file_title}.txt'
         self.results = self.open_file(results_path)
         self.categories = ['non-match, match']
 
@@ -55,32 +55,15 @@ class Hitlist:
         if name not in self.difference_matrix:
             self.difference_matrix[name] = {}
 
+    #TODO: figure out how to get accuracy and average hit fixed.
     def get_results(self):
         for spectrum_name, entries in self.difference_matrix.items():
             spectra_hitlist = []
             for comp_spectrum_name, score in entries.items():
-                spectra_hitlist.append({'name': comp_spectrum_name, 'score': score,
-                    'count': 0})
-
-            compound = spectrum_name.split('.')[:5]
-            for i in range(len(spectra_hitlist)):
-                hitlist_compound = spectra_hitlist[i]['name'].split('.')
-
-                similarity_count = 0
-                j = 0
-                while j < len(compound) and compound[j] == hitlist_compound[j]:
-                    similarity_count += 1
-                    j += 1
-
-                spectra_hitlist[i]['count'] = similarity_count
+                spectra_hitlist.append({'name': comp_spectrum_name, 'score': score})
 
             spectra_hitlist = sorted(spectra_hitlist, key = lambda i: i['count'],
                 reverse=True)
-
-            for i in range(len(spectra_hitlist)):
-                if spectra_hitlist[i]['name'] == spectrum_name:
-                    spectra_hitlist.pop(i)
-                    break
 
             expected_closest = spectra_hitlist[0]['name']
 
@@ -91,17 +74,16 @@ class Hitlist:
                 if expected_closest == spectra_hitlist[i]['name']:
                     self.log_info(f'{spectrum_name} ' \
                         f'is closest to: {spectra_hitlist[0]["name"]} ' \
-                        f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED, False)
+                        f'w/ score: {spectra_hitlist[0]["score"]:.3f}', Fore.RED, True)
                     if i > 0:
                         self.missed_spectrum.append([spectrum_name, i])
 
 
                         self.log_info(f'Actual closest compound, {expected_closest},' \
                             f'was {i} spectrum from closest w/ score ' \
-                            f'{spectra_hitlist[i]["score"]}\n', Fore.RED, False)
+                            f'{spectra_hitlist[i]["score"]}\n', Fore.RED, True)
                     else:
-                        pass
-                        # print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
+                        print(Fore.GREEN + 'Found the best match' + Style.RESET_ALL)
 
     def accuracy(self):
         average_miss = 0
