@@ -26,11 +26,9 @@ def create_graphs(files, directory):
         file_name = file.split('/')[-1]
         split_path = []
         if '.tir.' in file_name:
-            split_path = file_name[:file_name.find('.tir.')+4] \
-            .split('.')
-        else:
-            split_path = file_name[:file_name.find('.all.')+4] \
-            .split('.')
+            split_path = file_name[:file_name.find('.tir.')+4].split('.')
+        elif '.all.' in file_name:
+            split_path = file_name[:file_name.find('.all.')+4].split('.')
 
         for i in range(0, len(split_path) + 1):
             new_dir = f'{directory}/{"/".join(split_path[:i])}'
@@ -55,8 +53,8 @@ def create_graphs(files, directory):
 
 if __name__=='__main__':
     start = datetime.datetime.now()
-    vis_dir = '../../datasets/ecospeclib-new-categories-graphs/'
-    directory_path = '../../datasets/ecospeclib-new-categories/'
+    vis_dir = '../../datasets/ecospeclib-graphs/'
+    directory_path = '../../datasets/ecospeclib-all/'
 
     if os.path.exists(vis_dir):
         shutil.rmtree(vis_dir)
