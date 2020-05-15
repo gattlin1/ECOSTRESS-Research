@@ -7,7 +7,6 @@
 import os
 import datetime
 from hitlist import Hitlist
-from lib.lib import nlc
 import multiprocessing as mp
 import shutil
 from scripts.make_nlc_files import make_nlc_files
@@ -15,13 +14,19 @@ from scripts.make_ab_pairs import make_ab_pairs
 
 # Creates a hitlist for the specified algorithm and gives it the path to
 # the spectrum directory
-def run_hitlist(algorithm, path):
-    created_hitlist = Hitlist(algorithm, path)
+def run_hitlist(algorithm, path, time):
+    created_hitlist = Hitlist(algorithm, path, time)
     created_hitlist.run_spectra()
     created_hitlist.accuracy()
 
 if __name__=='__main__':
     start = datetime.datetime.now()
+    time = start.strftime('%m-%d-%Y %Hhr %Mm %Ss')
+    path = f'./results/{time}'
+    if not os.path.exists(path):
+        os.mkdir(path)
+        os.mkdir(f'{path}/heatmap')
+
 
     # paths to spectrum directories
     dataset_path = '../../datasets/ecospeclib-final/'
@@ -38,10 +43,10 @@ if __name__=='__main__':
     for alg in hitlist_types:
         if 'nlc' in alg:
             p = mp.Process(target=run_hitlist,
-                args=(alg, nlc_dataset_path))
+                args=(alg, nlc_dataset_path, time))
         else:
             p = mp.Process(target=run_hitlist,
-                args=(alg, dataset_path))
+                args=(alg, dataset_path, time))
 
         processes.append(p)
         p.start()
@@ -53,4 +58,4 @@ if __name__=='__main__':
     shutil.rmtree(dataset_path)
     shutil.rmtree(nlc_dataset_path)
 
-print('Total Runtime: {0}'.format(datetime.datetime.now() - start))
+    print('Total Runtime: {0}'.format(datetime.datetime.now() - start))

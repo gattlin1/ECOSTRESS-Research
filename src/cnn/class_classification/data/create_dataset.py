@@ -1,3 +1,6 @@
+# Author: Gattlin Walker
+# creates a X and y pickle used for creating a model that classifies by spectral
+# class
 import numpy as np
 import matplotlib.pyplot as plt
 import os

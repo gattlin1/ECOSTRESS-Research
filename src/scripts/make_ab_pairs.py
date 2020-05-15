@@ -1,5 +1,6 @@
 # Authors: Gattlin Walker
 # Script to create an organized dataset structure
+
 import math
 import shutil
 import os
@@ -29,33 +30,26 @@ def make_ab_pairs(final_path):
             else:
                 files.append(f.path)
 
-            if len(files) == 1:
-                shutil.rmtree(folder, ignore_errors=True)
+        if len(files) == 1:
+            shutil.rmtree(folder, ignore_errors=True)
 
-            elif len(files) >= 2:
-                shutil.move(files[0], final_path)
-                shutil.move(files[1], final_path)
+        elif len(files) >= 2:
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
 
-            elif len(files) >= 3:
-                random.shuffle(files)
-
-                shutil.move(files[0], final_path)
-                shutil.move(files[1], final_path)
+        elif len(files) >= 3:
+            random.shuffle(files)
+            shutil.move(files[0], final_path)
+            shutil.move(files[1], final_path)
 
 def organize_data(directory_path, dest_path):
     for file in os.listdir(directory_path):
         if file.endswith('.txt') and 'spectrum' in file:
             file_path = directory_path + file
-            new_path = dest_path + '/'.join(file.split('.')[:1])
-            split_file = file.split('.')[:1]
+            new_path = dest_path + '/'.join(file.split('.')[:5])
+            split_file = file.split('.')[:5]
 
             for i in range(len(split_file) + 1):
                 if not os.path.exists(dest_path + '/'.join(split_file[:i])):
                     os.mkdir(dest_path + '/'.join(split_file[:i]))
             shutil.copy(file_path, new_path)
-
-if __name__ =='__main__':
-    f = '../../datasets/ecospeclib-all/'
-    dest = '../../datasets/ecospeclib-organized/'
-    organize_data(f, dest)
-    #make_ab_pairs(dest)

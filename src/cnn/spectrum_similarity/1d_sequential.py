@@ -12,10 +12,10 @@ import os
 
 if __name__=='__main__':
     num_classes = 2
-    dense_layer_sizes = [100] #[32, 64, 128, 256]
-    dense_layers = [2] #[1, 2]
-    conv_layer_sizes = [100] #[32, 64, 128]
-    conv_layers = [2] #[1, 2]
+    dense_layer_sizes = [32, 64, 128, 256]
+    dense_layers = [1, 2]
+    conv_layer_sizes = [32, 64, 128]
+    conv_layers = [1, 2]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):
@@ -27,8 +27,6 @@ if __name__=='__main__':
 
     # calculating bias
     class_weights = class_weight.compute_class_weight('balanced', np.unique(y), y)
-
-    #y = tf.keras.utils.to_categorical(y, num_classes)
 
     NAME = '1d-sequential.h5'
 

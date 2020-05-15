@@ -10,20 +10,19 @@ from lib.lib import cor, dpn, mad, msd, create_spectrum, match_points
 from copy import deepcopy
 
 class Hitlist:
-    def __init__(self, algorithm, dataset_path):
+    def __init__(self, algorithm, dataset_path, results_path):
         self.comparison_type = algorithm
         self.missed_spectrum = []
         self.dataset_path = dataset_path
         self.difference_matrix = self.create_difference_matrix()
         self.classification_level = [0, 0, 0, 0, 0]
-        self.results, self.heatmap = self.setup_results(algorithm)
+        self.results, self.heatmap = self.setup_results(algorithm, results_path)
 
-    def setup_results(self, algorithm):
-        time = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
-        results_path = f'../../results/{time}/{algorithm}.txt'
+    def setup_results(self, algorithm, path):
+        results_path = f'./results/{path}/{algorithm}.txt'
         results = self.open_file(results_path)
 
-        heatmap_path = f'../results/{time}/heatmap/{algorithm} heatmap.txt'
+        heatmap_path = f'./results/{path}/heatmap/{algorithm} heatmap.txt'
         heatmap = self.open_file(heatmap_path)
         return results, heatmap
 
@@ -31,7 +30,6 @@ class Hitlist:
     def open_file(self, path):
         if not os.path.exists(path):
             open(path, 'x', errors='ignore')
-
         return open(path, 'a', errors='ignore')
 
     def create_difference_matrix(self):
@@ -242,6 +240,5 @@ class Hitlist:
         else:
             i = 1
             while unknown_spectrum[i - 1] == known_spectrum[i - 1] and i < len(self.classification_level):
-                print(unknown_spectrum[i - 1], known_spectrum[i - 1])
                 self.classification_level[i] += 1
                 i += 1

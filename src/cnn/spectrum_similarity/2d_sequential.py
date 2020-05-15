@@ -16,7 +16,7 @@ if __name__=='__main__':
     dense_layers = [1, 2]
     conv_layer_sizes = [16, 32, 64]
     conv_layers = [1, 2]
-    alpha_vals = [0.1] # [0.01, 0.1, 0.2, 0.3]
+    alpha_vals = [0.01, 0.1, 0.2, 0.3]
     save_dir = os.path.join(os.getcwd(), 'saved_models')
 
     if not os.path.isdir(save_dir):
@@ -29,7 +29,6 @@ if __name__=='__main__':
     # calculating bias
     class_weights = class_weight.compute_class_weight('balanced', np.unique(y), y)
 
-    #y = tf.keras.utils.to_categorical(y, num_classes)
     X = X / 255
 
     for dense_layer in dense_layers:
