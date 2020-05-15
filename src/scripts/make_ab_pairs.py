@@ -6,8 +6,8 @@ import os
 import random
 
 def make_ab_pairs(final_path):
-    original_dataset_path = '../datasets/ecospeclib-all/'
-    organized_path = '../datasets/ecospeclib-organized/'
+    original_dataset_path = '../../datasets/ecospeclib-all/'
+    organized_path = '../../datasets/ecospeclib-organized/'
 
     organize_data(original_dataset_path, organized_path)
 

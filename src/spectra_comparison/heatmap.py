@@ -18,7 +18,6 @@ def run_hitlist(algorithm, path, file_title):
     created_hitlist.accuracy()
 
 def generate_heatmaps(file_path, floor_values, wavelength_values, file_count):
-
     with open(file_path, 'r', errors='ignore') as file:
         entries = {'accuracy': [], 'avg miss': [], 'class lvl': []}
         for line in file.readlines():
@@ -34,21 +33,27 @@ def generate_heatmaps(file_path, floor_values, wavelength_values, file_count):
 
     file_name = file_path.split('/')[4:][0].replace('heatmap.txt', '')
 
-    accuracy_heatmap = np.array(entries['accuracy']).reshape((len(floor_values), len(wavelength_values))).round(decimals=2)
+    accuracy_heatmap = np.array(entries['accuracy']).reshape(
+        (len(floor_values), len(wavelength_values))).round(decimals=2)
     title = file_name + 'Best Match Accuracy'
-    create_heatmap(title, np.rot90(accuracy_heatmap, k=1, axes=(0,1)), floor_values, wavelength_values)
+    create_heatmap(title, np.rot90(accuracy_heatmap, k=1, axes=(0,1)),
+        floor_values, wavelength_values)
 
-    avg_miss_heatmap = np.array(entries['avg miss']).reshape((len(floor_values), len(wavelength_values))).round(decimals=2)
+    avg_miss_heatmap = np.array(entries['avg miss']).reshape(
+        (len(floor_values), len(wavelength_values))).round(decimals=2)
     title = file_name + 'Average Best Match Miss'
-    create_heatmap(title, np.rot90(avg_miss_heatmap, k=1, axes=(0,1)), floor_values, wavelength_values)
+    create_heatmap(title, np.rot90(avg_miss_heatmap, k=1, axes=(0,1)),
+        floor_values, wavelength_values)
 
     class_lvl_heatmap = np.array(entries['class lvl'])
     for i in range(1, np.size(class_lvl_heatmap,1)):
         title = file_name + 'Accuracy at Level {0}'.format(i)
-        lvl_heatmap = class_lvl_heatmap[:, i].reshape((len(floor_values), len(wavelength_values)))
+        lvl_heatmap = class_lvl_heatmap[:, i].reshape(
+            (len(floor_values), len(wavelength_values)))
         print(np.rot90(lvl_heatmap.round(decimals=2)))
-        #lvl_heatmap = np.true_divide(class_lvl_heatmap,  file_count)
-        create_heatmap(title, np.rot90(lvl_heatmap.round(decimals=2), k=1, axes=(0,1)), floor_values, wavelength_values)
+
+        create_heatmap(title, np.rot90(lvl_heatmap.round(decimals=2), k=1,
+            axes=(0,1)), floor_values, wavelength_values)
 
 
 def create_heatmap(title, heatmap, floor_values, wavelength_values):
@@ -102,13 +107,15 @@ if __name__=='__main__':
         for w_val in wavelength_values:
 
             # Create NLC Files for each hitlist
-            make_nlc_files(dataset_path, nlc_dataset_path, floor_value=f_val, width=w_val)
+            make_nlc_files(dataset_path, nlc_dataset_path, floor_value=f_val,
+                width=w_val)
 
             # Start Multiprocessing
             processes = []
             hitlist_types = ['nlc - cor', 'nlc - dpn', 'nlc - mad', 'nlc - msd']
             for alg in hitlist_types:
-                p = multiprocessing.Process(target=run_hitlist, args=(alg, nlc_dataset_path, i))
+                p = multiprocessing.Process(target=run_hitlist,
+                    args=(alg, nlc_dataset_path, i))
                 processes.append(p)
                 p.start()
 
@@ -117,7 +124,9 @@ if __name__=='__main__':
 
             i += 1
 
-    path = '../results/6th_run/heatmap/'
+
+    time = str(datetime.datetime.now().strftime('%m-%d-%Y %Hhr %Mm %Ss'))
+    path = f'../results/{time}/heatmap/'
     file_count = len(list(os.listdir(nlc_dataset_path)))
     for file in os.listdir(path):
         generate_heatmaps(path + file, floor_values, wavelength_values, file_count)

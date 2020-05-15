@@ -5,7 +5,7 @@ def get_best_model_at_level(level, results):
     return results[0]
 
 if __name__=='__main__':
-    results_dir = 'results/spectra_match/'
+    results_dir = 'results/non-nlc/'
     model_results = []
     for results in os.listdir(results_dir):
         model_path = os.path.join(results_dir, results)
